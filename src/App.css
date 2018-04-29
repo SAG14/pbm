@@ -1,5 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  min-width: 1000px;
+  position: relative;
+}
+
 .App {
-  text-align: center;
+  min-width: 1000px;
 }
 
 .App-logo {
