@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addImage } from '../actions/uploadActions';
 
+import '../styles/Manager.css';
 import '../styles/UploadImage.css';
 
 class UploadImage extends Component {
@@ -12,7 +13,7 @@ class UploadImage extends Component {
 
   render() {
     return (
-      <div id="upload-image">
+      <div id="upload-image" className="manager-bottom">
         <input 
           type="file"
           accept="image/jpeg"

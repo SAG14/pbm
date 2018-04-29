@@ -1,0 +1,19 @@
+.manager-container {
+  border-right: inset 1px black;
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.manager-top {
+  height: calc(100% - 200px);
+}
+
+.manager-bottom {
+  border-top: 1px black solid;
+  border-right: 1px black solid;
+  height: 200px;
+  width: 100%;
+}
