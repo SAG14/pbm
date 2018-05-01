@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import '../styles/Product.css';
 
+import fireworks from '../images/fireworks.jpg';
+import humananddog from '../images/humananddog.jpg';
+
 class Product extends Component {
   constructor(props) {
     super(props);
@@ -19,12 +22,14 @@ class Product extends Component {
               startingPos: 0,
               rowspan: 4,
               colspan: 6,
+              source: null,
             },
             {
               id: "i1",
               startingPos: 8,
               rowspan: 4,
               colspan: 4,
+              source: null,
             },
           ],
           texts: [
@@ -90,11 +95,10 @@ class Page extends Component {
 
 class Image extends Component {
   render() {
-    let id = this.props.value.id === "i0" ? "i0" : "i1";
+    let source = this.props.value.id === "i0" ? fireworks : humananddog;
     return (
-      <div id={id}>
-        Image
-        {this.props.value.id}
+      <div id={this.props.value.id}>
+        <img src={source} />
       </div>
     )
   }
@@ -102,11 +106,9 @@ class Image extends Component {
 
 class Text extends Component {
   render() {
-    let id = "t0";
     return (
-      <div id={id}>
-        Text
-        {this.props.value.id}
+      <div id={this.props.value.id}>
+        <p>TEXT</p>
       </div>
     )
   }
