@@ -80,7 +80,6 @@ class Page extends Component {
   render() {
     return (
       <div id="page">
-        Page
         {this.renderImage(0)}
         {this.renderImage(1)}
         {this.renderText(0)}
@@ -91,8 +90,9 @@ class Page extends Component {
 
 class Image extends Component {
   render() {
+    let id = this.props.value.id === "i0" ? "i0" : "i1";
     return (
-      <div>
+      <div id={id}>
         Image
         {this.props.value.id}
       </div>
@@ -102,8 +102,9 @@ class Image extends Component {
 
 class Text extends Component {
   render() {
+    let id = "t0";
     return (
-      <div>
+      <div id={id}>
         Text
         {this.props.value.id}
       </div>
