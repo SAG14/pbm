@@ -12,36 +12,31 @@ class Product extends Component {
       pages: [
         {
           id: "p0",
-          width: 0,
-          height: 0,
+          width: 8.5,
+          height: 5.5,
           rows: 4,
           columns: 12,
+          areas: '"i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 t0 t0 i1 i1 i1 i1"',
           images: [
             {
               id: "i0",
-              startingPos: 0,
-              rowspan: 4,
-              colspan: 6,
-              source: null,
+              source: fireworks,
             },
             {
               id: "i1",
-              startingPos: 8,
-              rowspan: 4,
-              colspan: 4,
-              source: null,
+              source: humananddog,
             },
           ],
           texts: [
             {
               id: "t0",
-              startingPos: 42,
-              rowspan: 1,
-              colspan: 2,
+              value: "Hello world",
             }
           ],
         },
       ],
+      name: "Photo Book 8.5 by 5.5 inches (24 pages)",
+      current: 0,
     }
   }
 
@@ -57,7 +52,7 @@ class Product extends Component {
     return (
       <div id="product">
         <h1>Product</h1>
-        {this.renderPage(0)}
+        {this.renderPage(this.state.current)}
       </div>
     )
   }
@@ -83,11 +78,28 @@ class Page extends Component {
   }
 
   render() {
+    const images = this.props.value.images.map((arr, id) => {
+      return (
+        this.renderImage(id)
+      );
+    });
+
+    const texts = this.props.value.texts.map((arr, id) => {
+      return (
+        this.renderText(id)
+      );
+    });
+
+    const layout = {
+      "gridTemplateRows": `repeat(${this.props.value.rows}, 1fr)`,
+      "gridTemplateColumns": `repeat(${this.props.value.columns}, 1fr)`,
+      "gridTemplateAreas": this.props.value.areas,
+    };
+
     return (
-      <div id="page">
-        {this.renderImage(0)}
-        {this.renderImage(1)}
-        {this.renderText(0)}
+      <div id="page" style={layout}>
+        {images}
+        {texts}
       </div>
     )
   }
@@ -95,10 +107,14 @@ class Page extends Component {
 
 class Image extends Component {
   render() {
-    let source = this.props.value.id === "i0" ? fireworks : humananddog;
+    const style = {
+      "gridArea": this.props.value.id,
+      // "border": "solid 1px black",
+    };
+
     return (
-      <div id={this.props.value.id}>
-        <img src={source} />
+      <div style={style}>
+        <img src={this.props.value.source} />
       </div>
     )
   }
@@ -106,9 +122,14 @@ class Image extends Component {
 
 class Text extends Component {
   render() {
+    const style = {
+      "gridArea": this.props.value.id,
+      "border": "solid 1px black",
+    };
+
     return (
-      <div id={this.props.value.id}>
-        <p>TEXT</p>
+      <div style={style}>
+        <p>{this.props.value.value}</p>
       </div>
     )
   }
