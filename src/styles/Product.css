@@ -1,0 +1,35 @@
+#product {
+  border-top: solid 1px black;
+  position: fixed;
+  width: 80%;
+  right: 0;
+  top: 0;
+  height: 80%;
+}
+
+#page {
+  border: solid 1px red;
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas:
+    "image-a image-a image-a image-a image-a image-a . . image-b image-b image-b image-b"
+    "image-a image-a image-a image-a image-a image-a . . image-b image-b image-b image-b"
+    "image-a image-a image-a image-a image-a image-a . . image-b image-b image-b image-b"
+    "image-a image-a image-a image-a image-a image-a text-a text-a image-b image-b image-b image-b";
+}
+
+#image-a {
+  grid-area: image-a;
+}
+
+#image-b {
+  grid-area: image-b;
+}
+
+#text-a {
+  grid-area: text-a;
+}
