@@ -1,7 +1,7 @@
 import { ADD_IMAGE } from '../actions/types';
 
 const initialState = {
-  images: {},
+  images: [],
 };
 
 export default function(state = initialState, action) {

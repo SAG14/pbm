@@ -7,8 +7,30 @@ import '../styles/Manager.css';
 import '../styles/UploadImage.css';
 
 class UploadImage extends Component {
+  
   fileChangedHandler = (e) => {
-    this.props.addImage(e.target.files);
+    e.preventDefault();
+    let files = e.target.files;
+    let filesAsURL = Array.from(files);
+    let pending = files.length;
+    for (let i = 0; i < files.length; i++){
+      let reader = new FileReader();
+      let currentFile = files[i];
+      reader.readAsDataURL(currentFile);
+      reader.onloadend = () => {
+        filesAsURL[i] = {
+          file: currentFile,
+          imageURL: reader.result
+        };
+        console.log(--pending);
+        if (pending == 0) {
+          console.log("adding images!");
+          this.props.addImage(filesAsURL);
+        }
+      }
+    }
+      
+    
   }
 
   render() {
