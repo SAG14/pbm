@@ -7,9 +7,9 @@ import store from '../store';
 
 import '../styles/Manager.css';
 import '../styles/ImageManager.css';
-import PreviewImage from './PreviewImage';
 
 class ImageManager extends Component {
+  
   render() {
     /*
     const sheldonImages = Object.keys(this.props.images).map(key => {
@@ -21,11 +21,15 @@ class ImageManager extends Component {
       );
     });
     */
+
+   const imageStyle = {
+     width: '15em',
+   };
     const viewImages = Object.keys(this.props.images).map((key) => {
       let image = this.props.images[key];
       return (
         <div key = {key + image.file.lastModified}>
-          <img src= {image.imageURL} width= "100pt"/>
+          <img src= {image.imageURL} style={imageStyle}/>
         </div>
       );
     });
