@@ -10,7 +10,6 @@ export default function(state = initialState, action) {
       let newStateImages = [...state.images, ...action.payload];
       return {
         ...state,
-        //images: [...state.images, action.payload]
         images: newStateImages
       }
     default:
