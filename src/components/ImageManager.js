@@ -11,17 +11,6 @@ import '../styles/ImageManager.css';
 class ImageManager extends Component {
   
   render() {
-    /*
-    const sheldonImages = Object.keys(this.props.images).map(key => {
-      let image = this.props.images[key];
-        return (
-          <div key={image.lastModified}>
-            {image.name}
-          </div>
-      );
-    });
-    */
-
    const imageStyle = {
      width: '15em',
    };
