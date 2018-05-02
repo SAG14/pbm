@@ -23,7 +23,7 @@ class ImageManager extends Component {
     const viewImages = Object.keys(this.props.images).map((key) => {
       let image = this.props.images[key];
       return (
-        <div key = {image.file.lastModified}>
+        <div key = {key + image.file.lastModified}>
           <img src= {image.imageURL} width= "100pt"/>
         </div>
       );
