@@ -124,12 +124,11 @@ class Text extends Component {
   render() {
     const style = {
       "gridArea": this.props.value.id,
-      "border": "solid 1px black",
     };
 
     return (
-      <div style={style}>
-        <p>{this.props.value.value}</p>
+      <div className="txt"  style={style}>
+        {this.props.value.value}
       </div>
     )
   }
