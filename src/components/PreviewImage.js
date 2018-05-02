@@ -7,7 +7,6 @@ import store from '../store';
 
 import '../styles/Manager.css';
 import '../styles/ImageManager.css';
-import PreviewImage from './PreviewImage';
 
 class ImageManager extends Component {
   render() {
@@ -33,7 +32,7 @@ class ImageManager extends Component {
       <div id="image-manager" className="manager-container">
         <div className="manager-top">
           <h1 className="title">ImageManager</h1>
-            {viewImages}
+          {viewImages}
         </div>
         <UploadImage />
       </div>

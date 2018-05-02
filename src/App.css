@@ -30,8 +30,9 @@ body {
   font-size: large;
 }
 
-.manager-container {
-  overflow: scroll;
+.manager-top {
+  overflow-x: scroll;
+  overflow-x: hidden;
 }
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
