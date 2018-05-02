@@ -9,6 +9,7 @@ export default function(state = initialState, action) {
     case ADD_IMAGE:
       return {
         ...state,
+        //images: [...state.images, action.payload]
         images: action.payload
       }
     default:
