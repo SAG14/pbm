@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import ImageManager from './components/ImageManager';
 import Filmstrip from './components/Filmstrip';
 import UploadImage from './components/UploadImage';
+import Product from './components/Product';
 
 import store from './store';
 
@@ -15,6 +16,7 @@ class App extends Component {
         <div className="App">
           <ImageManager />
           <Filmstrip />
+          <Product />
         </div>
       </Provider>
     );
