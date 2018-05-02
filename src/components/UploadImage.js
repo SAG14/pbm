@@ -22,9 +22,7 @@ class UploadImage extends Component {
           file: currentFile,
           imageURL: reader.result
         };
-        console.log(--pending);
         if (pending == 0) {
-          console.log("adding images!");
           this.props.addImage(filesAsURL);
         }
       }
