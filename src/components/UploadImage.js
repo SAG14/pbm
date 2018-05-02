@@ -22,6 +22,7 @@ class UploadImage extends Component {
           file: currentFile,
           imageURL: reader.result
         };
+        --pending;
         if (pending == 0) {
           this.props.addImage(filesAsURL);
         }
