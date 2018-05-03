@@ -26,6 +26,7 @@ class Header extends Component {
             return (
                 <div>
                     <p>PhotoBook Maker</p>
+                    <p> Welcome, {this.props.currentUser.firstName}</p>
                     <button onClick={this.logout}>Logout</button>
                 </div>
             );
@@ -43,11 +44,13 @@ Header.propTypes = {
     logout: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
     token: PropTypes.string,
+    currentUser: PropTypes.object,
 }
 
 const mapStateToProps = state => ({
     isAuthenticated: state.user.isAuthenticated,
     token: state.user.token,
+    currentUser: state.user.currentUser,
 })
 
 export default connect(mapStateToProps, { logout })(Header);

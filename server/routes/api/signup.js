@@ -1,11 +1,17 @@
 const User = require('../../models/User');
 const UserSession = require('../../models/UserSession');
+const EmailVerification = require('../../models/EmailVerification');
+const config = require('../../../config/config');
+
+var crypto = require('crypto');
+var nodemailer = require('nodemailer');
 
 module.exports = (app) => {
     app.post('/api/account/signup', (req, res, next) => {
         const { body } = req;
         const {
-            password
+            password,
+            confirmPassword
         } = body;
         let {
             email,
@@ -13,6 +19,10 @@ module.exports = (app) => {
             lastName,
             studentNo
         } = body;
+
+        // RegExp
+        const emailRegex = RegExp('^[a-zA-Z0-9]*@my.bcit.ca$');
+        const studentNoRegex = RegExp('^A{1}[0-9]{8}$');
 
         // Null checks
         if (!email) {
@@ -25,6 +35,12 @@ module.exports = (app) => {
             return res.send({
                 success: false,
                 message: 'Error: Password cannot be blank.'
+            });
+        }
+        if (!confirmPassword) {
+            return res.send({
+                success: false,
+                message: 'Error: Confirmation password cannot be blank.'
             });
         }
         if (!firstName) {
@@ -45,12 +61,33 @@ module.exports = (app) => {
                 message: 'Error: Student Number cannot be blank.'
             });
         }
+        if (password !== confirmPassword) {
+            return res.send({
+                success: false,
+                message: 'Error: Passwords do not match.'
+            });
+        }
 
         // Changes data format
         email = email.toLowerCase().trim();
         firstName = firstName.toLowerCase().trim();
         lastName = lastName.toLowerCase().trim();
         studentNo = studentNo.toUpperCase().trim();
+
+        // Checking RegExp
+        if (!emailRegex.test(email)) {
+            return res.status(401).send({
+                success: false,
+                message: 'Error: The email provided is not a BCIT email. (ex. student@my.bcit.ca)'
+            });
+        }
+
+        if (!studentNoRegex.test(studentNo)) {
+            return res.status(401).send({
+                success: false,
+                message: 'Error: Please provide a valid BCIT student ID. (ex. A00123456)'
+            });
+        }
 
         User.find({
             email: email
@@ -83,9 +120,122 @@ module.exports = (app) => {
                         message: 'Error: Server Error.'
                     })
                 }
+
+                // Creates the email token
+                var emailToken = new EmailVerification({
+                    _userId: user._id,
+                    token: crypto.randomBytes(16).toString('hex')
+                });
+
+                emailToken.save(function(err) {
+                    if (err) {
+                        return res.status(500). send ({
+                            success: false,
+                            message: err.message 
+                        });
+                    }
+
+                    // Sending the email
+                    var transporter = nodemailer.createTransport({
+                        service: config.emailService,
+                        auth: {
+                            user: config.emailUsername,
+                            pass: config.emailPassword
+                        }
+                    });
+
+                    const url = `http://localhost:3100/confirmation/${emailToken.token}`;
+
+                    var mailOptions = { 
+                        from: config.emailUsername, 
+                        to: user.email,
+                        subject: 'Account Verification Token',
+                        //text: 'Hello,\n\n Thank you for signing up an account for the PhotoBook Maker. Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + emailToken.token + '.\n'
+                        html: `Please click this link to confirm your email: ${url}`
+                    };
+
+                    transporter.sendMail(mailOptions, function (err) {
+                        if (err) {
+                            return res.status(500).send({
+                                success: false,
+                                message: err.message
+                            });
+                        }
+                        return res.status(200).send({
+                            success: true,
+                            message: 'Verification email has been sent to ' + user.email + '.'
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    // Confirms the token
+    app.get('/confirmation/:token', (req, res, next) => {
+
+        if (!req.params.token) {
+            return res.status(400).send({
+                success: false,
+                message: 'Error: Token cannot is empty.'
+            });
+        }
+
+        EmailVerification.findOne({
+            token: req.params.token
+        }, function(err, token) {
+            if (err) {
                 return res.send({
-                    success: true,
-                    message: 'Signed up'
+                    success: false,
+                    message: 'Error: Server error'
+                });
+            }
+
+            if (!token) {
+                return res.status(400).send({
+                    success: false,
+                    message: 'Unable to find valid token, your token may have expired.'
+                });
+            }
+
+            User.findOne({
+                _id: token._userId
+            }, function(err, user) {
+                if (err) {
+                    return res.send({
+                        success: false,
+                        message: 'Error: Server error'
+                    });
+                }
+
+                if (!user) {
+                    return res.status(400).send({
+                        success: false,
+                        message: 'We were unable to find a user for this token.'
+                    });
+                }
+
+                if (user.isVerified) {
+                    return res.status(400).send({
+                        success: false,
+                        message: 'This user has already been verified.'
+                    });
+                }
+
+                // Verify and save the user
+                user.isVerified = true;
+                user.save(function (err) {
+                    if (err) {
+                        return res.status(500).send({
+                            success: false,
+                            message: err.message
+                        })
+                    }
+
+                    return res.status(200).send({
+                        success: true,
+                        message: "The account has been verified. Please log in."
+                    });
                 });
             });
         });
@@ -129,23 +279,32 @@ module.exports = (app) => {
         }, (err, users) => {
             if (err) {
                 console.log('Error: ', err);
-                return res.send({
+                return res.status(400).send({
                     success: false,
                     message: 'Error: Server error.'
                 });
             }
+
             if (users.length != 1) {
-                return res.send({
+                return res.status(401).send({
                     success: false,
-                    message: 'Error: Cannot find user by specified Email'
+                    message: 'Error: Invalid email address.'
                 });
             }
 
             const user = users[0];
             if (!user.validPassword(password)) {
-                return res.send({
+                return res.status(401).send({
                     success: false,
                     message: 'Error: Invalid password'
+                });
+            }
+
+            // Checks that the account has been verified via email
+            if (!user.isVerified) {
+                return res.status(401).send({
+                    success: false,
+                    message: 'Your account is not verified.'
                 });
             }
 
@@ -155,7 +314,7 @@ module.exports = (app) => {
             userSession.save((err, doc) => {
                 if (err) {
                     console.log(err);
-                    return res.send({
+                    return res.status(401).send({
                         success: false,
                         message: 'Error: server error'
                     });
@@ -164,7 +323,12 @@ module.exports = (app) => {
                 return res.send({
                     success: true,
                     message: 'Valid sign in',
-                    token: doc._id
+                    token: doc._id,
+                    currentUser: {
+                        email: user.email,
+                        firstName: user.firstName,
+                        lastName: user.lastName
+                    },
                 });
             });
         });
@@ -228,12 +392,3 @@ module.exports = (app) => {
         });
     });
 };
-
-// function checkNullProperty(property) {
-//     if (!property) {
-//         return res.send({
-//             success: false,
-//             message: `Error: ${property} field cannot be blank.`
-//         })
-//     }
-// }

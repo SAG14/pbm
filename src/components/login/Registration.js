@@ -34,22 +34,17 @@ class Registration extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        if (this.state.signUpPassword !== this.state.signUpConfirmPassword) {
-            this.setState({
-                signUpError: 'Error: Passwords do not match.' //TODO
-            });
-        } else {
-
-            const userData = {
-                firstName: this.state.signUpFirstName,
-                lastName: this.state.signUpLastName,
-                email: this.state.signUpEmail,
-                password: this.state.signUpPassword,
-                studentNo: this.state.signUpStudentNo                
-            };
-            // Register function in actions > reducer
-            this.props.register(userData);
-        }
+        const userData = {
+            firstName: this.state.signUpFirstName,
+            lastName: this.state.signUpLastName,
+            email: this.state.signUpEmail,
+            password: this.state.signUpPassword,
+            confirmPassword: this.state.signUpConfirmPassword,
+            studentNo: this.state.signUpStudentNo                
+        };
+        
+        // Register function in actions > reducer
+        this.props.register(userData);
     }
     
     render() {

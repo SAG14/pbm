@@ -8,6 +8,7 @@ const initialState = {
     // Login variables
     isAuthenticated: false,
     signInError: '',
+    currentUser: { },
 
     // Registration variables
     isRegistered: false,
@@ -21,14 +22,16 @@ export default function(state = initialState, action) {
                 ...state,
                 isAuthenticated: action.payload.success,
                 signInError: action.payload.message,
-                token: action.payload.token
+                token: action.payload.token,
+                currentUser: action.payload.currentUser,
             }
         case LOGOUT_USER:
             return {
                 ...state,
                 isAuthenticated: false,
                 signInError: '',
-                token: ''
+                token: '',
+                currentUser: { },
             }
         case REGISTER_USER:
             return {

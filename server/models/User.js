@@ -22,6 +22,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
     isDeleted: {
         type: Boolean,
         default: false

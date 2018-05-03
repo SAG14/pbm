@@ -29,7 +29,6 @@ export const logout = (token) => dispatch => {
 }
 
 export const register = (userData) => dispatch =>{
-    console.log(userData);
     fetch('http://localhost:3100/api/account/signup', {
                 method: 'POST',
                 headers: {

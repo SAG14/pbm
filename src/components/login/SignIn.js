@@ -44,27 +44,6 @@ class SignIn extends Component {
         this.props.signIn(credentials);
     }
 
-    // Sign in function
-    // onSignIn() {
-    //     // Grab State
-    //     const {
-    //         signInEmail,
-    //         signInPassword
-    //     } = this.state;
-
-    //     this.setState({
-    //         isLoading: true
-    //     });
-
-    //     const credentials = {
-    //         email: this.state.signInEmail,
-    //         password: this.state.signInPassword
-    //     }
-
-    //     // Redirects to actions > reducer
-    //     this.props.signIn(credentials);
-    // }
-
     render() {
          if (!this.props.isAuthenticated) {
             return (

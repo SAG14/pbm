@@ -7,7 +7,8 @@ const UserSessionSchema = new mongoose.Schema({
     },
     timestamp: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
+        expires: 3600
     },
     isDeleted: {
         type: Boolean,
