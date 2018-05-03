@@ -3,29 +3,30 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addImage } from '../actions/uploadActions';
 import UploadImage from './UploadImage';
-
+import store from '../store';
 
 import '../styles/Manager.css';
 import '../styles/ImageManager.css';
 
 class ImageManager extends Component {
+  
   render() {
+   const imageStyle = {
+     width: '15em',
+   };
+    const viewImages = Object.keys(this.props.images).map((key) => {
+      let image = this.props.images[key];
+      return (
+        <div key = {key + image.file.lastModified}>
+          <img src= {image.imageURL} style={imageStyle}/>
+        </div>
+      );
+    });
     return (
       <div id="image-manager" className="manager-container">
         <div className="manager-top">
-
           <h1 className="title">ImageManager</h1>
-          {
-            Object.keys(this.props.images).map(key => {
-              let image = this.props.images[key];
-
-              return (
-                <div key={image["lastModified"]}>
-                  {image["name"]}
-                </div>
-              )
-            })
-          }
+            {viewImages}
         </div>
         <UploadImage />
       </div>
@@ -34,7 +35,7 @@ class ImageManager extends Component {
 }
 
 ImageManager.propTypes = {
-  images: PropTypes.object,
+  images: PropTypes.array,
   addImage: PropTypes.func.isRequired
 }
 

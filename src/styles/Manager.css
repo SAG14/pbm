@@ -3,12 +3,15 @@
   height: 100%;
   width: 20%;
   position: fixed;
-  top: 0;
-  left: 0;
+  /* top: 0;
+  left: 0; */
 }
 
 .manager-top {
   height: calc(100% - 200px);
+  overflow-x: scroll;
+  overflow-x: hidden;
+
 }
 
 .manager-bottom {
