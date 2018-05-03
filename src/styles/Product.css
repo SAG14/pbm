@@ -29,3 +29,13 @@ img {
 .textbox {
   border: solid 1px #979797;
 }
+
+textarea {
+  background: transparent;
+  resize: none;
+  outline: none;
+  font: 32px arial, sans-serif;
+  width: 100%;
+  height: 100%;
+  border: 0 none;
+}

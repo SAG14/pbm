@@ -1,52 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { selectProduct } from '../actions/productActions';
+import { applyTemplate } from '../actions/pageActions';
 
 import '../styles/Product.css';
 
-import fireworks from '../images/fireworks.jpg';
-import humananddog from '../images/humananddog.jpg';
-
 class Product extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pages: [
-        {
-          id: "p0",
-          width: 8.5,
-          height: 5.5,
-          rows: 4,
-          columns: 12,
-          areas: '"i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 t0 t0 i1 i1 i1 i1"',
-          images: [
-            {
-              id: "i0",
-              // source: fireworks,
-              source: null,
-            },
-            {
-              id: "i1",
-              // source: humananddog,
-              source: null,
-            },
-          ],
-          texts: [
-            {
-              id: "t0",
-              // value: "Hello world",
-              value: '',
-            }
-          ],
-        },
-      ],
-      name: "Photo Book 8.5 by 5.5 inches (24 pages)",
-      current: 0,
-    }
+  componentWillMount() {
+    this.props.selectProduct();
+    this.props.applyTemplate();
   }
 
   renderPage(i) {
+    if (i == null)
+      return;
     return (
       <Page
-        value={this.state.pages[i]}
+        value={this.props.pages[i]}
       />
     )
   }
@@ -55,7 +25,7 @@ class Product extends Component {
     return (
       <div id="product">
         <h1>Product</h1>
-        {this.renderPage(this.state.current)}
+        {this.renderPage(this.props.current)}
       </div>
     )
   }
@@ -130,10 +100,16 @@ class Text extends Component {
 
     return (
       <div className="textbox" style={style}>
-        <textarea>{this.props.value.value}</textarea>
+        <textarea></textarea>
       </div>
     )
   }
 }
 
-export default Product;
+const mapStateToProps = state => ({
+  product: state.products.product,
+  pages: state.pages.pages,
+  current: state.pages.current,
+});
+
+export default connect(mapStateToProps, { selectProduct, applyTemplate })(Product);
