@@ -278,7 +278,6 @@ module.exports = (app) => {
             email: email
         }, (err, users) => {
             if (err) {
-                console.log('Error: ', err);
                 return res.status(400).send({
                     success: false,
                     message: 'Error: Server error.'
@@ -313,7 +312,6 @@ module.exports = (app) => {
             userSession.userId = user._id;
             userSession.save((err, doc) => {
                 if (err) {
-                    console.log(err);
                     return res.status(401).send({
                         success: false,
                         message: 'Error: server error'
@@ -348,7 +346,6 @@ module.exports = (app) => {
             }
         }, null, (err, sessions) => {
             if (err) {
-                console.log(err);
                 return res.sent({
                     success: false,
                     message: 'Error: Server error'
@@ -371,7 +368,6 @@ module.exports = (app) => {
             isDelete: false
         }, (err, sessions) => {
             if (err) {
-                console.log(err);
                 return res.send({
                     sucess: false,
                     message: 'Error: Server error'
