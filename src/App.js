@@ -1,26 +1,41 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Provider } from 'react-redux';
 
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router';
 import ImageManager from './components/ImageManager';
 import Filmstrip from './components/Filmstrip';
 import UploadImage from './components/UploadImage';
 import Product from './components/Product';
 
-import store from './store';
-
 class App extends Component {
   render() {
-    return (
-      <Provider store={store}>
+
+    // Redirects to login page if not authenticated
+    if (this.props.isAuthenticated) {
+      return (
         <div className="App">
-          <ImageManager />
-          <Filmstrip />
-          <Product />
+          <ImageManager/>
+          <Filmstrip/>
         </div>
-      </Provider>
-    );
+      );
+    } else {
+      return (
+        <div>
+          <Redirect to="/"/>
+        </div>
+      );
+    }
   }
 }
 
-export default App;
+App.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.user.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(App);
