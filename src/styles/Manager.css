@@ -9,6 +9,9 @@
 
 .manager-top {
   height: calc(100% - 200px);
+  overflow-x: scroll;
+  overflow-x: hidden;
+
 }
 
 .manager-bottom {
