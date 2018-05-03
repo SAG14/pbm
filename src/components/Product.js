@@ -1,54 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { selectProduct } from '../actions/productActions';
+import { applyTemplate } from '../actions/pageActions';
 
 import '../styles/Product.css';
 
-import fireworks from '../images/fireworks.jpg';
-import humananddog from '../images/humananddog.jpg';
-
 class Product extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pages: [
-        {
-          id: "p0",
-          width: 0,
-          height: 0,
-          rows: 4,
-          columns: 12,
-          images: [
-            {
-              id: "i0",
-              startingPos: 0,
-              rowspan: 4,
-              colspan: 6,
-              source: null,
-            },
-            {
-              id: "i1",
-              startingPos: 8,
-              rowspan: 4,
-              colspan: 4,
-              source: null,
-            },
-          ],
-          texts: [
-            {
-              id: "t0",
-              startingPos: 42,
-              rowspan: 1,
-              colspan: 2,
-            }
-          ],
-        },
-      ],
-    }
+  componentWillMount() {
+    this.props.selectProduct();
+    this.props.applyTemplate();
   }
 
   renderPage(i) {
+    if (i == null)
+      return;
     return (
       <Page
-        value={this.state.pages[i]}
+        value={this.props.pages[i]}
       />
     )
   }
@@ -57,7 +25,7 @@ class Product extends Component {
     return (
       <div id="product">
         <h1>Product</h1>
-        {this.renderPage(0)}
+        {this.renderPage(this.props.current)}
       </div>
     )
   }
@@ -83,11 +51,28 @@ class Page extends Component {
   }
 
   render() {
+    const images = this.props.value.images.map((arr, id) => {
+      return (
+        this.renderImage(id)
+      );
+    });
+
+    const texts = this.props.value.texts.map((arr, id) => {
+      return (
+        this.renderText(id)
+      );
+    });
+
+    const layout = {
+      "gridTemplateRows": `repeat(${this.props.value.rows}, 1fr)`,
+      "gridTemplateColumns": `repeat(${this.props.value.columns}, 1fr)`,
+      "gridTemplateAreas": this.props.value.areas,
+    };
+
     return (
-      <div id="page">
-        {this.renderImage(0)}
-        {this.renderImage(1)}
-        {this.renderText(0)}
+      <div id="page" style={layout}>
+        {images}
+        {texts}
       </div>
     )
   }
@@ -95,10 +80,13 @@ class Page extends Component {
 
 class Image extends Component {
   render() {
-    let source = this.props.value.id === "i0" ? fireworks : humananddog;
+    const style = {
+      "gridArea": this.props.value.id,
+    };
+
     return (
-      <div id={this.props.value.id}>
-        <img src={source} />
+      <div className="imagebox" style={style}>
+        <img src={this.props.value.source} />
       </div>
     )
   }
@@ -106,12 +94,22 @@ class Image extends Component {
 
 class Text extends Component {
   render() {
+    const style = {
+      "gridArea": this.props.value.id,
+    };
+
     return (
-      <div id={this.props.value.id}>
-        <p>TEXT</p>
+      <div className="textbox" style={style}>
+        <textarea></textarea>
       </div>
     )
   }
 }
 
-export default Product;
+const mapStateToProps = state => ({
+  product: state.products.product,
+  pages: state.pages.pages,
+  current: state.pages.current,
+});
+
+export default connect(mapStateToProps, { selectProduct, applyTemplate })(Product);

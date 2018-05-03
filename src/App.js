@@ -18,6 +18,7 @@ class App extends Component {
         <div className="App">
           <ImageManager/>
           <Filmstrip/>
+          <Product/>
         </div>
       );
     } else {
