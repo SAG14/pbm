@@ -1,8 +1,6 @@
-import { REGISTER_USER, LOGIN_USER } from './types';
+import { REGISTER_USER, LOGIN_USER, LOGOUT_USER, UPDATE_REGISTER_VALUE } from './types';
 
 export const signIn = (credentialData) => dispatch => {
-    console.log("hits signin");
-    console.log(credentialData);
     fetch('http://localhost:3100/api/account/login', {
             method: 'POST',
             headers: {
@@ -11,10 +9,46 @@ export const signIn = (credentialData) => dispatch => {
             body: JSON.stringify(credentialData)
         })
         .then(res => res.json())
-        .then(json => 
+        .then(data => 
             dispatch ({
                 type: LOGIN_USER,
-                payload: json
+                payload: data
             })
         );
 }
+
+export const logout = (token) => dispatch => {
+    fetch('http://localhost:3100/api/account/logout?token=' + token)
+            .then(res => res.json())
+            .then(data =>
+                dispatch ({
+                    type: LOGOUT_USER,
+                    payload: data
+                })
+            );
+}
+
+export const register = (userData) => dispatch =>{
+    console.log(userData);
+    fetch('http://localhost:3100/api/account/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(res => res.json())
+            .then(data => 
+                dispatch ({
+                    type: REGISTER_USER,
+                    payload: data
+                })
+            );
+}
+
+// export const resetRegisterValue = (registerData) => dispatch => {
+//     dispatch({
+//         type: UPDATE_REGISTER_VALUE,
+//         payload: JSON.stringify(registerdData)
+//     });
+// }

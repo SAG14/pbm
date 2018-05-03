@@ -1,3 +1,5 @@
 export const ADD_IMAGE = 'ADD_IMAGE';
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGIN_USER = "LOGIN_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
+export const UPDATE_REGISTER_VALUE = "UPDATE_REGISTER_VALUE";
