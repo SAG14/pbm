@@ -20,17 +20,20 @@ class Product extends Component {
           images: [
             {
               id: "i0",
-              source: fireworks,
+              // source: fireworks,
+              source: null,
             },
             {
               id: "i1",
-              source: humananddog,
+              // source: humananddog,
+              source: null,
             },
           ],
           texts: [
             {
               id: "t0",
-              value: "Hello world",
+              // value: "Hello world",
+              value: '',
             }
           ],
         },
@@ -109,11 +112,10 @@ class Image extends Component {
   render() {
     const style = {
       "gridArea": this.props.value.id,
-      // "border": "solid 1px black",
     };
 
     return (
-      <div style={style}>
+      <div className="imagebox" style={style}>
         <img src={this.props.value.source} />
       </div>
     )
@@ -127,8 +129,8 @@ class Text extends Component {
     };
 
     return (
-      <div className="txt"  style={style}>
-        {this.props.value.value}
+      <div className="textbox" style={style}>
+        <textarea>{this.props.value.value}</textarea>
       </div>
     )
   }

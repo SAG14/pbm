@@ -38,12 +38,6 @@ const initialState = {
     },
   ],
   currentPage: 0,
-  product: {
-    name: "Photo Book 8.5 by 5.5 inches (24 pages)",
-    price: 10.00,
-    priceUnit: "CAD",
-    pageNumber: 24,
-  }
 };
 
 const middleWare = [thunk];

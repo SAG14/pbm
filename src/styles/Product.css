@@ -22,6 +22,10 @@ img {
   object-fit: cover;
 }
 
-.txt {
+.imagebox {
+  border: solid 1px #979797;
+}
+
+.textbox {
   border: solid 1px #979797;
 }
