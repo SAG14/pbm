@@ -51,7 +51,7 @@ class Registration extends Component {
     }
     
     render() {
-        // if (!this.props.isRegistered) {
+        if (!this.props.isRegistered) {
             return (
                 <div className="outerContainer">
                     <div className="loginContainer">
@@ -119,11 +119,11 @@ class Registration extends Component {
                     </div>
                 </div>
             );
-        // } else {
-        //     return (
-        //         <Redirect to="/"/>
-        //     );
-        // }
+        } else {
+            return (
+                <Redirect to="/"/>
+            );
+        }
     }
 }
 

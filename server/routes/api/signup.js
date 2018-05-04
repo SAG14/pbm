@@ -165,6 +165,8 @@ module.exports = (app) => {
                             success: true,
                             message: 'Verification email has been sent to ' + user.email + '.'
                         });
+                        // TODO: Redirect to login
+                        // return res.redirect('http://localhost:3000/');
                     });
                 });
             });
@@ -232,11 +234,12 @@ module.exports = (app) => {
                         })
                     }
 
-                    // return res.status(200).send({
-                    //     success: true,
-                    //     message: "The account has been verified. Please log in."
-                    // });
-                    return res.redirect('http://localhost:3000/');
+                    return res.status(200).send({
+                        success: true,
+                        message: "The account has been verified. Please log in."
+                    });
+                    // TODO: Redirect to login
+                    //return res.redirect('http://localhost:3000/');
                 });
             });
         });
