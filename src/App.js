@@ -8,10 +8,13 @@ import ImageManager from './components/ImageManager';
 import Filmstrip from './components/Filmstrip';
 import UploadImage from './components/UploadImage';
 import Product from './components/Product';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { addImageToFrame } from './actions/pageActions';
 
 class App extends Component {
-  render() {
 
+  render() {
     // Redirects to login page if not authenticated
     if (this.props.isAuthenticated) {
       return (
@@ -39,4 +42,7 @@ const mapStateToProps = state => ({
   isAuthenticated: state.user.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(App);
+App = DragDropContext(HTML5Backend)(App);
+App = connect(mapStateToProps, {addImageToFrame})(App);
+
+export default App;

@@ -7,18 +7,15 @@ import store from '../store';
 
 import '../styles/Manager.css';
 import '../styles/ImageManager.css';
+import PreviewImage from './PreviewImage'
 
 class ImageManager extends Component {
   
   render() {
-   const imageStyle = {
-     width: '15em',
-   };
-    const viewImages = Object.keys(this.props.images).map((key) => {
-      let image = this.props.images[key];
+    const processImages = this.props.images.map((image, key) => {
       return (
         <div key = {key + image.file.lastModified}>
-          <img src= {image.imageURL} style={imageStyle}/>
+          <PreviewImage imageURL = {image.imageURL}/>
         </div>
       );
     });
@@ -26,21 +23,22 @@ class ImageManager extends Component {
       <div id="image-manager" className="manager-container">
         <div className="manager-top">
           <h1 className="title">ImageManager</h1>
-            {viewImages}
+          {
+            processImages
+          }   
         </div>
         <UploadImage />
       </div>
-    )
+    );
   }
 }
 
 ImageManager.propTypes = {
   images: PropTypes.array,
-  addImage: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   images: state.uploads.images
 });
 
-export default connect(mapStateToProps, { addImage })(ImageManager);
+export default connect(mapStateToProps, null)(ImageManager);

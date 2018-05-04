@@ -1,4 +1,4 @@
-import { SELECT_PRODUCT, APPLY_TEMPLATE, JUMP_TO_PAGE } from '../actions/types';
+import { SELECT_PRODUCT, APPLY_TEMPLATE, JUMP_TO_PAGE, ADD_IMAGE_TO_FRAME } from '../actions/types';
 
 const initialState = {
   current : null,
@@ -53,6 +53,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         current : action.payload,
+      };
+
+    case ADD_IMAGE_TO_FRAME:
+      let newPages = Object.assign({}, state);
+      console.log(state.current);
+      newPages.pages[state.current].images[action.payload.id].source = action.payload.source;
+      return {
+      ...state,
+      newPages
       };
     default:
       return state;

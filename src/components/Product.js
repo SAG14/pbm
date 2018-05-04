@@ -2,14 +2,35 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectProduct } from '../actions/productActions';
 import { applyTemplate } from '../actions/pageActions';
-
+import PageImage from './PageImage';
 import '../styles/Product.css';
+import { addImageToFrame } from '../actions/pageActions';
+import store from '../store';
 
 class Product extends Component {
+  constructor(props){
+    super(props);
+    this.addImageToPage = this.addImageToPage.bind(this);
+  };
   componentWillMount() {
     this.props.selectProduct();
     this.props.applyTemplate(1);
+    this.props.applyTemplate(2);
+    this.props.applyTemplate(3);
+    this.props.applyTemplate(4);
+    this.props.applyTemplate(5);
+    this.props.applyTemplate(6);
+    this.props.applyTemplate(7);
+    this.props.applyTemplate(8);
+    this.props.applyTemplate(9);
+    this.props.applyTemplate(10);
+    this.props.applyTemplate(11);
+
   }
+
+  addImageToPage(id, source) {
+    this.props.addImageToFrame({id: id, source: source});
+  };
 
   renderPage(i) {
     if (i == null)
@@ -17,6 +38,7 @@ class Product extends Component {
     return (
       <Page
         value={this.props.pages[i]}
+        addImageToPage = {this.addImageToPage}
       />
     )
   }
@@ -36,9 +58,10 @@ class Product extends Component {
 class Page extends Component {
   renderImage(i) {
     return (
-      <Image
+      <PageImage
         key={this.props.value.images[i].id}
         value={this.props.value.images[i]}
+        addImageToPage = {this.props.addImageToPage}
       />
     )
   }
@@ -80,22 +103,6 @@ class Page extends Component {
   }
 }
 
-class Image extends Component {
-  render() {
-    const style = {
-      "gridArea": this.props.value.id,
-    };
-
-    const image = this.props.value.source === null ? null : <img src={this.props.value.source} alt="img" />;
-
-    return (
-      <div className="imagebox" style={style}>
-        {image}
-      </div>
-    )
-  }
-}
-
 class Text extends Component {
   render() {
     const style = {
@@ -110,10 +117,11 @@ class Text extends Component {
   }
 }
 
+
 const mapStateToProps = state => ({
   product: state.products.product,
   pages: state.pages.pages,
   current: state.pages.current,
 });
 
-export default connect(mapStateToProps, { selectProduct, applyTemplate })(Product);
+export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame })(Product);
