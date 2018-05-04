@@ -1,9 +1,9 @@
 import { APPLY_TEMPLATE, JUMP_TO_PAGE } from './types';
 
-// import fireworks from '../images/fireworks.jpg';
-// import humananddog from '../images/humananddog.jpg';
+import fireworks from '../images/fireworks.jpg';
+import humananddog from '../images/humananddog.jpg';
 
-export const applyTemplate = () => dispatch => {
+export const applyTemplate = (index) => dispatch => {
     const template = {
         rows: 4,
         columns: 12,
@@ -11,13 +11,13 @@ export const applyTemplate = () => dispatch => {
         images: [
             {
                 id: "i0",
-                // source: fireworks,
-                source: null,
+                source: fireworks,
+                // source: null,
             },
             {
                 id: "i1",
-                // source: humananddog,
-                source: null,
+                source: humananddog,
+                // source: null,
             },
         ],
         texts: [
@@ -27,7 +27,6 @@ export const applyTemplate = () => dispatch => {
             }
         ],
     }
-    const index = 0;
 
     dispatch({
         type: APPLY_TEMPLATE,
