@@ -8,7 +8,7 @@ import '../styles/Product.css';
 class Product extends Component {
   componentWillMount() {
     this.props.selectProduct();
-    this.props.applyTemplate();
+    this.props.applyTemplate(1);
   }
 
   renderPage(i) {
@@ -22,9 +22,11 @@ class Product extends Component {
   }
 
   render() {
+    const current = 'page ' + this.props.current;
     return (
       <div id="product">
         <h1>Product</h1>
+        <h2>{current}</h2>
         {this.renderPage(this.props.current)}
       </div>
     )
@@ -51,13 +53,13 @@ class Page extends Component {
   }
 
   render() {
-    const images = this.props.value.images.map((arr, id) => {
+    const images = this.props.value.images.map((img, id) => {
       return (
         this.renderImage(id)
       );
     });
 
-    const texts = this.props.value.texts.map((arr, id) => {
+    const texts = this.props.value.texts.map((txt, id) => {
       return (
         this.renderText(id)
       );
@@ -84,9 +86,11 @@ class Image extends Component {
       "gridArea": this.props.value.id,
     };
 
+    const image = this.props.value.source === null ? null : <img src={this.props.value.source} alt="img" />;
+
     return (
       <div className="imagebox" style={style}>
-        <img src={this.props.value.source} />
+        {image}
       </div>
     )
   }
