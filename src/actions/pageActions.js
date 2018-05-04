@@ -1,7 +1,7 @@
 import { APPLY_TEMPLATE, JUMP_TO_PAGE, ADD_IMAGE_TO_FRAME } from './types';
 
-import fireworks from '../images/fireworks.jpg';
-import humananddog from '../images/humananddog.jpg';
+// import fireworks from '../images/fireworks.jpg';
+// import humananddog from '../images/humananddog.jpg';
 
 export const applyTemplate = (index) => dispatch => {
     const template = {
@@ -11,13 +11,13 @@ export const applyTemplate = (index) => dispatch => {
         images: [
             {
                 id: "i0",
-                source: fireworks,
-                // source: null,
+                // source: fireworks,
+                source: null,
             },
             {
                 id: "i1",
-                source: humananddog,
-                // source: null,
+                // source: humananddog,
+                source: null,
             },
         ],
         texts: [

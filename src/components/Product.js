@@ -14,6 +14,7 @@ class Product extends Component {
   };
   componentWillMount() {
     this.props.selectProduct();
+    this.props.applyTemplate(0);
     this.props.applyTemplate(1);
     this.props.applyTemplate(2);
     this.props.applyTemplate(3);
@@ -25,7 +26,6 @@ class Product extends Component {
     this.props.applyTemplate(9);
     this.props.applyTemplate(10);
     this.props.applyTemplate(11);
-
   }
 
   addImageToPage(id, source) {
