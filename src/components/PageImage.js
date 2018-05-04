@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { findDOMNode } from 'react-dom';
 import { DropTarget } from 'react-dnd';
-import fireworks from '../images/fireworks.jpg';
-import humananddog from '../images/humananddog.jpg';
+// import fireworks from '../images/fireworks.jpg';
+// import humananddog from '../images/humananddog.jpg';
 import { addImageToFrame } from '../actions/pageActions';
 
 const Types = {
