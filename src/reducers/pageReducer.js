@@ -57,6 +57,7 @@ export default function(state = initialState, action) {
 
     case ADD_IMAGE_TO_FRAME:
       let newPages = Object.assign({}, state);
+      console.log(state.current);
       newPages.pages[state.current].images[action.payload.id].source = action.payload.source;
       return {
       ...state,
