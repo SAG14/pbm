@@ -1,14 +1,37 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { selectProduct } from '../actions/productActions';
+import { jumpToPage } from '../actions/pageActions';
+
 import '../styles/Filmstrip.css';
 
 class Filmstrip extends Component {
+
+  handleClick(i) {
+    this.props.jumpToPage(i);
+  }
+
   render() {
+    const strip = this.props.pages.map((page, index) => {
+      return (
+        <li key={index}>
+            <button className="frame" onClick={() => this.handleClick(index)}>{index}</button>
+        </li>
+      );
+    });
+
     return (
       <div id="filmstrip">
         <h1>Filmstrip</h1>
+        <ul>{strip}</ul>
       </div>
     )
   }
 }
 
-export default Filmstrip;
+const mapStateToProps = state => ({
+  pages: state.pages.pages,
+  current: state.pages.current,
+});
+
+export default connect(mapStateToProps, { jumpToPage })(Filmstrip);

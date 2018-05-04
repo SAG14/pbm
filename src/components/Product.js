@@ -1,63 +1,55 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { selectProduct } from '../actions/productActions';
+import { applyTemplate } from '../actions/pageActions';
+import PageImage from './PageImage';
 import '../styles/Product.css';
-
-import fireworks from '../images/fireworks.jpg';
-import humananddog from '../images/humananddog.jpg';
+import { addImageToFrame } from '../actions/pageActions';
+import store from '../store';
 
 class Product extends Component {
-  constructor(props) {
+  constructor(props){
     super(props);
-    this.state = {
-      pages: [
-        {
-          id: "p0",
-          width: 0,
-          height: 0,
-          rows: 4,
-          columns: 12,
-          images: [
-            {
-              id: "i0",
-              startingPos: 0,
-              rowspan: 4,
-              colspan: 6,
-              source: null,
-            },
-            {
-              id: "i1",
-              startingPos: 8,
-              rowspan: 4,
-              colspan: 4,
-              source: null,
-            },
-          ],
-          texts: [
-            {
-              id: "t0",
-              startingPos: 42,
-              rowspan: 1,
-              colspan: 2,
-            }
-          ],
-        },
-      ],
-    }
+    this.addImageToPage = this.addImageToPage.bind(this);
+  };
+  componentWillMount() {
+    this.props.selectProduct();
+    this.props.applyTemplate(1);
+    this.props.applyTemplate(2);
+    this.props.applyTemplate(3);
+    this.props.applyTemplate(4);
+    this.props.applyTemplate(5);
+    this.props.applyTemplate(6);
+    this.props.applyTemplate(7);
+    this.props.applyTemplate(8);
+    this.props.applyTemplate(9);
+    this.props.applyTemplate(10);
+    this.props.applyTemplate(11);
+
   }
 
+  addImageToPage(id, source) {
+    this.props.addImageToFrame({id: id, source: source});
+  };
+
   renderPage(i) {
+    if (i == null)
+      return;
     return (
       <Page
-        value={this.state.pages[i]}
+        value={this.props.pages[i]}
+        addImageToPage = {this.addImageToPage}
       />
     )
   }
 
   render() {
+    const current = 'page ' + this.props.current;
     return (
       <div id="product">
         <h1>Product</h1>
-        {this.renderPage(0)}
+        <h2>{current}</h2>
+        {this.renderPage(this.props.current)}
       </div>
     )
   }
@@ -66,9 +58,10 @@ class Product extends Component {
 class Page extends Component {
   renderImage(i) {
     return (
-      <Image
+      <PageImage
         key={this.props.value.images[i].id}
         value={this.props.value.images[i]}
+        addImageToPage = {this.props.addImageToPage}
       />
     )
   }
@@ -83,22 +76,28 @@ class Page extends Component {
   }
 
   render() {
-    return (
-      <div id="page">
-        {this.renderImage(0)}
-        {this.renderImage(1)}
-        {this.renderText(0)}
-      </div>
-    )
-  }
-}
+    const images = this.props.value.images.map((img, id) => {
+      return (
+        this.renderImage(id)
+      );
+    });
 
-class Image extends Component {
-  render() {
-    let source = this.props.value.id === "i0" ? fireworks : humananddog;
+    const texts = this.props.value.texts.map((txt, id) => {
+      return (
+        this.renderText(id)
+      );
+    });
+
+    const layout = {
+      "gridTemplateRows": `repeat(${this.props.value.rows}, 1fr)`,
+      "gridTemplateColumns": `repeat(${this.props.value.columns}, 1fr)`,
+      "gridTemplateAreas": this.props.value.areas,
+    };
+
     return (
-      <div id={this.props.value.id}>
-        <img src={source} />
+      <div id="page" style={layout}>
+        {images}
+        {texts}
       </div>
     )
   }
@@ -106,12 +105,23 @@ class Image extends Component {
 
 class Text extends Component {
   render() {
+    const style = {
+      "gridArea": this.props.value.id,
+    };
+
     return (
-      <div id={this.props.value.id}>
-        <p>TEXT</p>
+      <div className="textbox" style={style}>
+        <textarea></textarea>
       </div>
     )
   }
 }
 
-export default Product;
+
+const mapStateToProps = state => ({
+  product: state.products.product,
+  pages: state.pages.pages,
+  current: state.pages.current,
+});
+
+export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame })(Product);
