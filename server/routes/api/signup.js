@@ -165,6 +165,8 @@ module.exports = (app) => {
                             success: true,
                             message: 'Verification email has been sent to ' + user.email + '.'
                         });
+                        // TODO: Redirect to login
+                        // return res.redirect('http://localhost:3000/');
                     });
                 });
             });
@@ -202,7 +204,7 @@ module.exports = (app) => {
                 _id: token._userId
             }, function(err, user) {
                 if (err) {
-                    return res.send({
+                    return res.status(401).send({
                         success: false,
                         message: 'Error: Server error'
                     });
@@ -236,6 +238,8 @@ module.exports = (app) => {
                         success: true,
                         message: "The account has been verified. Please log in."
                     });
+                    // TODO: Redirect to login
+                    //return res.redirect('http://localhost:3000/');
                 });
             });
         });

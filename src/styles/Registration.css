@@ -1,0 +1,17 @@
+.secondButton {
+    width: 88px;
+    padding-top: 5px;
+    margin-right: 10px;
+    margin-top: 20px;
+    float: right;
+}
+
+.errorText {
+    color: #F44336;
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+
+.buttonsContainer {
+    padding-bottom: 10px;
+}
