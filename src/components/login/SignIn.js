@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { signIn } from '../../actions/userActions';
+import TextField from 'material-ui/TextField';
+import '../../styles/Login.css';
+import { RaisedButton } from 'material-ui';
+import Background from '../../images/Photos.jpeg';
 
 class SignIn extends Component {
     constructor(props) {
@@ -47,36 +51,41 @@ class SignIn extends Component {
     render() {
          if (!this.props.isAuthenticated) {
             return (
-                <div>
-                    <div>
-                        {
-                            (this.props.signInError) ? (
-                                <p>{this.props.signInError}</p>
-                            ) : (null)
-                        }
-                        <p>Sign In</p>
+                <div className="outerContainer">
+                    <div className="loginContainer">
+                        <h1>Sign In</h1>
                         <form onSubmit={this.onSubmit}>
                             <div>
-                                <input
+                                <TextField
                                     type="email"
-                                    placeholder="Email"
+                                    hintText="Email"
                                     name="signInEmail"
                                     value={this.state.signInEmail}
                                     onChange={this.onChange}
                                 /><br/>
-                                <input
+                                <TextField
                                     type="password"
-                                    placeholder="Password"
+                                    hintText="Password"
                                     name="signInPassword"
                                     value={this.state.signInPassword}
                                     onChange={this.onChange}
                                 /><br/>
-                                <button type="submit">Sign In</button>
+                                <div className="button">
+                                    <RaisedButton type="submit" primary={true} label="Sign In"/>
+                                </div>
                             </div>
                         </form>
                         <div>
                             <Link to="/registration">Register</Link>
                         </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        {
+                            (this.props.signInError) ? (
+                                <div className="errorText">{this.props.signInError}</div>
+                            ) : (null)
+                        }
                     </div>
                 </div>
             );
