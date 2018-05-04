@@ -13,7 +13,7 @@ export const selectProduct = () => dispatch => {
     name: "Photo Book 8.5 by 5.5 inches (24 pages)",
     price: 6.00,
     priceUnit: "CAD",
-    pageNumber: 12,
+    pageNumber: 24,
   }
   dispatch({
     type: SELECT_PRODUCT,

@@ -10,7 +10,7 @@ export default function(state = initialState, action) {
     case SELECT_PRODUCT:
       return {
         ...state,
-        pages: Array(action.payload.pageNumber).fill({
+        pages: Array(action.payload.pageNumber / 2).fill({
           rows : 4,
           columns : 12,
           areas : '"i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 t0 t0 i1 i1 i1 i1"',
