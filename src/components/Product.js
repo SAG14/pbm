@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectProduct } from '../actions/productActions';
-import { applyTemplate } from '../actions/pageActions';
+import { 
+  applyTemplate,
+  addImageToFrame,
+  addTextToPage,
+} from '../actions/pageActions';
 import PageImage from './PageImage';
+
 import '../styles/Product.css';
-import { addImageToFrame } from '../actions/pageActions';
-import store from '../store';
+// import store from '../store';
+
+const CALL_BACK_ENUMS = {
+  ADD_TEXT_TO_PAGE: 'ADD_TEXT_TO_PAGE',
+};
 
 class Product extends Component {
   constructor(props){
@@ -28,6 +36,15 @@ class Product extends Component {
     this.props.applyTemplate(11);
   }
 
+  callbackHandler = (type, data) => {
+    switch(type) {
+      case CALL_BACK_ENUMS.ADD_TEXT_TO_PAGE: {
+        this.props.addTextToPage(data.id, data.value);
+      }
+    }
+  }
+
+
   addImageToPage(id, source) {
     this.props.addImageToFrame({id: id, source: source});
   };
@@ -38,7 +55,8 @@ class Product extends Component {
     return (
       <Page
         value={this.props.pages[i]}
-        addImageToPage = {this.addImageToPage}
+        addImageToPage={this.addImageToPage}
+        callbackHandler={this.callbackHandler}
       />
     )
   }
@@ -56,12 +74,21 @@ class Product extends Component {
 }
 
 class Page extends Component {
+
+  viewCallbackHandler = (type, data) => {
+    switch(type) {
+      default:
+        // bubble up all other actions to parents
+        this.props.callbackHandler(type, data);
+    }
+  }
+
   renderImage(i) {
     return (
       <PageImage
         key={this.props.value.images[i].id}
         value={this.props.value.images[i]}
-        addImageToPage = {this.props.addImageToPage}
+        addImageToPage={this.props.addImageToPage}
       />
     )
   }
@@ -71,6 +98,7 @@ class Page extends Component {
       <Text
         key={this.props.value.texts[i].id}
         value={this.props.value.texts[i]}
+        callbackHandler={this.viewCallbackHandler}
       />
     )
   }
@@ -104,6 +132,16 @@ class Page extends Component {
 }
 
 class Text extends Component {
+  inputChangeHandler = (e) => {
+    this.props.callbackHandler(
+      CALL_BACK_ENUMS.ADD_TEXT_TO_PAGE,
+      {
+        id: this.props.value.id,
+        value: e.target.value,
+      },
+    );
+  }
+
   render() {
     const style = {
       "gridArea": this.props.value.id,
@@ -111,12 +149,11 @@ class Text extends Component {
 
     return (
       <div className="textbox" style={style}>
-        <textarea></textarea>
+        <textarea value={this.props.value.value} onInput={(e) => this.inputChangeHandler(e)}></textarea>
       </div>
     )
   }
 }
-
 
 const mapStateToProps = state => ({
   product: state.products.product,
@@ -124,4 +161,4 @@ const mapStateToProps = state => ({
   current: state.pages.current,
 });
 
-export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame })(Product);
+export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToPage })(Product);
