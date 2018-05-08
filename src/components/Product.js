@@ -6,6 +6,8 @@ import PageImage from './PageImage';
 import '../styles/Product.css';
 import { addImageToFrame } from '../actions/pageActions';
 import store from '../store';
+import { Editor } from '@progress/kendo-editor-react-wrapper';
+import kendo from '@progress/kendo-ui';
 
 class Product extends Component {
   constructor(props){
@@ -36,10 +38,22 @@ class Product extends Component {
     if (i == null)
       return;
     return (
-      <Page
-        value={this.props.pages[i]}
-        addImageToPage = {this.addImageToPage}
-      />
+      <div>
+      <Editor value={"<div>Testing this feature</div>"} tools={["pdf"]} pdf= {{
+        fileName: "TestDocument.pdf",
+        paperSize: "a4",
+        margin: {
+          bottom: 20,
+          left: 20,
+          right: 20,
+          top: 20
+        }
+      }}/>
+        <Page
+          value={this.props.pages[i]}
+          addImageToPage = {this.addImageToPage}
+        />
+      </div>
     )
   }
 
