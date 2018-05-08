@@ -4,25 +4,14 @@ import { connect } from 'react-redux';
 import { addImage } from '../actions/uploadActions';
 import UploadImage from './UploadImage';
 import store from '../store';
-
+import ImageManager from './ImageManager';
 import '../styles/Manager.css';
 import '../styles/ImageManager.css';
 import PreviewImage from './PreviewImage'
 
-class ImageManager extends Component {
+class TemplateManager extends Component {
   
   render() {
-    let topStyle = {
-      height: 'calc(100% - 200px)',
-      overflowX: 'scroll',
-      overflowY: 'hidden'
-    };
-    let containerStyle = {
-      borderR: 'thin solid black',
-      height: '100%',
-      width: '20%',
-      position: 'fixed'
-    };
     const processImages = this.props.images.map((image, key) => {
       return (
         <div key = {key + image.file.lastModified}>
@@ -31,14 +20,11 @@ class ImageManager extends Component {
       );
     });
     return (
-      <div id="image-manager"  className="manager-container">
+      <div id="image-manager" className="manager-container">
         <div className="manager-top">
-          <h1 className="title">ImageManager</h1>
-          {
-            processImages
-          }   
+          <h1 className="title">Templates</h1>
+
         </div>
-        <UploadImage/>
       </div>
     );
   }
@@ -51,5 +37,4 @@ ImageManager.propTypes = {
 const mapStateToProps = state => ({
   images: state.uploads.images
 });
-
-export default connect(mapStateToProps, null)(ImageManager);
+export default connect(mapStateToProps, null)(TemplateManager);
