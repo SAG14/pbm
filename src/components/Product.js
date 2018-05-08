@@ -38,9 +38,9 @@ class Product extends Component {
 
   callbackHandler = (type, data) => {
     switch(type) {
-      case CALL_BACK_ENUMS.ADD_TEXT_TO_PAGE: {
+      case CALL_BACK_ENUMS.ADD_TEXT_TO_PAGE:
         this.props.addTextToPage(data.id, data.value);
-      }
+        break;
     }
   }
 
