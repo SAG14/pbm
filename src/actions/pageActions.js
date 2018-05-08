@@ -1,4 +1,9 @@
-import { APPLY_TEMPLATE, JUMP_TO_PAGE, ADD_IMAGE_TO_FRAME } from './types';
+import { 
+    APPLY_TEMPLATE,
+    JUMP_TO_PAGE,
+    ADD_IMAGE_TO_FRAME,
+    ADD_TEXT_TO_PAGE,
+} from './types';
 
 // import fireworks from '../images/fireworks.jpg';
 // import humananddog from '../images/humananddog.jpg';
@@ -27,7 +32,6 @@ export const applyTemplate = (index) => dispatch => {
             }
         ],
     }
-
     dispatch({
         type: APPLY_TEMPLATE,
         payload: template,
@@ -45,6 +49,14 @@ export const jumpToPage = (index) => dispatch => {
 export const addImageToFrame = (data) => dispatch => {
     dispatch({
         type: ADD_IMAGE_TO_FRAME,
-        payload: data
+        payload: data,
+    });
+}
+
+export const addTextToPage = (id, value) => dispatch => {
+    dispatch({
+        type: ADD_TEXT_TO_PAGE,
+        id: id,
+        payload: value,
     });
 }
