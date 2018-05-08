@@ -4,7 +4,7 @@ import './App.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
-import ImageManager from './components/ImageManager';
+import Sidebar from './components/Sidebar';
 import Filmstrip from './components/Filmstrip';
 import UploadImage from './components/UploadImage';
 import Product from './components/Product';
@@ -19,7 +19,7 @@ class App extends Component {
     if (this.props.isAuthenticated) {
       return (
         <div className="App">
-          <ImageManager/>
+          <Sidebar />
           <Filmstrip/>
           <Product/>
         </div>
