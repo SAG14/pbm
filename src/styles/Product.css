@@ -3,6 +3,7 @@
   height: calc(100% - 200px);
 }
 
+/* keeps the container in the same ratio */
 .product-view-design-container-wrapper {
   width: 80%;
   margin: auto;
@@ -13,10 +14,13 @@
   background: #3E3E3E;
 }
 
+.bleed {
+  border: solid 1px red;
+  margin: -9px;
+}
 
 .page {
   background-color: #FFFFFF;
-  margin: auto;
   display: grid;
 }
 
@@ -28,14 +32,12 @@ img {
   border: 0 none; 
 }
 
-.imagebox {
-  /* border: solid 1px #979797; */
+.imageFrame {
   background: #11ADEC;
-  border: 0 none; 
+  border: 0 none;
 }
 
-.textbox {
-  /* border: solid 1px #979797; */
+.textFrame {
   background: #DEDFE0;
   border: 0 none; 
 }
@@ -48,4 +50,36 @@ textarea {
   width: 100%;
   height: 100%;
   border: 0 none;
+}
+
+.margin-top-35 {
+  margin-top: 35px;
+}
+
+.margin-right-35 {
+  margin-right: 35px;
+}
+
+.margin-bottom-35 {
+  margin-bottom: 35px;
+}
+
+.margin-left-35 {
+  margin-left: 35px;
+}
+
+.margin-top--9 {
+  margin-top: -9px;
+}
+
+.margin-right--9 {
+  margin-right: -9px;
+}
+
+.margin-bottom--9 {
+  margin-bottom: -9px;
+}
+
+.margin-left--9 {
+  margin-left: -9px;
 }

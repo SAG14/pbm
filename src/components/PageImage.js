@@ -39,33 +39,13 @@ class PageImage extends Component {
         const {connectDropTarget, isOver, canDrop } = this.props;
 
         const style = {
-          // let margin = {};
-          // switch (this.props.value.id) {
-          //   case 'i0':
-          //     margin = {
-          //       "margin": "36px 0 36px 36px",
-          //     }
-          //     break;
-          //   case 'i1':
-          //     margin = {
-          //       "margin": "36px 36px 0 0",
-          //     }
-          //     break;
-          // }
-          // const a = {
-          //   ...margin,
-          //   "gridArea": this.props.value.id,
-          // }
-          // console.log(a);
-          // return {
-          //   "background" : "yellow",
-          // };
+          "gridArea": this.props.value.id,
         };
 
         const image = this.props.value.source === null ? null : <img src={this.props.value.source} alt="img" />;
     
         return connectDropTarget(
-          <div className="imagebox" style={style}>
+          <div className="imageFrame" style={style}>
             {image}
           </div>
         )

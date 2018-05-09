@@ -68,7 +68,9 @@ class Product extends Component {
         </div>
         <div className="product-view-design-container-wrapper">
           <div className="product-view-design-container">
-            {this.renderPage(this.props.current)}
+            {/* <div className="bleed">
+            </div> */}
+              {this.renderPage(this.props.current)}
           </div>
         </div>
       </div>
@@ -76,8 +78,28 @@ class Product extends Component {
   }
 }
 
-class Page extends Component {
+class Spread extends Component {
+  renderPages(i) {
+    return (
+      <Page
+        value={this.props.pages[i]}
+        addImageToPage={this.addImageToPage}
+        callbackHandler={this.callbackHandler}
+      />
+    )
+  }
 
+  render() {
+    const pages = this.props.value.pages
+    return (
+      <div className="spread">
+        {pages}
+      </div>
+    )
+  }
+}
+
+class Page extends Component {
   viewCallbackHandler = (type, data) => {
     switch(type) {
       default:
@@ -152,7 +174,7 @@ class Text extends Component {
     };
 
     return (
-      <div className="textbox" style={style}>
+      <div className="textFrame" style={style}>
         <textarea value={this.props.value.value} onInput={(e) => this.inputChangeHandler(e)}></textarea>
       </div>
     )
