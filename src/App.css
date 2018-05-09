@@ -22,10 +22,7 @@ body {
   left: 50%;
   background: white;
   transform: translateX(-50%) translateY(-50%);
-  width: 50vw;
-  height: 50vh;
-  padding: 50px;
-  
+  padding: 25px 50px;
 }
 
 .App {
