@@ -21,7 +21,7 @@ class Product extends Component {
     this.addImageToPage = this.addImageToPage.bind(this);
   };
   componentWillMount() {
-    this.props.selectProduct();
+    this.props.selectProduct(0);
     this.props.applyTemplate(0);
     this.props.applyTemplate(1);
     this.props.applyTemplate(2);

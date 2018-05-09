@@ -6,6 +6,25 @@ body {
   position: relative;
 }
 
+.Modal-background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.Modal-content {
+  position: fixed;
+  box-sizing: border-box;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  background: white;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 25px 50px;
+}
+
 .App {
   min-width: 1000px;
 }
