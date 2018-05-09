@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectProduct } from '../actions/productActions';
-import { 
+import {
   applyTemplate,
   addImageToFrame,
   addTextToPage,
@@ -9,35 +9,35 @@ import {
 import PageImage from './PageImage';
 
 import '../styles/Product.css';
-// import store from '../store';
 
 const CALL_BACK_ENUMS = {
   ADD_TEXT_TO_PAGE: 'ADD_TEXT_TO_PAGE',
 };
 
 class Product extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.addImageToPage = this.addImageToPage.bind(this);
   };
+
   componentWillMount() {
     this.props.selectProduct();
     this.props.applyTemplate(0);
-    this.props.applyTemplate(1);
     this.props.applyTemplate(2);
-    this.props.applyTemplate(3);
     this.props.applyTemplate(4);
-    this.props.applyTemplate(5);
     this.props.applyTemplate(6);
-    this.props.applyTemplate(7);
     this.props.applyTemplate(8);
-    this.props.applyTemplate(9);
     this.props.applyTemplate(10);
-    this.props.applyTemplate(11);
+    this.props.applyTemplate(12);
+    this.props.applyTemplate(14);
+    this.props.applyTemplate(16);
+    this.props.applyTemplate(18);
+    this.props.applyTemplate(20);
+    this.props.applyTemplate(22);
   }
 
   callbackHandler = (type, data) => {
-    switch(type) {
+    switch (type) {
       case CALL_BACK_ENUMS.ADD_TEXT_TO_PAGE:
         this.props.addTextToPage(data.id, data.value);
         break;
@@ -45,15 +45,16 @@ class Product extends Component {
   }
 
   addImageToPage(id, source) {
-    this.props.addImageToFrame({id: id, source: source});
+    this.props.addImageToFrame({ id: id, source: source });
   };
 
-  renderPage(i) {
+  renderSpread(i) {
     if (i == null)
       return;
     return (
-      <Page
-        value={this.props.pages[i]}
+      <Spread
+        left={this.props.pages[i]}
+        right={this.props.pages[i + 1]}
         addImageToPage={this.addImageToPage}
         callbackHandler={this.callbackHandler}
       />
@@ -68,9 +69,7 @@ class Product extends Component {
         </div>
         <div className="product-view-design-container-wrapper">
           <div className="product-view-design-container">
-            {/* <div className="bleed">
-            </div> */}
-              {this.renderPage(this.props.current)}
+            {this.renderSpread(this.props.current)}
           </div>
         </div>
       </div>
@@ -79,29 +78,38 @@ class Product extends Component {
 }
 
 class Spread extends Component {
-  renderPages(i) {
+  callbackHandler = (type, data) => {
+    switch (type) {
+      default:
+        // bubble up all other actions to parents
+        this.props.callbackHandler(type, data);
+    }
+  }
+
+  renderPage(page, isRight) {
     return (
       <Page
-        value={this.props.pages[i]}
-        addImageToPage={this.addImageToPage}
+        value={page}
+        isRight={isRight}
+        addImageToPage={this.props.addImageToPage}
         callbackHandler={this.callbackHandler}
       />
     )
   }
 
   render() {
-    const pages = this.props.value.pages
     return (
       <div className="spread">
-        {pages}
+        {this.renderPage(this.props.left, false)}
+        {this.renderPage(this.props.right, true)}
       </div>
     )
   }
 }
 
 class Page extends Component {
-  viewCallbackHandler = (type, data) => {
-    switch(type) {
+  callbackHandler = (type, data) => {
+    switch (type) {
       default:
         // bubble up all other actions to parents
         this.props.callbackHandler(type, data);
@@ -123,7 +131,7 @@ class Page extends Component {
       <Text
         key={this.props.value.texts[i].id}
         value={this.props.value.texts[i]}
-        callbackHandler={this.viewCallbackHandler}
+        callbackHandler={this.callbackHandler}
       />
     )
   }
@@ -142,16 +150,22 @@ class Page extends Component {
     });
 
     const layout = {
-      "gridTemplateRows": `repeat(${this.props.value.rows}, 1fr)`,
-      "gridTemplateColumns": `repeat(${this.props.value.columns}, 1fr)`,
-      "gridTemplateAreas": this.props.value.areas,
-      "gridGap": "12px",
+      "gridTemplateRows":   `repeat(${this.props.value.rows-1}, 1fr 12px) 1fr`,
+      "gridTemplateColumns": `repeat(${this.props.value.columns-1}, 1fr 12px) 1fr`,
+      "gridTemplateAreas": this.props.value.area,
     };
 
+    let className = 'bleed';
+    if (this.props.isRight) {
+      className += ' bleed-right';
+    }
+
     return (
-      <div className="page" style={layout}>
-        {images}
-        {texts}
+      <div className={className}>
+        <div className="page" style={layout}>
+          {images}
+          {texts}
+        </div>
       </div>
     )
   }
@@ -159,6 +173,7 @@ class Page extends Component {
 
 class Text extends Component {
   inputChangeHandler = (e) => {
+    console.log(this.props.value.id);
     this.props.callbackHandler(
       CALL_BACK_ENUMS.ADD_TEXT_TO_PAGE,
       {
@@ -169,9 +184,7 @@ class Text extends Component {
   }
 
   render() {
-    const style = {
-      "gridArea": this.props.value.id,
-    };
+    const style = JSON.parse(this.props.value.style);
 
     return (
       <div className="textFrame" style={style}>

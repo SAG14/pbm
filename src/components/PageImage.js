@@ -12,8 +12,6 @@ const Types = {
   };
   
 const imageTarget = {
-
-
     drop(props, monitor, component) {
         if (monitor.didDrop()) {
           return;
@@ -21,7 +19,8 @@ const imageTarget = {
         let imageURL = monitor.getItem().imageURL;
         let idPattern = /\d+/g;
         let parsedId = parseInt((props.value.id).match(idPattern));
-        props.addImageToPage(parsedId, imageURL);
+        // props.addImageToPage(parsedId, imageURL);
+        props.addImageToPage(props.value.id, imageURL);
         return;
       }
 };
@@ -37,11 +36,7 @@ function collect(connect, monitor) {
 class PageImage extends Component {
     render() {
         const {connectDropTarget, isOver, canDrop } = this.props;
-
-        const style = {
-          "gridArea": this.props.value.id,
-        };
-
+        const style = JSON.parse(this.props.value.style);
         const image = this.props.value.source === null ? null : <img src={this.props.value.source} alt="img" />;
     
         return connectDropTarget(

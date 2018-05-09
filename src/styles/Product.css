@@ -14,14 +14,32 @@
   background: #3E3E3E;
 }
 
+.spread {
+  display: table;
+}
+
+.spread:after {
+  display: table;
+  clear: both;
+}
+
 .bleed {
   border: solid 1px red;
+  float: left;
+  width: calc(50% - 12px);
+  padding: 8px;
   margin: -9px;
+}
+
+.bleed-right {
+  margin-left: 9px;
 }
 
 .page {
   background-color: #FFFFFF;
   display: grid;
+  height: 500px;
+
 }
 
 img {

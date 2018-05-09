@@ -1,39 +1,63 @@
-import { 
+import {
     APPLY_TEMPLATE,
     JUMP_TO_PAGE,
     ADD_IMAGE_TO_FRAME,
     ADD_TEXT_TO_PAGE,
 } from './types';
 
-// import fireworks from '../images/fireworks.jpg';
-// import humananddog from '../images/humananddog.jpg';
-
 export const applyTemplate = (index) => dispatch => {
     const template = {
-        rows: 4,
-        columns: 10,
-        areas: '"i0 i0 i0 .  .  .  i1 i1 i1 i1"'
-             + '"i0 i0 i0 .  .  .  i1 i1 i1 i1"'
-             + '"i0 i0 i0 t0 .  .  i1 i1 i1 i1"'
-             + '"i0 i0 i0 t0 .  .  .  .  t1 t1"',
-        images: [
+        id: "tp1",
+        pages: [
             {
-                id: "i0",
-                source: null,
+                rows: 4,
+                columns: 5,
+                area: '"i0 i0 i0 i0 i0 .  .  .  . "'
+                    + '"i0 i0 i0 i0 i0 .  .  .  . "'
+                    + '"i0 i0 i0 i0 i0 .  .  .  . "'
+                    + '"i0 i0 i0 i0 i0 .  .  .  . "'
+                    + '"i0 i0 i0 i0 i0 .  t0 .  . "'
+                    + '"i0 i0 i0 i0 i0 .  t0 .  . "'
+                    + '"i0 i0 i0 i0 i0 .  t0 .  . "',
+                images: [
+                    {
+                        id: "i0",
+                        source: null,
+                        style: '{"margin":"36px 0 36px 36px", "gridArea":"i0"}',
+                    },
+                ],
+                texts: [
+                    {
+                        id: "t0",
+                        value: '',
+                        style: '{"margin":"0 0 36px 0", "gridArea":"t0"}',
+                    },
+                ],
             },
             {
-                id: "i1",
-                source: null,
-            },
-        ],
-        texts: [
-            {
-                id: "t0",
-                value: '',
-            },
-            {
-                id: "t1",
-                value: '',
+                rows: 4,
+                columns: 5,
+                area: '".  .  i1 i1 i1 i1 i1 i1 i1"'
+                    + '".  .  i1 i1 i1 i1 i1 i1 i1"'
+                    + '".  .  i1 i1 i1 i1 i1 i1 i1"'
+                    + '".  .  i1 i1 i1 i1 i1 i1 i1"'
+                    + '".  .  i1 i1 i1 i1 i1 i1 i1"'
+                    + '".  .  .  .  .  .  .  .  . "'
+                    + '".  .  .  .  .  .  t1 t1 t1"',
+                images: [
+                    {
+                        id: "i1",
+                        source: null,
+                        style: '{"margin":"36px 36px 0 0", "gridArea":"i1"}',
+                    },
+                ],
+                texts: [
+                    {
+                        id: "t1",
+                        value: '',
+                        style: '{"margin":"0 36px 36px 0", "gridArea":"t1"}',
+                    },
+                ],
             },
         ],
     }

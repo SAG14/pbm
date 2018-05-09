@@ -16,33 +16,27 @@ export default function(state = initialState, action) {
     case SELECT_PRODUCT: {
       return {
         ...state,
-        pages: Array(action.payload.pageNumber / 2).fill({
+        pages: Array(action.payload.pageNumber).fill({
           rows : 0,
           columns : 0,
           areas : '',
-          images: [
-
-          ],
-          texts: [
-            
-          ],
+          images: [],
+          texts: [],
         }),
         current: 0,
       }
     }
     case APPLY_TEMPLATE: {
       return Object.assign({}, state, {
-        pages : state.pages.map((page, index) => {
+        pages : state.pages.map((page, index, array) => {
+          if (index % 2 === 1) {
+            return page;
+          }
           if (index !== action.index) {
             return page;
           }
-          return Object.assign({}, page, {
-            rows : action.payload.rows,
-            columns : action.payload.columns,
-            areas : action.payload.areas,
-            images : action.payload.images,
-            texts : action.payload.texts,
-          });
+          array[index + 1] = action.payload.pages[1];
+          return action.payload.pages[0];
         }),
       });
     }
@@ -53,13 +47,29 @@ export default function(state = initialState, action) {
       };
     }
     case ADD_IMAGE_TO_FRAME: {
-      let newPages = Object.assign({}, state);
-      // console.log(state.current);
-      newPages.pages[state.current].images[action.payload.id].source = action.payload.source;
-      return {
-        ...state,
-        newPages
-      };
+      return Object.assign({}, state, {
+        pages : state.pages.map((page, pageIndex) => {
+          if (pageIndex !== state.current) {
+            return page;
+          }
+          return Object.assign({}, page, {
+            images : page.images.map((image) => {
+              if (image.id !== action.payload.id) {
+                return image;
+              }
+              return Object.assign({}, image, {
+                source : action.payload.source,
+              });
+            }),
+          });
+        }),
+      });
+      // let newPages = Object.assign({}, state);
+      // newPages.pages[state.current].images[action.payload.id].source = action.payload.source;
+      // return {
+      //   ...state,
+      //   newPages
+      // };
     }
     case ADD_TEXT_TO_PAGE: {
       return Object.assign({}, state, {

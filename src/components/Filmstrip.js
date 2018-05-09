@@ -13,6 +13,9 @@ class Filmstrip extends Component {
 
   render() {
     const strip = this.props.pages.map((page, index) => {
+      if (index % 2 === 1) {
+        return;
+      }
       return (
         <li key={index}>
             <button className="frame" onClick={() => this.handleClick(index)}>{index}</button>
