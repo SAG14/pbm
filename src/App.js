@@ -5,20 +5,27 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router';
 import Sidebar from './components/Sidebar';
+import ProductSelector from './components/ProductSelector';
 import Filmstrip from './components/Filmstrip';
 import UploadImage from './components/UploadImage';
 import Product from './components/Product';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { addImageToFrame } from './actions/pageActions';
+import { fetchProducts } from './actions/productActions';
+
 
 class App extends Component {
-
+  constructor(props) {
+    super(props);
+    this.props.fetchProducts();
+  }
   render() {
     // Redirects to login page if not authenticated
-    if (this.props.isAuthenticated) {
+    if (1) {//this.props.isAuthenticated) {
       return (
         <div className="App">
+          <ProductSelector />
           <Sidebar />
           <Filmstrip/>
           <Product/>
@@ -36,6 +43,7 @@ class App extends Component {
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool,
+  fetchProducts: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -43,6 +51,6 @@ const mapStateToProps = state => ({
 });
 
 App = DragDropContext(HTML5Backend)(App);
-App = connect(mapStateToProps, {addImageToFrame})(App);
+App = connect(mapStateToProps, {addImageToFrame, fetchProducts})(App);
 
 export default App;

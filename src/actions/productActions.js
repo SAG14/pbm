@@ -1,7 +1,29 @@
 import { FETCH_PRODUCTS, SELECT_PRODUCT } from './types';
 
 export const fetchProducts = () => dispatch => {
-  const products = [];
+  const products = [
+    {
+      type: "Photo Book",
+      size: "8.5 by 5.5 inches",
+      price: 6.00,
+      priceUnit: "CAD",
+      pageNumber: 16,
+    },
+    {
+      type: "Photo Book",
+      size: "8.5 by 5.5 inches",
+      price: 8.00,
+      priceUnit: "CAD",
+      pageNumber: 24,
+    },
+    {
+      type: "Photo Book",
+      size: "8.5 by 5.5 inches",
+      price: 10.00,
+      priceUnit: "CAD",
+      pageNumber: 32,
+    }
+  ];
   dispatch({
     type: FETCH_PRODUCTS,
     payload: products,
