@@ -4,57 +4,53 @@ import { selectProduct } from '../actions/productActions';
 import {
   applyTemplate,
   addImageToFrame,
-  addTextToPage,
+  addTextToFrame,
 } from '../actions/pageActions';
-import PageImage from './PageImage';
+import PageImage, { CALL_BACK_ENUMS } from './PageImage';
 
 import '../styles/Product.css';
 
-const CALL_BACK_ENUMS = {
-  ADD_TEXT_TO_PAGE: 'ADD_TEXT_TO_PAGE',
+const VIEW_CALL_BACK_ENUMS = {
+  ...CALL_BACK_ENUMS,
+  ADD_TEXT_TO_FRAME: 'ADD_TEXT_TO_FRAME',
 };
 
 class Product extends Component {
   constructor(props) {
     super(props);
-    this.addImageToPage = this.addImageToPage.bind(this);
+    // this.addImageToPage = this.addImageToPage.bind(this);
   };
 
   componentWillMount() {
     this.props.selectProduct();
-    this.props.applyTemplate(0);
-    this.props.applyTemplate(2);
-    this.props.applyTemplate(4);
-    this.props.applyTemplate(6);
-    this.props.applyTemplate(8);
-    this.props.applyTemplate(10);
-    this.props.applyTemplate(12);
-    this.props.applyTemplate(14);
-    this.props.applyTemplate(16);
-    this.props.applyTemplate(18);
-    this.props.applyTemplate(20);
-    this.props.applyTemplate(22);
+    for (let i = 0; i < 24; i += 2) {
+      this.props.applyTemplate(i, this.props.templates[i / 2 % 5]);
+      this.props.applyTemplate(i + 1, this.props.templates[i / 2 % 5]);
+    }
   }
 
   callbackHandler = (type, data) => {
     switch (type) {
-      case CALL_BACK_ENUMS.ADD_TEXT_TO_PAGE:
-        this.props.addTextToPage(data.id, data.value);
+      case VIEW_CALL_BACK_ENUMS.ADD_TEXT_TO_FRAME:
+        this.props.addTextToFrame(data.id, data.value, data.index);
+        break;
+      case VIEW_CALL_BACK_ENUMS.ADD_IMAGE_TO_FRAME:
+        this.props.addImageToFrame(data.id, data.value, data.index);
         break;
     }
   }
 
-  addImageToPage(id, source) {
-    this.props.addImageToFrame({ id: id, source: source });
-  };
+  // addImageToPage(id, source) {
+  //   this.props.addImageToFrame({ id: id, source: source, });
+  // };
 
   renderSpread(i) {
     if (i == null)
       return;
     return (
       <Spread
-        left={this.props.pages[i]}
-        right={this.props.pages[i + 1]}
+        pages={this.props.pages}
+        index={i}
         addImageToPage={this.addImageToPage}
         callbackHandler={this.callbackHandler}
       />
@@ -86,11 +82,11 @@ class Spread extends Component {
     }
   }
 
-  renderPage(page, isRight) {
+  renderPage(i) {
     return (
       <Page
-        value={page}
-        isRight={isRight}
+        index={i}
+        value={this.props.pages[i]}
         addImageToPage={this.props.addImageToPage}
         callbackHandler={this.callbackHandler}
       />
@@ -100,8 +96,8 @@ class Spread extends Component {
   render() {
     return (
       <div className="spread">
-        {this.renderPage(this.props.left, false)}
-        {this.renderPage(this.props.right, true)}
+        {this.renderPage(this.props.index)}
+        {this.renderPage(this.props.index + 1)}
       </div>
     )
   }
@@ -110,6 +106,11 @@ class Spread extends Component {
 class Page extends Component {
   callbackHandler = (type, data) => {
     switch (type) {
+      case VIEW_CALL_BACK_ENUMS.ADD_TEXT_TO_FRAME:
+        this.props.callbackHandler(type, { ...data, index: this.props.index, });
+        break;
+      case VIEW_CALL_BACK_ENUMS.ADD_IMAGE_TO_FRAME:
+        this.props.callbackHandler(type, { ...data, index: this.props.index, });
       default:
         // bubble up all other actions to parents
         this.props.callbackHandler(type, data);
@@ -121,7 +122,7 @@ class Page extends Component {
       <PageImage
         key={this.props.value.images[i].id}
         value={this.props.value.images[i]}
-        addImageToPage={this.props.addImageToPage}
+        callbackHandler={this.callbackHandler}
       />
     )
   }
@@ -137,26 +138,26 @@ class Page extends Component {
   }
 
   render() {
-    const images = this.props.value.images.map((img, id) => {
+    const images = this.props.value.images.map((img, i) => {
       return (
-        this.renderImage(id)
+        this.renderImage(i)
       );
     });
 
-    const texts = this.props.value.texts.map((txt, id) => {
+    const texts = this.props.value.texts.map((txt, i) => {
       return (
-        this.renderText(id)
+        this.renderText(i)
       );
     });
 
     const layout = {
-      "gridTemplateRows":   `repeat(${this.props.value.rows-1}, 1fr 12px) 1fr`,
-      "gridTemplateColumns": `repeat(${this.props.value.columns-1}, 1fr 12px) 1fr`,
+      "gridTemplateRows": `repeat(${this.props.value.rows - 1}, 1fr 12px) 1fr`,
+      "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, 1fr 12px) 1fr`,
       "gridTemplateAreas": this.props.value.area,
     };
 
     let className = 'bleed';
-    if (this.props.isRight) {
+    if (this.props.index % 2) {
       className += ' bleed-right';
     }
 
@@ -173,9 +174,8 @@ class Page extends Component {
 
 class Text extends Component {
   inputChangeHandler = (e) => {
-    console.log(this.props.value.id);
     this.props.callbackHandler(
-      CALL_BACK_ENUMS.ADD_TEXT_TO_PAGE,
+      VIEW_CALL_BACK_ENUMS.ADD_TEXT_TO_FRAME,
       {
         id: this.props.value.id,
         value: e.target.value,
@@ -198,6 +198,7 @@ const mapStateToProps = state => ({
   product: state.products.product,
   pages: state.pages.pages,
   current: state.pages.current,
+  templates: state.templates.templates,
 });
 
-export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToPage })(Product);
+export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame })(Product);

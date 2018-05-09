@@ -16,10 +16,10 @@
 
 .spread {
   display: table;
+  width: 100%;
 }
 
 .spread:after {
-  display: table;
   clear: both;
 }
 
@@ -38,8 +38,7 @@
 .page {
   background-color: #FFFFFF;
   display: grid;
-  height: 500px;
-
+  height: 350px;
 }
 
 img {
@@ -47,17 +46,19 @@ img {
   height: 100%;
   object-fit: cover;
   outline: none;
-  border: 0 none; 
+  border: 0 none;
 }
 
 .imageFrame {
   background: #11ADEC;
   border: 0 none;
+  outline: none;
 }
 
 .textFrame {
   background: #DEDFE0;
-  border: 0 none; 
+  border: 0 none;
+  outline: none;
 }
 
 textarea {
@@ -68,36 +69,4 @@ textarea {
   width: 100%;
   height: 100%;
   border: 0 none;
-}
-
-.margin-top-35 {
-  margin-top: 35px;
-}
-
-.margin-right-35 {
-  margin-right: 35px;
-}
-
-.margin-bottom-35 {
-  margin-bottom: 35px;
-}
-
-.margin-left-35 {
-  margin-left: 35px;
-}
-
-.margin-top--9 {
-  margin-top: -9px;
-}
-
-.margin-right--9 {
-  margin-right: -9px;
-}
-
-.margin-bottom--9 {
-  margin-bottom: -9px;
-}
-
-.margin-left--9 {
-  margin-left: -9px;
 }

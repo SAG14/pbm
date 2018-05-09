@@ -11,12 +11,16 @@ import Product from './components/Product';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { addImageToFrame } from './actions/pageActions';
+import { fetchTemplates } from './actions/templateActions';
 
 class App extends Component {
-
+  constructor(props) {
+    super(props);
+    this.props.fetchTemplates();
+  }
   render() {
     // Redirects to login page if not authenticated
-    // if (this.props.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       return (
         <div className="App">
           <div>
@@ -28,13 +32,13 @@ class App extends Component {
           </div>
         </div>
       );
-    // } else {
-    //   return (
-    //     <div>
-    //       <Redirect to="/"/>
-    //     </div>
-    //   );
-    // }
+    } else {
+      return (
+        <div>
+          <Redirect to="/"/>
+        </div>
+      );
+    }
   }
 }
 
@@ -47,6 +51,6 @@ const mapStateToProps = state => ({
 });
 
 App = DragDropContext(HTML5Backend)(App);
-App = connect(mapStateToProps, {addImageToFrame})(App);
+App = connect(mapStateToProps, {addImageToFrame, fetchTemplates,})(App);
 
 export default App;
