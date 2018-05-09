@@ -17,10 +17,6 @@ class ProductSelector extends Component {
     this.state = { productIndex: -1, visible: true }
   }
 
-  componentWillReceiveProps() {
-    console.log(this.props.products);
-  }
-
   handleChange(e, v) {
     const index = this.props.products.findIndex((e) => e.pageNumber == v);
     this.setState({productIndex: index});
