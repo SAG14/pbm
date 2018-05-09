@@ -12,17 +12,6 @@ import PreviewImage from './PreviewImage'
 class ImageManager extends Component {
   
   render() {
-    let topStyle = {
-      height: 'calc(100% - 200px)',
-      overflowX: 'scroll',
-      overflowY: 'hidden'
-    };
-    let containerStyle = {
-      borderR: 'thin solid black',
-      height: '100%',
-      width: '20%',
-      position: 'fixed'
-    };
     const processImages = this.props.images.map((image, key) => {
       return (
         <div key = {key + image.file.lastModified}>

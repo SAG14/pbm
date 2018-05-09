@@ -11,17 +11,18 @@ import {
 export const applyTemplate = (index) => dispatch => {
     const template = {
         rows: 4,
-        columns: 12,
-        areas: '"i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 t0 t0 i1 i1 i1 i1"',
+        columns: 10,
+        areas: '"i0 i0 i0 .  .  .  i1 i1 i1 i1"'
+             + '"i0 i0 i0 .  .  .  i1 i1 i1 i1"'
+             + '"i0 i0 i0 t0 .  .  i1 i1 i1 i1"'
+             + '"i0 i0 i0 t0 .  .  .  .  t1 t1"',
         images: [
             {
                 id: "i0",
-                // source: fireworks,
                 source: null,
             },
             {
                 id: "i1",
-                // source: humananddog,
                 source: null,
             },
         ],
@@ -29,7 +30,11 @@ export const applyTemplate = (index) => dispatch => {
             {
                 id: "t0",
                 value: '',
-            }
+            },
+            {
+                id: "t1",
+                value: '',
+            },
         ],
     }
     dispatch({

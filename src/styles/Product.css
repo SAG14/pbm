@@ -1,17 +1,20 @@
-#product {
+#product-view-design {
   border: solid 1px black;
-  position: fixed;
-  width: 80%;
-  right: 0;
-  /* top: 0; */
-  height: 77.1%;
+  height: calc(100% - 200px);
 }
 
+#product-view-design-container-wrapper {
+
+}
+
+#product-view-design-container {
+  padding: 40px;
+  background: #3E3E3E;
+}
+
+
 #page {
-  border: solid 1px #979797;
-  background-color: #D8D8D8;
-  width: 80%;
-  height: 60%;
+  background-color: #FFFFFF;
   margin: auto;
   display: grid;
 }
@@ -20,14 +23,20 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  outline: none;
+  border: 0 none; 
 }
 
 .imagebox {
-  border: solid 1px #979797;
+  /* border: solid 1px #979797; */
+  background: #11ADEC;
+  border: 0 none; 
 }
 
 .textbox {
-  border: solid 1px #979797;
+  /* border: solid 1px #979797; */
+  background: #DEDFE0;
+  border: 0 none; 
 }
 
 textarea {

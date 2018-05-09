@@ -16,21 +16,25 @@ class App extends Component {
 
   render() {
     // Redirects to login page if not authenticated
-    if (this.props.isAuthenticated) {
+    // if (this.props.isAuthenticated) {
       return (
         <div className="App">
-          <Sidebar />
-          <Filmstrip/>
-          <Product/>
+          <div id="sidebar">
+            <Sidebar />
+          </div>
+          <div id="main">
+            <Product/>
+            <Filmstrip/>
+          </div>
         </div>
       );
-    } else {
-      return (
-        <div>
-          <Redirect to="/"/>
-        </div>
-      );
-    }
+    // } else {
+    //   return (
+    //     <div>
+    //       <Redirect to="/"/>
+    //     </div>
+    //   );
+    // }
   }
 }
 

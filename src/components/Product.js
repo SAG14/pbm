@@ -44,7 +44,6 @@ class Product extends Component {
     }
   }
 
-
   addImageToPage(id, source) {
     this.props.addImageToFrame({id: id, source: source});
   };
@@ -62,12 +61,16 @@ class Product extends Component {
   }
 
   render() {
-    const current = 'page ' + this.props.current;
     return (
-      <div id="product">
-        <h1>Product</h1>
-        <h2>{current}</h2>
-        {this.renderPage(this.props.current)}
+      <div id="product-view-design">
+        <div id="product-detail">
+          product information
+        </div>
+        <div id="product-view-design-container-wrapper">
+          <div id="product-view-design-container">
+            {this.renderPage(this.props.current)}
+          </div>
+        </div>
       </div>
     )
   }
@@ -120,6 +123,8 @@ class Page extends Component {
       "gridTemplateRows": `repeat(${this.props.value.rows}, 1fr)`,
       "gridTemplateColumns": `repeat(${this.props.value.columns}, 1fr)`,
       "gridTemplateAreas": this.props.value.areas,
+      "gridRowGap": "12px",
+      "gridColumnGap": "12px",
     };
 
     return (

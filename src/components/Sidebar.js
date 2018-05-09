@@ -5,6 +5,8 @@ import ImageManager from './ImageManager';
 import TemplateManager from './TemplateManager';
 import ToolBar from './Toolbar';
 
+import '../styles/Sidebar.css';
+
 class Sidebar extends Component {
     constructor(props) {
         super(props);
@@ -28,46 +30,21 @@ class Sidebar extends Component {
         }
     }
 
-
     render() {
-        let sidebarStyle = {
-            height: '100%',
-            width: '20%',
-            position: 'fixed'
-        };
-
-        let toolbarStyle = {
-            border: 'solid red thin',
-            width: '30%',
-        };
-
-
         return (
-        <div style={sidebarStyle}>
-            <div style={toolbarStyle}>
-                <button 
-                    onClick={(e)=> this.handleClick('images', e)}
-                >
-                    Images 
-                </button>
-                <button
-                onClick={(e)=> this.handleClick('templates', e)}
-                > 
-                    Templates
-                </button>
-            </div> 
-            {this.renderTool()}
-        </div>
+            <div ClassName="sidebar">
+                <div ClassName="sidebar-menu">
+                    <button  onClick={(e)=> this.handleClick('images', e)}>Images</button>
+                    <button onClick={(e)=> this.handleClick('templates', e)}>Templates</button>
+                </div>
+                {this.renderTool()}
+            </div>
         );
     }
-
-
 }
 
 const mapStateToProps = state => ({
 
 });
-
-
 
 export default connect(mapStateToProps, null)(Sidebar);

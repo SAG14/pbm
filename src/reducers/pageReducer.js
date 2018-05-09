@@ -17,24 +17,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         pages: Array(action.payload.pageNumber / 2).fill({
-          rows : 4,
-          columns : 12,
-          areas : '"i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 t0 t0 i1 i1 i1 i1"',
+          rows : 0,
+          columns : 0,
+          areas : '',
           images: [
-            {
-              id: "i0",
-              source: null,
-            },
-            {
-              id: "i1",
-              source: null,
-            },
+
           ],
           texts: [
-            {
-              id: "t0",
-              value: '',
-            }
+            
           ],
         }),
         current: 0,

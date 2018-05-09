@@ -22,7 +22,6 @@ class Filmstrip extends Component {
 
     return (
       <div id="filmstrip">
-        <h1>Filmstrip</h1>
         <ul>{strip}</ul>
       </div>
     )
