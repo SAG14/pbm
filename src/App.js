@@ -14,7 +14,6 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { addImageToFrame } from './actions/pageActions';
 import { fetchProducts } from './actions/productActions';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +21,7 @@ class App extends Component {
   }
   render() {
     // Redirects to login page if not authenticated
-    if (1) {//this.props.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       return (
         <div className="App">
           <ProductSelector />
