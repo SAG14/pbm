@@ -37,9 +37,31 @@ function collect(connect, monitor) {
 class PageImage extends Component {
     render() {
         const {connectDropTarget, isOver, canDrop } = this.props;
+
         const style = {
-          "gridArea": this.props.value.id,
+          // let margin = {};
+          // switch (this.props.value.id) {
+          //   case 'i0':
+          //     margin = {
+          //       "margin": "36px 0 36px 36px",
+          //     }
+          //     break;
+          //   case 'i1':
+          //     margin = {
+          //       "margin": "36px 36px 0 0",
+          //     }
+          //     break;
+          // }
+          // const a = {
+          //   ...margin,
+          //   "gridArea": this.props.value.id,
+          // }
+          // console.log(a);
+          // return {
+          //   "background" : "yellow",
+          // };
         };
+
         const image = this.props.value.source === null ? null : <img src={this.props.value.source} alt="img" />;
     
         return connectDropTarget(

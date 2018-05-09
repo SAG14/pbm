@@ -32,8 +32,8 @@ class Sidebar extends Component {
 
     render() {
         return (
-            <div ClassName="sidebar">
-                <div ClassName="sidebar-menu">
+            <div className="sidebar">
+                <div className="sidebar-menu">
                     <button  onClick={(e)=> this.handleClick('images', e)}>Images</button>
                     <button onClick={(e)=> this.handleClick('templates', e)}>Templates</button>
                 </div>

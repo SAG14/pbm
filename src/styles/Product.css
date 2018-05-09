@@ -1,19 +1,20 @@
-#product-view-design {
+.product-view-design {
   border: solid 1px black;
   height: calc(100% - 200px);
 }
 
-#product-view-design-container-wrapper {
-
+.product-view-design-container-wrapper {
+  width: 80%;
+  margin: auto;
 }
 
-#product-view-design-container {
+.product-view-design-container {
   padding: 40px;
   background: #3E3E3E;
 }
 
 
-#page {
+.page {
   background-color: #FFFFFF;
   margin: auto;
   display: grid;

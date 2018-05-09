@@ -62,12 +62,12 @@ class Product extends Component {
 
   render() {
     return (
-      <div id="product-view-design">
+      <div className="product-view-design">
         <div id="product-detail">
           product information
         </div>
-        <div id="product-view-design-container-wrapper">
-          <div id="product-view-design-container">
+        <div className="product-view-design-container-wrapper">
+          <div className="product-view-design-container">
             {this.renderPage(this.props.current)}
           </div>
         </div>
@@ -123,12 +123,11 @@ class Page extends Component {
       "gridTemplateRows": `repeat(${this.props.value.rows}, 1fr)`,
       "gridTemplateColumns": `repeat(${this.props.value.columns}, 1fr)`,
       "gridTemplateAreas": this.props.value.areas,
-      "gridRowGap": "12px",
-      "gridColumnGap": "12px",
+      "gridGap": "12px",
     };
 
     return (
-      <div id="page" style={layout}>
+      <div className="page" style={layout}>
         {images}
         {texts}
       </div>

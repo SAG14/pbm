@@ -19,10 +19,10 @@ class App extends Component {
     // if (this.props.isAuthenticated) {
       return (
         <div className="App">
-          <div id="sidebar">
+          <div>
             <Sidebar />
           </div>
-          <div id="main">
+          <div className="main">
             <Product/>
             <Filmstrip/>
           </div>
