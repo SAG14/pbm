@@ -1,10 +1,6 @@
 #filmstrip {
+  height: 200px;
   border-top: solid 1px black;
-  position: fixed;
-  width: 80%;
-  right: 0;
-  bottom: 0;
-  /* height: 20%; */
 }
 
 #filmstrip li {
