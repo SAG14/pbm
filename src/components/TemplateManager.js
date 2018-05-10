@@ -1,40 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addImage } from '../actions/uploadActions';
-import UploadImage from './UploadImage';
+import { applyTemplate } from '../actions/pageActions';
+
 import store from '../store';
-import ImageManager from './ImageManager';
-import '../styles/Manager.css';
-import '../styles/ImageManager.css';
-import PreviewImage from './PreviewImage'
 
 class TemplateManager extends Component {
-  
-  render() {
-    const processImages = this.props.images.map((image, key) => {
-      return (
-        <div key = {key + image.file.lastModified}>
-          <PreviewImage imageURL = {image.imageURL}/>
-        </div>
-      );
-    });
-    return (
-      <div id="image-manager" className="manager-container">
-        <div className="manager-top">
-          <h1 className="title">Templates</h1>
 
-        </div>
+  handleClick(i) {
+    this.props.applyTemplate(this.props.current, i);
+    this.props.applyTemplate(this.props.current + 1, i);
+  }
+
+  render() {
+    const templates = this.props.templates.map((template, index) => {
+      return (
+        <li key={index}>
+          <button onClick={() => this.handleClick(index)}>{index}</button>
+        </li>
+      )
+    });
+
+    return (
+      <div className="manager-container">
+        <ul>{templates}</ul>
       </div>
     );
   }
 }
 
-ImageManager.propTypes = {
-  images: PropTypes.array,
-}
-
 const mapStateToProps = state => ({
-  images: state.uploads.images
+  templates: state.templates.templates,
+  current: state.pages.current,
 });
-export default connect(mapStateToProps, null)(TemplateManager);
+
+export default connect(mapStateToProps, { applyTemplate, })(TemplateManager);

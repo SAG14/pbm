@@ -3,7 +3,7 @@ import {
   APPLY_TEMPLATE,
   JUMP_TO_PAGE,
   ADD_IMAGE_TO_FRAME,
-  ADD_TEXT_TO_PAGE,
+  ADD_TEXT_TO_FRAME,
 } from '../actions/types';
 
 const initialState = {
@@ -14,28 +14,16 @@ const initialState = {
 export default function(state = initialState, action) {
   switch(action.type) {
     case SELECT_PRODUCT: {
+      let i = 0;
       return {
         ...state,
-        pages: Array(action.payload.pageNumber / 2).fill({
-          rows : 4,
-          columns : 12,
-          areas : '"i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 t0 t0 i1 i1 i1 i1"',
-          images: [
-            {
-              id: "i0",
-              source: null,
-            },
-            {
-              id: "i1",
-              source: null,
-            },
-          ],
-          texts: [
-            {
-              id: "t0",
-              value: '',
-            }
-          ],
+        pages: Array(action.payload.pageNumber).fill({
+          id : i,
+          rows : 0,
+          columns : 0,
+          area : '',
+          images: [],
+          texts: [],
         }),
         current: 0,
       }
@@ -46,12 +34,13 @@ export default function(state = initialState, action) {
           if (index !== action.index) {
             return page;
           }
+          const i = index % 2;
           return Object.assign({}, page, {
-            rows : action.payload.rows,
-            columns : action.payload.columns,
-            areas : action.payload.areas,
-            images : action.payload.images,
-            texts : action.payload.texts,
+            rows: action.payload.pages[i].rows,
+            columns: action.payload.pages[i].columns,
+            area: action.payload.pages[i].area,
+            images: action.payload.pages[i].images,
+            texts: action.payload.pages[i].texts,
           });
         }),
       });
@@ -63,18 +52,34 @@ export default function(state = initialState, action) {
       };
     }
     case ADD_IMAGE_TO_FRAME: {
-      let newPages = Object.assign({}, state);
-      // console.log(state.current);
-      newPages.pages[state.current].images[action.payload.id].source = action.payload.source;
-      return {
-        ...state,
-        newPages
-      };
-    }
-    case ADD_TEXT_TO_PAGE: {
       return Object.assign({}, state, {
-        pages : state.pages.map((page, pageIndex) => {
-          if (pageIndex !== state.current) {
+        pages : state.pages.map((page, index) => {
+          if (index !== action.index) {
+            return page;
+          }
+          return Object.assign({}, page, {
+            images : page.images.map((image) => {
+              if (image.id !== action.id) {
+                return image;
+              }
+              return Object.assign({}, image, {
+                source : action.payload,
+              });
+            }),
+          });
+        }),
+      });
+      // let newPages = Object.assign({}, state);
+      // newPages.pages[state.current].images[action.payload.id].source = action.payload.source;
+      // return {
+      //   ...state,
+      //   newPages
+      // };
+    }
+    case ADD_TEXT_TO_FRAME: {
+      return Object.assign({}, state, {
+        pages : state.pages.map((page, index) => {
+          if (index !== action.index) {
             return page;
           }
           return Object.assign({}, page, {

@@ -6,6 +6,13 @@ body {
   position: relative;
 }
 
+.main {
+  position: fixed;
+  right: 0;
+  width: 80%;
+  height: 100%;
+}
+
 .Modal-background {
   position: fixed;
   width: 100vw;

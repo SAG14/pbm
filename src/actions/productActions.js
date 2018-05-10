@@ -39,7 +39,6 @@ export const selectProduct = (index) => dispatch => {
   //   pageNumber: 24,
   // }
   let products = store.getState().products.products;
-
   dispatch({
     type: SELECT_PRODUCT,
     payload: products[index],

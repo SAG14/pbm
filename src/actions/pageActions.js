@@ -1,41 +1,17 @@
-import { 
+import {
     APPLY_TEMPLATE,
     JUMP_TO_PAGE,
     ADD_IMAGE_TO_FRAME,
-    ADD_TEXT_TO_PAGE,
+    ADD_TEXT_TO_FRAME,
 } from './types';
+import store from '../store';
 
-// import fireworks from '../images/fireworks.jpg';
-// import humananddog from '../images/humananddog.jpg';
-
-export const applyTemplate = (index) => dispatch => {
-    const template = {
-        rows: 4,
-        columns: 12,
-        areas: '"i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 . . i1 i1 i1 i1" "i0 i0 i0 i0 i0 i0 t0 t0 i1 i1 i1 i1"',
-        images: [
-            {
-                id: "i0",
-                // source: fireworks,
-                source: null,
-            },
-            {
-                id: "i1",
-                // source: humananddog,
-                source: null,
-            },
-        ],
-        texts: [
-            {
-                id: "t0",
-                value: '',
-            }
-        ],
-    }
+export const applyTemplate = (pageIndex, templateIndex) => dispatch => {
+    let templates = store.getState().templates.templates;
     dispatch({
         type: APPLY_TEMPLATE,
-        payload: template,
-        index: index,
+        payload: templates[templateIndex],
+        index: pageIndex,
     });
 }
 
@@ -46,17 +22,20 @@ export const jumpToPage = (index) => dispatch => {
     });
 }
 
-export const addImageToFrame = (data) => dispatch => {
+export const addImageToFrame = (id, source, index) => dispatch => {
     dispatch({
         type: ADD_IMAGE_TO_FRAME,
-        payload: data,
+        id: id,
+        payload: source,
+        index: index,
     });
 }
 
-export const addTextToPage = (id, value) => dispatch => {
+export const addTextToFrame = (id, value, index) => dispatch => {
     dispatch({
-        type: ADD_TEXT_TO_PAGE,
+        type: ADD_TEXT_TO_FRAME,
         id: id,
         payload: value,
+        index: index,
     });
 }
