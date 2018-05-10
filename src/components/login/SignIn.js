@@ -3,7 +3,10 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { signIn } from '../../actions/userActions';
+import { 
+    signIn,
+    toRegistration,
+ } from '../../actions/userActions';
 import TextField from 'material-ui/TextField';
 import '../../styles/Login.css';
 import { RaisedButton } from 'material-ui';
@@ -23,10 +26,6 @@ class SignIn extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
-    }
-
-    componentDidMount() {
-        
     }
 
     onChange(e) {
@@ -76,7 +75,7 @@ class SignIn extends Component {
                             </div>
                         </form>
                         <div>
-                            <Link to="/registration">Register</Link>
+                            <Link to="/registration" onClick={this.props.toRegistration}>Register</Link>
                         </div>
                         <br/>
                         <br/>
@@ -102,6 +101,7 @@ class SignIn extends Component {
 
 SignIn.propTypes = {
     signIn: PropTypes.func.isRequired,
+    toRegistration: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
     signInError: PropTypes.string,
     token: PropTypes.string, 
@@ -113,4 +113,4 @@ const mapStateToProps = state => ({
     token: state.user.token,
   });
 
-export default connect(mapStateToProps, { signIn })(SignIn);
+export default connect(mapStateToProps, { signIn, toRegistration })(SignIn);

@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { register } from '../../actions/userActions';
+import { 
+    register,
+    toLogin,
+} from '../../actions/userActions';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import '../../styles/Registration.css';
@@ -26,6 +29,7 @@ class Registration extends Component {
         // Binding the functions on the registration form
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.backToLogin = this.backToLogin.bind(this);
     }
 
     onChange(e) {
@@ -49,93 +53,98 @@ class Registration extends Component {
         // Register function in actions > reducer
         this.props.register(userData);
     }
+
+    backToLogin() {
+        this.props.toLogin();
+        this.props.history.push('/');
+    }
     
     render() {
-        if (!this.props.isRegistered) {
-            return (
-                <div className="outerContainer">
-                    <div className="loginContainer">
-                        <h1>Sign Up</h1>
-                        <form onSubmit={this.onSubmit}>
-                            <TextField
-                                type="email"
-                                placeholder="Email (...@my.bcit.ca)"
-                                name="signUpEmail"
-                                value={this.state.signUpEmail}
-                                onChange={this.onChange}
-                            /><br/>
-                            <TextField
-                                type="password"
-                                placeholder="Password"
-                                name="signUpPassword"
-                                value={this.state.signUpPassword}
-                                onChange={this.onChange}
-                            /><br/>
-                            <TextField
-                                type="password"
-                                placeholder="Confirm Password"
-                                name="signUpConfirmPassword"
-                                value={this.state.signUpConfirmPassword}
-                                onChange={this.onChange}
-                            /><br/>
-                            <TextField
-                                type="text"
-                                placeholder="First Name"
-                                name="signUpFirstName"
-                                value={this.state.signUpFirstName}
-                                onChange={this.onChange}
-                            /><br/>
-                            <TextField
-                                type="text"
-                                placeholder="Last Name"
-                                name="signUpLastName"
-                                value={this.state.signUpLastName}
-                                onChange={this.onChange}
-                            /><br/>   
-                            <TextField
-                                type="text"
-                                placeholder="Student Number (A00123456)"
-                                name="signUpStudentNo"
-                                value={this.state.signUpStudentNo}
-                                onChange={this.onChange}
-                            /><br/>
-                            <div className="buttonsContainer">
-                                <div className="button">
-                                    <RaisedButton type="submit" primary={true} label="Sign up" />
-                                </div>
-                                <div className="secondButton">
-                                    <RaisedButton type="button" backgroundColor="#a4c639" labelColor="#FFFFFF" label="Back" onClick={() => this.props.history.push('/')}/>
-                                </div>
+        return (
+            <div className="outerContainer">
+                <div className="loginContainer">
+                    <h1>Sign Up</h1>
+                    <form onSubmit={this.onSubmit}>
+                        <TextField
+                            type="email"
+                            placeholder="Email (...@my.bcit.ca)"
+                            name="signUpEmail"
+                            value={this.state.signUpEmail}
+                            onChange={this.onChange}
+                        /><br/>
+                        <TextField
+                            type="password"
+                            placeholder="Password"
+                            name="signUpPassword"
+                            value={this.state.signUpPassword}
+                            onChange={this.onChange}
+                        /><br/>
+                        <TextField
+                            type="password"
+                            placeholder="Confirm Password"
+                            name="signUpConfirmPassword"
+                            value={this.state.signUpConfirmPassword}
+                            onChange={this.onChange}
+                        /><br/>
+                        <TextField
+                            type="text"
+                            placeholder="First Name"
+                            name="signUpFirstName"
+                            value={this.state.signUpFirstName}
+                            onChange={this.onChange}
+                        /><br/>
+                        <TextField
+                            type="text"
+                            placeholder="Last Name"
+                            name="signUpLastName"
+                            value={this.state.signUpLastName}
+                            onChange={this.onChange}
+                        /><br/>   
+                        <TextField
+                            type="text"
+                            placeholder="Student Number (A00123456)"
+                            name="signUpStudentNo"
+                            value={this.state.signUpStudentNo}
+                            onChange={this.onChange}
+                        /><br/>
+                        <div className="buttonsContainer">
+                            <div className="button">
+                                <RaisedButton type="submit" primary={true} label="Sign up" />
                             </div>
-                        </form>
-                        <br/>
-                        <br/>
-                        <br/>
-                        {
-                            (this.props.signUpError && !this.props.isRegistered) ? (
-                                <div className="errorText">{this.props.signUpError}</div>
-                            ) : (null)
-                        }
-                    </div>
+                            <div className="secondButton">
+                                <RaisedButton type="button" backgroundColor="#a4c639" labelColor="#FFFFFF" label="Back" onClick={this.backToLogin}/>
+                            </div>
+                        </div>
+                    </form>
+                    <br/>
+                    <br/>
+                    <br/>
+                    {/* {
+                        (this.props.signUpError && !this.props.isRegistered) ? (
+                            <div className="errorText">{this.props.signUpError}</div>
+                        ) : (null)
+                    } */}
+                    {
+                        (this.props.signUpError) ? (
+                            <div className={this.props.isRegistered ? '' : 'errorText'}> {this.props.signUpError} </div>
+                        ) : (null)
+                    }
                 </div>
-            );
-        } else {
-            return (
-                <Redirect to="/"/>
-            );
-        }
+            </div>
+        );
     }
 }
 
 Registration.propTypes = {
     register: PropTypes.func.isRequired,
+    toLogin: PropTypes.func.isRequired,
     isRegistered: PropTypes.bool,
     signUpError: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
     isRegistered: state.user.isRegistered,
-    signUpError: state.user.signUpError
+    signUpError: state.user.signUpError,
 });
 
-export default connect(mapStateToProps, { register })(Registration);
+export default connect(mapStateToProps, { register, toLogin })(Registration);
