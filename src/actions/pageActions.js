@@ -4,12 +4,14 @@ import {
     ADD_IMAGE_TO_FRAME,
     ADD_TEXT_TO_FRAME,
 } from './types';
+import store from '../store';
 
-export const applyTemplate = (index, template) => dispatch => {
+export const applyTemplate = (pageIndex, templateIndex) => dispatch => {
+    let templates = store.getState().templates.templates;
     dispatch({
         type: APPLY_TEMPLATE,
-        payload: template,
-        index: index,
+        payload: templates[templateIndex],
+        index: pageIndex,
     });
 }
 

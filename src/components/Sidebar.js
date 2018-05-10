@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ImageManager from './ImageManager';
 import TemplateManager from './TemplateManager';
-import ToolBar from './Toolbar';
 
 import '../styles/Sidebar.css';
 

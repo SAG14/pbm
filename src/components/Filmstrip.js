@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectProduct } from '../actions/productActions';
 import { jumpToPage } from '../actions/pageActions';
 
 import '../styles/Filmstrip.css';

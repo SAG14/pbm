@@ -21,13 +21,14 @@ class Product extends Component {
     // this.addImageToPage = this.addImageToPage.bind(this);
   };
 
-  componentWillMount() {
-    this.props.selectProduct();
-    for (let i = 0; i < 24; i += 2) {
-      this.props.applyTemplate(i, this.props.templates[i / 2 % 5]);
-      this.props.applyTemplate(i + 1, this.props.templates[i / 2 % 5]);
-    }
-  }
+  // component() {
+  //   // this.props.selectProduct();
+  //   console.log("hi");
+  //   for (let i = 0; i < this.props.pages.length; i += 2) {
+  //     this.props.applyTemplate(i, this.props.templates[i / 2 % 5]);
+  //     this.props.applyTemplate(i + 1, this.props.templates[i / 2 % 5]);
+  //   }
+  // }
 
   callbackHandler = (type, data) => {
     switch (type) {
