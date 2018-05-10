@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@progress/kendo-editor-react-wrapper": "^2018.1.221",
-    "@progress/kendo-ui": "^2018.1.503",
+    "@progress/kendo-drawing": "^1.5.3",
+    "@progress/kendo-react-pdf": "^0.5.1",
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "crypto": "^1.0.1",

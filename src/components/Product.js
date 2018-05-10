@@ -6,15 +6,14 @@ import PageImage from './PageImage';
 import '../styles/Product.css';
 import { addImageToFrame } from '../actions/pageActions';
 import store from '../store';
-import { Editor } from '@progress/kendo-editor-react-wrapper';
-import kendo from '@progress/kendo-ui';
 
 class Product extends Component {
   constructor(props){
     super(props);
     this.addImageToPage = this.addImageToPage.bind(this);
   };
-  componentWillMount() {
+
+  componentDidMount() {
     this.props.selectProduct();
     this.props.applyTemplate(0);
     this.props.applyTemplate(1);
@@ -39,16 +38,6 @@ class Product extends Component {
       return;
     return (
       <div>
-      <Editor value={"<div>Testing this feature</div>"} tools={["pdf"]} pdf= {{
-        fileName: "TestDocument.pdf",
-        paperSize: "a4",
-        margin: {
-          bottom: 20,
-          left: 20,
-          right: 20,
-          top: 20
-        }
-      }}/>
         <Page
           value={this.props.pages[i]}
           addImageToPage = {this.addImageToPage}
@@ -139,3 +128,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame })(Product);
+export { Page };
