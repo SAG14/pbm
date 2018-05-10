@@ -23,7 +23,7 @@ class App extends Component {
   }
   render() {
     // Redirects to login page if not authenticated
-    if (this.props.isAuthenticated) {
+    // if (this.props.isAuthenticated) {
       return (
         <div className="App">
           <ProductSelector />
@@ -36,13 +36,13 @@ class App extends Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div>
-          <Redirect to="/" />
-        </div>
-      );
-    }
+    // } else {
+    //   return (
+    //     <div>
+    //       <Redirect to="/" />
+    //     </div>
+    //   );
+    // }
   }
 }
 

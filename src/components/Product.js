@@ -175,12 +175,11 @@ class Page extends Component {
 
 class Text extends Component {
   inputChangeHandler = (e) => {
-    console.log(e.target.value);
     this.props.callbackHandler(
       VIEW_CALL_BACK_ENUMS.ADD_TEXT_TO_FRAME,
       {
         id: this.props.value.id,
-        value: e.target.value,
+        value: e.target.innerText,
       },
     );
   }
@@ -190,10 +189,10 @@ class Text extends Component {
 
     return (
       <div className="textFrame" 
-        style={style} 
-        onInput={(e) => this.inputChangeHandler(e)}
+        style={style}
+        onBlur={(e) => this.inputChangeHandler(e)}
         contentEditable="true">
-      {this.props.value.value}
+        {this.props.value.value}
       </div>
     )
   }

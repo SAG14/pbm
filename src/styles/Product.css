@@ -65,12 +65,13 @@ img {
   font-weight: 300; /* light */
   background: #DEDFE0;
   
-  display: table-cell;  
-  text-align: center;
+  display: table-cell;
+  /* text-align: center; */
   vertical-align: bottom;
+
+  bottom: 0;
 
   outline: none;
   border: 0 none;
   overflow: hidden;
-  word-wrap: break-word;
 }
