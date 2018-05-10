@@ -262,12 +262,12 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "t1",
               value: '',
-              style: '{"gridArea":"t1", "margin":"12px 0 36px 0"}',
+              style: '{"gridArea":"t1", "margin":"0 0 36px 0"}',
             },
             {
               id: "t2",
               value: '',
-              style: '{"gridArea":"t2", "margin":"12px 0 36px 0"}',
+              style: '{"gridArea":"t2", "margin":"0 0 36px 0"}',
             },
           ],
         },

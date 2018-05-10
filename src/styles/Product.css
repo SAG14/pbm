@@ -5,13 +5,14 @@
 
 /* keeps the container in the same ratio */
 .product-view-design-container-wrapper {
-  width: 80%;
+  width: 100%;
   margin: auto;
 }
 
 .product-view-design-container {
   padding: 40px;
   background: #3E3E3E;
+  width: 1242px; /* 840 * 2 - 9 - 9 = 1662px or 630 * 2 - 9 - 9 = 1242px */
 }
 
 .spread {
@@ -26,9 +27,10 @@
 .bleed {
   border: solid 1px red;
   float: left;
-  width: calc(50% - 12px);
   padding: 8px;
   margin: -9px;
+  width: 612px; /* 840 - 9 - 9 = 822px or 630 - 9 - 9 = 612px */
+  height: 396px; /* 552 - 9 - 9 = 534px or 414 - 9 - 9 = 396px */
 }
 
 .bleed-right {
@@ -38,7 +40,8 @@
 .page {
   background-color: #FFFFFF;
   display: grid;
-  height: 350px;
+  height: 100%;
+  width: 100%;
 }
 
 img {
@@ -56,17 +59,18 @@ img {
 }
 
 .textFrame {
+  line-height: 11pt;
+  font-size: 8pt;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300; /* light */
   background: #DEDFE0;
-  border: 0 none;
-  outline: none;
-}
+  
+  display: table-cell;  
+  text-align: center;
+  vertical-align: bottom;
 
-textarea {
-  background: transparent;
-  resize: none;
   outline: none;
-  font: 32px arial, sans-serif;
-  width: 100%;
-  height: 100%;
   border: 0 none;
+  overflow: hidden;
+  word-wrap: break-word;
 }

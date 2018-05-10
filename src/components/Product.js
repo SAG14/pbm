@@ -175,6 +175,7 @@ class Page extends Component {
 
 class Text extends Component {
   inputChangeHandler = (e) => {
+    console.log(e.target.value);
     this.props.callbackHandler(
       VIEW_CALL_BACK_ENUMS.ADD_TEXT_TO_FRAME,
       {
@@ -188,8 +189,11 @@ class Text extends Component {
     const style = JSON.parse(this.props.value.style);
 
     return (
-      <div className="textFrame" style={style}>
-        <textarea value={this.props.value.value} onInput={(e) => this.inputChangeHandler(e)}></textarea>
+      <div className="textFrame" 
+        style={style} 
+        onInput={(e) => this.inputChangeHandler(e)}
+        contentEditable="true">
+      {this.props.value.value}
       </div>
     )
   }
