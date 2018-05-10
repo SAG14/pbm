@@ -37,6 +37,9 @@ class Header extends Component {
                     </div>
                     <div className="navbarOptions">
                         <div className="navbarOptionElement">
+                            <RaisedButton type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" label="Preview"/>
+                        </div>
+                        <div className="navbarOptionElement">
                             <RaisedButton type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" label="Order"/>
                         </div>
                         <div className="navbarOptionElement">
