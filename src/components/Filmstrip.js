@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectProduct } from '../actions/productActions';
 import { jumpToPage } from '../actions/pageActions';
 
 import '../styles/Filmstrip.css';
@@ -13,6 +12,9 @@ class Filmstrip extends Component {
 
   render() {
     const strip = this.props.pages.map((page, index) => {
+      if (index % 2 === 1) {
+        return;
+      }
       return (
         <li key={index}>
             <button className="frame" onClick={() => this.handleClick(index)}>{index}</button>
@@ -22,7 +24,6 @@ class Filmstrip extends Component {
 
     return (
       <div id="filmstrip">
-        <h1>Filmstrip</h1>
         <ul>{strip}</ul>
       </div>
     )
