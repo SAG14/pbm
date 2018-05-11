@@ -28,6 +28,10 @@ class SaveToPDF extends Component {
             <div>
             <PDFExport
                 ref={(component) => this.exportableContent = component}
+                // scale={0.2}
+                // paperSize={["8.75in", "11.25in"]}
+                // forcePageBreak=".page-break"
+                // multiPage={true}
             >
                 { this.props.pages.map((page, index) =>
                 <div key={index}>
