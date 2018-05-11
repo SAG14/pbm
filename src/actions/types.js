@@ -12,3 +12,5 @@ export const ADD_IMAGE_TO_FRAME = 'ADD_IMAGE_TO_FRAME';
 export const ADD_TEXT_TO_PAGE = 'ADD_TEXT_TO_PAGE';
 export const TOGGLE_PREVIEW = 'TOGGLE_PREVIEW';
 export const ADD_TEXT_TO_FRAME = 'ADD_TEXT_TO_FRAME';
+export const NEXT_PAGE = 'NEXT_PAGE';
+export const PREVIOUS_PAGE = 'PREVIOUS_PAGE';

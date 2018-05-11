@@ -4,6 +4,8 @@ import {
   JUMP_TO_PAGE,
   ADD_IMAGE_TO_FRAME,
   ADD_TEXT_TO_FRAME,
+  NEXT_PAGE,
+  PREVIOUS_PAGE,
 } from '../actions/types';
 
 const initialState = {
@@ -49,6 +51,25 @@ export default function(state = initialState, action) {
       return {
         ...state,
         current : action.payload,
+      };
+    }
+    case PREVIOUS_PAGE: {
+      let newCurrent = state.current;
+      if (newCurrent != 0 && (newCurrent -2) >= 0)
+        newCurrent = newCurrent -2;
+      return {
+        ...state,
+        current: newCurrent
+      };
+    }
+    case NEXT_PAGE: {
+      let newCurrent = state.current;
+      let maxPages = state.pages.length;
+      if ((newCurrent+2) < maxPages)
+        newCurrent = newCurrent + 2;
+      return {
+        ...state,
+        current: newCurrent,
       };
     }
     case ADD_IMAGE_TO_FRAME: {

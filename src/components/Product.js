@@ -5,8 +5,11 @@ import {
   applyTemplate,
   addImageToFrame,
   addTextToFrame,
+  nextPage,
+  previousPage,
 } from '../actions/pageActions';
 import PageImage, { CALL_BACK_ENUMS } from './PageImage';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import '../styles/Product.css';
 
@@ -59,16 +62,44 @@ class Product extends Component {
     )
   }
 
+
   render() {
+    let buttonNavStyle = {
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      backgroundColor: '#3E3E3E',
+      zIndex: 3,
+    };
     return (
       <div className="product-view-design">
         <div id="product-detail">
-          product information
+          Pages {this.props.current} and {this.props.current + 1}
         </div>
         <div className="product-view-design-container-wrapper">
+        <table>
+        <tr>
+          <td>
+        <div style={{border: 'yellow thin solid'}}>
+            <div style={{margin: '0 auto'}}>
+              <RaisedButton onClick={this.props.previousPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '65px'}} label="<"/>
+            </div>
+          </div>
+          </td>
+          <td style={{width: '100%'}}>
           <div className="product-view-design-container">
             {this.renderSpread(this.props.current)}
           </div>
+          </td>
+          <td>
+          <div style={{border: 'yellow thin solid'}}>
+            <div style={{margin: '0 auto'}}>
+              <RaisedButton onClick={this.props.nextPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '65px'}} label=">"/>
+            </div>
+          </div>
+          </td>
+          </tr>
+        </table>
         </div>
       </div>
     )
@@ -158,15 +189,13 @@ class Page extends Component {
       "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, 1fr 12px) 1fr`,
       "gridTemplateAreas": this.props.value.area,
     };
-    console.log(this);
+
     let className = 'bleed';
     if (!this.props.isPreview) {
-      console.log(this.props.isPreview);
       if (this.props.index % 2) {
         className += ' bleed-right';
       }
     } else {
-      console.log(this.props.isPreview);
       className = 'preview';
       if (this.props.index % 2) {
         className += ' preview-right';
@@ -214,4 +243,4 @@ const mapStateToProps = state => ({
   isPreview: state.preview.isPreview,
 });
 
-export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame })(Product);
+export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame, nextPage, previousPage })(Product);

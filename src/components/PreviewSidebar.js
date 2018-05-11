@@ -7,10 +7,11 @@ class PreviewSidebar extends Component {
 
     render(){
         let style = {
-            width: '100%',
+            width: '20%',
             height: '100%',
-            position: 'absolute',
-            backgroundColor: '#333333'
+            position: 'fixed',
+            zIndex: 2,
+            backgroundColor: '#3E3E3E'
         };
         return (
             <div style={style}>

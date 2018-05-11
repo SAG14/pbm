@@ -32,7 +32,7 @@ class App extends Component {
           <ProductSelector />
           <div>
             {this.props.isPreview && <PreviewSidebar/>}
-            <Sidebar />
+            {!this.props.isPreview && <Sidebar />}
           </div>
           <div className="main">
           {this.props.isPreview && <Preview/>}

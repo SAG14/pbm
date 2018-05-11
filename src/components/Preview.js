@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Product from './Product';
-
+import RaisedButton from 'material-ui/RaisedButton';
+import { previousPage, nextPage } from '../actions/pageActions';
 class Preview extends Component {
 
     render(){
@@ -22,7 +23,10 @@ class Preview extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    preview: state.preview.isPreview
+    preview: state.preview.isPreview,
+    current: state.pages.current,
+    pages: state.pages.pages,
+
 });
 
-export default connect(mapStateToProps, null)(Preview);
+export default connect(mapStateToProps, {previousPage, nextPage})(Preview);
