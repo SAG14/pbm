@@ -29,18 +29,20 @@ export default function(state = initialState, action) {
       }
     }
     case APPLY_TEMPLATE: {
+      let templatePageIndex = Math.floor((action.index + 1) % 2);
+      if (action.payload.type === "front" || action.payload.type === "back")
+        templatePageIndex = 0;
       return Object.assign({}, state, {
         pages : state.pages.map((page, index) => {
           if (index !== action.index) {
             return page;
           }
-          const i = index % 2;
           return Object.assign({}, page, {
-            rows: action.payload.pages[i].rows,
-            columns: action.payload.pages[i].columns,
-            area: action.payload.pages[i].area,
-            images: action.payload.pages[i].images,
-            texts: action.payload.pages[i].texts,
+            rows: action.payload.pages[templatePageIndex].rows,
+            columns: action.payload.pages[templatePageIndex].columns,
+            area: action.payload.pages[templatePageIndex].area,
+            images: action.payload.pages[templatePageIndex].images,
+            texts: action.payload.pages[templatePageIndex].texts,
           });
         }),
       });
