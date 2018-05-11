@@ -145,6 +145,28 @@ class PageImage extends Component {
 
       this.setState({ offsetY: offsetY, currY: currY });
     } 
+    
+    if (!this.state.moveVertical) { // moving horizontally
+      offsetX = e.pageX - this.state.startX;
+
+      currX += this.state.offsetX - offsetX;  // update x-position of image from left
+
+      if (offsetX == this.state.offsetX) return;  // no movement, skip to reduce setState calls
+
+      if (offsetX >= this.state.offsetX) {  // moving right
+        if (currX < 0) {  // image at left, set everything to 0
+          offsetX = 0;
+          currX = 0;
+        }
+      } else {
+        if (currX > this.state.imageBoundaryX) { // image reached right, set everything to boundary
+          offsetX = this.state.imageBoundaryX * -1;
+          currX = this.state.imageBoundaryX;
+        }
+      }
+
+      this.setState({ offsetX: offsetX, currX: currX });
+    }
 
     e.preventDefault();
   }
