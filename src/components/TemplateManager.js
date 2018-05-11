@@ -19,7 +19,7 @@ class TemplateManager extends Component {
     const backTemplateIndex = this.props.templates.findIndex((t) => {
       return t.type === "back"
     });
-    
+
     this.props.applyTemplate(0, frontTemplateIndex);
     this.props.applyTemplate(this.props.pageSize - 1, backTemplateIndex);
   }
