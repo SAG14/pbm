@@ -63,6 +63,7 @@ class PageImage extends Component {
       moveVertical: false,
       currX: 0,
       currY: 0,
+      movingDown: false
     }
     
     this.onMouseDown = this.onMouseDown.bind(this);
@@ -71,9 +72,6 @@ class PageImage extends Component {
   }
 
   onMouseDown(e) {
-    console.log(e);
-    console.log(e.pageX, e.pageY);
-
     let i = new Image();
     i.src = this.props.value.source;
 
@@ -85,8 +83,10 @@ class PageImage extends Component {
     let elementAspect = e.target.clientWidth / e.target.clientHeight;
     let multiplier = 1;
     let moveVertical = false;
+    let imageBoundaryX = this.state.imageWidth - this.state.elementWidth;
+    let imageBoundaryY = this.state.imageHeight - this.state.elementHeight;
 
-    if (imageAspect < elementAspect) {
+    if (imageAspect < elementAspect) {  // calculate multiplier to get real image dimensions
       multiplier = imageWidth / elementWidth;
     } else {
       multiplier = imageHeight / elementHeight;
@@ -108,13 +108,10 @@ class PageImage extends Component {
       imageHeight: imageHeight,
       elementWidth: elementWidth,
       elementHeight: elementHeight,
-      moveVertical: moveVertical
+      moveVertical: moveVertical,
+      imageBoundaryX: imageBoundaryX,
+      imageBoundaryY: imageBoundaryY
     });
-
-    console.log(imageWidth + " x " + imageHeight, "imagedimension");
-    console.log(elementWidth + " x " + elementHeight, "elemntdimension");
-    console.log(imageAspect, "imageaspect");
-    console.log(elementAspect, "elementaspect");
 
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
@@ -127,24 +124,27 @@ class PageImage extends Component {
     let currX = this.state.currX;
     let currY = this.state.currY;
 
-    if (this.state.moveVertical) {
-      offsetY = e.pageY - this.state.startY;
+    if (this.state.moveVertical) {  // moving vertically
+      offsetY = e.pageY - this.state.startY;  // calculate mouse position offset
 
-      if (offsetY > 0) {  //moving down
-        currY += offsetY * -1;
-        if (currY < 0) {  //out of bounds
-          this.setState({ currY: 0});
-          return;
+      currY += this.state.offsetY - offsetY;  // update y-position of image from top
+
+      if (offsetY == this.state.offsetY) return;  // no movement, skip to reduce setState calls
+
+      if (offsetY >= this.state.offsetY) {  // moving down
+        if (currY < 0) {  // image at top, set everything to 0
+          offsetY = 0;
+          currY = 0;
+        }
+      } else {
+        if (currY > this.state.imageBoundaryY) { // image reached bottom, set everything to boundary
+          offsetY = this.state.imageBoundaryY * -1;
+          currY = this.state.imageBoundaryY;
         }
       }
-    } else {
-      offsetX = e.pageX - this.state.startX;
-    }
 
-    console.log(offsetY, "offsetY");
-    console.log(currY, "currY");
-
-    this.setState({ offsetX: offsetX, offsetY: offsetY, currY: currY, currX: currX});
+      this.setState({ offsetY: offsetY, currY: currY });
+    } 
 
     e.preventDefault();
   }
