@@ -60,14 +60,20 @@ class PageImage extends Component {
       imageHeight: 0,
       elementWidth: 0,
       elementHeight: 0,
-      moveVertical: false
+      moveVertical: false,
+      currX: 0,
+      currY: 0,
     }
     
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
   }
+
   onMouseDown(e) {
+    console.log(e);
+    console.log(e.pageX, e.pageY);
+
     let i = new Image();
     i.src = this.props.value.source;
 
@@ -105,6 +111,11 @@ class PageImage extends Component {
       moveVertical: moveVertical
     });
 
+    console.log(imageWidth + " x " + imageHeight, "imagedimension");
+    console.log(elementWidth + " x " + elementHeight, "elemntdimension");
+    console.log(imageAspect, "imageaspect");
+    console.log(elementAspect, "elementaspect");
+
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
     e.preventDefault();
@@ -113,14 +124,27 @@ class PageImage extends Component {
   onMouseMove(e) {
     let offsetX = 0;
     let offsetY = 0;
+    let currX = this.state.currX;
+    let currY = this.state.currY;
 
     if (this.state.moveVertical) {
       offsetY = e.pageY - this.state.startY;
+
+      if (offsetY > 0) {  //moving down
+        currY += offsetY * -1;
+        if (currY < 0) {  //out of bounds
+          this.setState({ currY: 0});
+          return;
+        }
+      }
     } else {
       offsetX = e.pageX - this.state.startX;
     }
 
-    this.setState({ offsetX: offsetX, offsetY: offsetY });
+    console.log(offsetY, "offsetY");
+    console.log(currY, "currY");
+
+    this.setState({ offsetX: offsetX, offsetY: offsetY, currY: currY, currX: currX});
 
     e.preventDefault();
   }
