@@ -203,3 +203,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame })(Product);
+export { Page };
