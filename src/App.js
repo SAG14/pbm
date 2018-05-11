@@ -12,6 +12,7 @@ import Product from './components/Product';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { addImageToFrame } from './actions/pageActions';
+import SaveToPDF from './components/SaveToPDF';
 import { fetchProducts } from './actions/productActions';
 
 class App extends Component {
@@ -24,15 +25,24 @@ class App extends Component {
     // Redirects to login page if not authenticated
     if (this.props.isAuthenticated) {
       return (
-        <div className="App">
-          <ProductSelector />
-          <div>
-            <Sidebar />
+        <div>
+          <div className="App">
+            <ProductSelector />
+            <div>
+              <Sidebar />
+            </div>
+            <div className="main">
+              <Product />
+              <Filmstrip />
+            </div>
           </div>
-          <div className="main">
-            <Product />
-            <Filmstrip />
-          </div>
+          {
+              (this.props.displayExportPDFPage) ? (
+                  <div>
+                    <SaveToPDF/>
+                  </div>
+              ) : (null)
+          }          
         </div>
       );
     } else {
@@ -47,11 +57,17 @@ class App extends Component {
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool,
+  displayExportPDFPage: PropTypes.bool,
+  displayOrderPage: PropTypes.bool,
+  displayPreviewPage: PropTypes.bool,
   fetchProducts: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.user.isAuthenticated,
+  displayExportPDFPage: state.appNavigation.displayExportPDFPage,
+  displayOrderPage: state.appNavigation.displayOrderPage,
+  displayPreviewPage: state.appNavigation.displayPreviewPage,
 });
 
 App = DragDropContext(HTML5Backend)(App);

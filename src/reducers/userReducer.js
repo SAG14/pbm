@@ -1,8 +1,13 @@
-import { REGISTER_USER, LOGIN_USER, LOGOUT_USER } from '../actions/types';
+import { 
+    REGISTER_USER, 
+    LOGIN_USER, 
+    LOGOUT_USER,
+    REDIRECT_TO_REGISTRATION,
+    REDIRECT_TO_LOGIN,
+} from '../actions/types';
 
 const initialState = {
     
-    isLoading: false,
     token: '',
 
     // Login variables
@@ -12,7 +17,7 @@ const initialState = {
 
     // Registration variables
     isRegistered: false,
-    signUpError: '',  
+    signUpError: '', 
 };
 
 export default function(state = initialState, action) {
@@ -38,7 +43,18 @@ export default function(state = initialState, action) {
                 ...state,
                 isRegistered: action.payload.success,
                 signUpError: action.payload.message
-            }    
+            }
+        case REDIRECT_TO_REGISTRATION:
+            return {
+                ...state,
+                signInError: '',  
+            }
+        case REDIRECT_TO_LOGIN:
+            return {
+                ...state,
+                isRegistered: false,
+                signUpError: '',
+            }
         default:
             return state;
     } 
