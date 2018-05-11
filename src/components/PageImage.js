@@ -68,9 +68,6 @@ class PageImage extends Component {
     this.onMouseUp = this.onMouseUp.bind(this);
   }
   onMouseDown(e) {
-    console.log(e);
-    console.log(e.pageX, e.pageY);
-
     let i = new Image();
     i.src = this.props.value.source;
 
@@ -108,19 +105,12 @@ class PageImage extends Component {
       moveVertical: moveVertical
     });
 
-    console.log(imageWidth + " x " + imageHeight, "imagedimension");
-    console.log(elementWidth + " x " + elementHeight, "elemntdimension");
-    console.log(imageAspect, "imageaspect");
-    console.log(elementAspect, "elementaspect");
-
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
     e.preventDefault();
   }
 
   onMouseMove(e) {
-    console.log(e.pageX, e.pageY);
-
     let offsetX = 0;
     let offsetY = 0;
 
