@@ -27,6 +27,18 @@ class Product extends Component {
     }
   }
 
+  renderProductDetail() {
+    return (
+      <div className="product-detail">
+        <div>{this.props.product.type}</div>
+        <div>{this.props.product.size}</div>
+        <div>{this.props.product.pageNumber} pages</div>
+        <div>{this.props.product.price}</div>
+        <div>{this.props.product.priceUnit}</div>
+      </div>
+    )
+  }
+
   renderSpread(i) {
     if (i == null)
       return;
@@ -41,11 +53,11 @@ class Product extends Component {
   }
 
   render() {
+    if (!Object.keys(this.props.product).length)
+      return null;
     return (
       <div className="product-view-design">
-        <div id="product-detail">
-          product information
-        </div>
+        {this.renderProductDetail()}
         <div className="product-view-design-container-wrapper">
           <div className="product-view-design-container">
             {this.renderSpread(this.props.current)}
@@ -181,7 +193,7 @@ class Text extends Component {
     const style = JSON.parse(this.props.value.style);
 
     return (
-      <div className="textFrame" 
+      <div className="textFrame"
         style={style}
         onBlur={(e) => this.inputChangeHandler(e)}
         contentEditable="true">
@@ -195,7 +207,6 @@ const mapStateToProps = state => ({
   product: state.products.product,
   pages: state.pages.pages,
   current: state.pages.current,
-  templates: state.templates.templates,
 });
 
 export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame })(Product);

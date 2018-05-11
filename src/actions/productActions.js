@@ -36,5 +36,5 @@ export const selectProduct = (index) => dispatch => {
   dispatch({
     type: SELECT_PRODUCT,
     payload: products[index],
-  })
+  });
 }

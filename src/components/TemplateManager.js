@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { fetchTemplates } from '../actions/templateActions';
 import { applyTemplate } from '../actions/pageActions';
 
 import store from '../store';
 
 class TemplateManager extends Component {
-  componentDidMount() {
-    this.props.applyTemplate(0, 5);
+  componentWillMount() {
+    this.props.fetchTemplates();
+  }
+
+  componentDidUpdate() {
+    const frontTemplateIndex = this.props.templates.findIndex((t) => {
+      return t.type === "front"
+    });
+
+    const backTemplateIndex = this.props.templates.findIndex((t) => {
+      return t.type === "back"
+    });
+    
+    this.props.applyTemplate(0, frontTemplateIndex);
+    this.props.applyTemplate(this.props.pageSize - 1, backTemplateIndex);
   }
 
   handleClick(i) {
@@ -45,7 +59,8 @@ class TemplateManager extends Component {
 const mapStateToProps = state => ({
   templates: state.templates.templates,
   current: state.pages.current,
+  pageSize: state.pages.pages.length,
   max: Math.floor((state.pages.pages.length + 1) / 2),
 });
 
-export default connect(mapStateToProps, { applyTemplate, })(TemplateManager);
+export default connect(mapStateToProps, { fetchTemplates, applyTemplate, })(TemplateManager);

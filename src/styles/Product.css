@@ -79,3 +79,7 @@ img {
   border: 0 none;
   overflow: hidden;
 }
+
+.product-detail div {
+  display: inline-block;
+}

@@ -303,7 +303,7 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "t0",
               value: '',
-              style: '{"gridArea":"t0", "margin":"0 0 36px 0", "border-top":"solid 2px #000000", "border-bottom":"solid 2px #000000"}',
+              style: '{"gridArea":"t0", "margin":"0 0 36px 0", "borderTop":"solid 2px #000000", "borderBottom":"solid 2px #000000"}',
             },
           ],
         },
