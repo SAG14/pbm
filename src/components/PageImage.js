@@ -52,14 +52,15 @@ class PageImage extends Component {
     this.state = {
       startX: 0,
       startY: 0,
+      offsetX: 0,
+      offsetY: 0,
+      imageAspect: 0,
+      elementAspect: 0,
       imageWidth: 0,
       imageHeight: 0,
       elementWidth: 0,
       elementHeight: 0,
-      verticalImage: null,
-      verticalElement: null,
-      offsetX: 0,
-      offsetY: 0
+      moveVertical: false
     }
     
     this.onMouseDown = this.onMouseDown.bind(this);
@@ -73,18 +74,44 @@ class PageImage extends Component {
     let i = new Image();
     i.src = this.props.value.source;
 
+    let imageWidth = i.width;
+    let imageHeight = i.height;
+    let elementWidth = e.target.clientWidth;
+    let elementHeight = e.target.clientHeight;
+    let imageAspect = i.width / i.height;
+    let elementAspect = e.target.clientWidth / e.target.clientHeight;
+    let multiplier = 1;
+    let moveVertical = false;
+
+    if (imageAspect < elementAspect) {
+      multiplier = imageWidth / elementWidth;
+    } else {
+      multiplier = imageHeight / elementHeight;
+    }
+
+    imageWidth /= multiplier;
+    imageHeight /= multiplier;
+
+    if (elementAspect > imageAspect) {
+      moveVertical = true;
+    }
+
     this.setState({
       startX: e.pageX,
       startY: e.pageY,
-      imageWidth: i.width,
-      imageHeight: i.height,
-      elementWidth: e.target.clientWidth,
-      elementHeight: e.target.clientHeight,
-      verticalImage: i.width < i.height,
-      verticalElement: e.target.clientWidth < e.target.clientHeight
-    })
-    console.log(i.width + " x " + i.height, "imagedimension");
-    console.log(e.target.clientWidth + " x " + e.target.clientHeight, "elemntdimension");
+      imageAspect: imageAspect,
+      elementAspect: elementAspect,
+      imageWidth: imageWidth,
+      imageHeight: imageHeight,
+      elementWidth: elementWidth,
+      elementHeight: elementHeight,
+      moveVertical: moveVertical
+    });
+
+    console.log(imageWidth + " x " + imageHeight, "imagedimension");
+    console.log(elementWidth + " x " + elementHeight, "elemntdimension");
+    console.log(imageAspect, "imageaspect");
+    console.log(elementAspect, "elementaspect");
 
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
@@ -94,13 +121,16 @@ class PageImage extends Component {
   onMouseMove(e) {
     console.log(e.pageX, e.pageY);
 
-    let offsetX = e.pageX - this.state.startX;
-    let offsetY = e.pageY - this.state.startY;
+    let offsetX = 0;
+    let offsetY = 0;
 
-    this.setState({
-      offsetX: e.pageX - this.state.startX,
-      offsetY: e.pageY - this.state.startY
-    });
+    if (this.state.moveVertical) {
+      offsetY = e.pageY - this.state.startY;
+    } else {
+      offsetX = e.pageX - this.state.startX;
+    }
+
+    this.setState({ offsetX: offsetX, offsetY: offsetY });
 
     e.preventDefault();
   }
@@ -124,7 +154,6 @@ class PageImage extends Component {
     return connectDropTarget(
       <div className="imageFrame" style={style}>
         <div className="imageContainer" style={imageStyle} onMouseDown={this.onMouseDown}>
-          {/* {image} */}
         </div>
       </div>
     )
