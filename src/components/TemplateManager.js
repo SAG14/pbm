@@ -6,8 +6,15 @@ import { applyTemplate } from '../actions/pageActions';
 import store from '../store';
 
 class TemplateManager extends Component {
+  componentDidMount() {
+    this.props.applyTemplate(0, 5);
+  }
 
   handleClick(i) {
+    if (this.props.current === 0 || this.props.current === this.props.max) {
+      return;
+    }
+
     const left = this.props.current * 2 - 1;
     const right = this.props.current * 2;
 
@@ -38,6 +45,7 @@ class TemplateManager extends Component {
 const mapStateToProps = state => ({
   templates: state.templates.templates,
   current: state.pages.current,
+  max: Math.floor((state.pages.pages.length + 1) / 2),
 });
 
 export default connect(mapStateToProps, { applyTemplate, })(TemplateManager);
