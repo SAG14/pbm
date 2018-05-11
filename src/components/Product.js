@@ -74,14 +74,14 @@ class Product extends Component {
     return (
       <div className="product-view-design">
         <div id="product-detail">
-          Pages {this.props.current} and {this.props.current + 1}
+          Current Pages {this.props.current} and {this.props.current + 1}
         </div>
         <div className="product-view-design-container-wrapper">
         <table>
         <tr>
           <td>
-        <div style={{border: 'yellow thin solid'}}>
-            <div style={{margin: '0 auto'}}>
+        <div>
+            <div>
               <RaisedButton onClick={this.props.previousPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '65px'}} label="<"/>
             </div>
           </div>
@@ -92,8 +92,8 @@ class Product extends Component {
           </div>
           </td>
           <td>
-          <div style={{border: 'yellow thin solid'}}>
-            <div style={{margin: '0 auto'}}>
+          <div>
+            <div>
               <RaisedButton onClick={this.props.nextPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '65px'}} label=">"/>
             </div>
           </div>
