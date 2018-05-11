@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../../styles/Header.css';
 import { logout } from '../../actions/userActions';
+import { togglePreview } from '../../actions/previewActions';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class Header extends Component {
@@ -37,7 +38,12 @@ class Header extends Component {
                     </div>
                     <div className="navbarOptions">
                         <div className="navbarOptionElement">
-                            <RaisedButton type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" label="Preview"/>
+                            <RaisedButton 
+                                type="button" 
+                                backgroundColor="#0288D1" 
+                                labelColor="#FFFFFF" 
+                                label="Preview"
+                                onClick={this.props.togglePreview}/>
                         </div>
                         <div className="navbarOptionElement">
                             <RaisedButton type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" label="Order"/>
@@ -63,12 +69,15 @@ Header.propTypes = {
     isAuthenticated: PropTypes.bool,
     token: PropTypes.string,
     currentUser: PropTypes.object,
+    isPreview: PropTypes.bool,
+    togglePreview: PropTypes.func
 }
 
 const mapStateToProps = state => ({
     isAuthenticated: state.user.isAuthenticated,
     token: state.user.token,
     currentUser: state.user.currentUser,
+    isPreview: state.preview.isPreview
 })
 
-export default connect(mapStateToProps, { logout })(Header);
+export default connect(mapStateToProps, { logout, togglePreview })(Header);

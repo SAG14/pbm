@@ -54,6 +54,7 @@ class Product extends Component {
         index={i}
         addImageToPage={this.addImageToPage}
         callbackHandler={this.callbackHandler}
+        isPreview = {this.props.isPreview}
       />
     )
   }
@@ -90,6 +91,7 @@ class Spread extends Component {
         value={this.props.pages[i]}
         addImageToPage={this.props.addImageToPage}
         callbackHandler={this.callbackHandler}
+        isPreview = {this.props.isPreview}
       />
     )
   }
@@ -156,10 +158,19 @@ class Page extends Component {
       "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, 1fr 12px) 1fr`,
       "gridTemplateAreas": this.props.value.area,
     };
-
+    console.log(this);
     let className = 'bleed';
-    if (this.props.index % 2) {
-      className += ' bleed-right';
+    if (!this.props.isPreview) {
+      console.log(this.props.isPreview);
+      if (this.props.index % 2) {
+        className += ' bleed-right';
+      }
+    } else {
+      console.log(this.props.isPreview);
+      className = 'preview';
+      if (this.props.index % 2) {
+        className += ' preview-right';
+      }
     }
 
     return (
@@ -200,6 +211,7 @@ const mapStateToProps = state => ({
   pages: state.pages.pages,
   current: state.pages.current,
   templates: state.templates.templates,
+  isPreview: state.preview.isPreview,
 });
 
 export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame })(Product);

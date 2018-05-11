@@ -14,6 +14,8 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { addImageToFrame } from './actions/pageActions';
 import { fetchTemplates } from './actions/templateActions';
 import { fetchProducts } from './actions/productActions';
+import Preview from './components/Preview';
+import PreviewSidebar from './components/PreviewSidebar';
 
 class App extends Component {
   constructor(props) {
@@ -26,11 +28,14 @@ class App extends Component {
     if (this.props.isAuthenticated) {
       return (
         <div className="App">
+          
           <ProductSelector />
           <div>
+            {this.props.isPreview && <PreviewSidebar/>}
             <Sidebar />
           </div>
           <div className="main">
+          {this.props.isPreview && <Preview/>}
             <Product />
             <Filmstrip />
           </div>
@@ -48,11 +53,13 @@ class App extends Component {
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool,
-  fetchProducts: PropTypes.func.isRequired
+  fetchProducts: PropTypes.func.isRequired,
+  isPreview: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.user.isAuthenticated,
+  isPreview: state.preview.isPreview,
 });
 
 App = DragDropContext(HTML5Backend)(App);

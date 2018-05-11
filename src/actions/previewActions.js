@@ -1,8 +1,8 @@
 import { TOGGLE_PREVIEW } from './types';
 
-export const togglePreview = (toggleData) => (dispatch) => {
+export const togglePreview = () => (dispatch) => {
     dispatch({
         type: TOGGLE_PREVIEW,
-        payload: toggleData
+        payload: null
     });
 }
