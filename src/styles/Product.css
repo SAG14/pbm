@@ -33,6 +33,10 @@
   height: 396px; /* 552 - 9 - 9 = 534px or 414 - 9 - 9 = 396px */
 }
 
+.transparent {
+  border-color: transparent;
+}
+
 .bleed-right {
   margin-left: 9px;
 }

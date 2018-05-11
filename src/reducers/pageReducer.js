@@ -34,7 +34,7 @@ export default function(state = initialState, action) {
           if (index !== action.index) {
             return page;
           }
-          const i = index % 2;
+          const i = (index + 1) % 2;
           return Object.assign({}, page, {
             rows: action.payload.pages[i].rows,
             columns: action.payload.pages[i].columns,

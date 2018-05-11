@@ -8,15 +8,21 @@ import store from '../store';
 class TemplateManager extends Component {
 
   handleClick(i) {
-    this.props.applyTemplate(this.props.current, i);
-    this.props.applyTemplate(this.props.current + 1, i);
+    const left = this.props.current * 2 - 1;
+    const right = this.props.current * 2;
+
+    this.props.applyTemplate(left, i);
+    this.props.applyTemplate(right , i);
   }
 
   render() {
     const templates = this.props.templates.map((template, index) => {
+      if (template.type !== "body") {
+        return;
+      }
       return (
         <li key={index}>
-          <button onClick={() => this.handleClick(index)}>{index}</button>
+          <button onClick={() => this.handleClick(index)}>{index + 1}</button>
         </li>
       )
     });

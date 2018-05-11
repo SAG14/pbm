@@ -11,20 +11,33 @@ class Filmstrip extends Component {
   }
 
   render() {
+    // console.log(this.props.pages.length);
     const strip = this.props.pages.map((page, index) => {
-      if (index % 2 === 1) {
+      let pageIndex = index + ", " + (index + 1);
+      if (index === 0) {
+        pageIndex = 'FRONT';
+      }
+      else if (index === this.props.pages.length - 1) {
+        pageIndex = "BACK";
+      }
+      else if (index % 2 === 1) {
         return;
       }
+      
+      const spreadIndex = Math.floor((index + 1) / 2);
+
       return (
         <li key={index}>
-            <button className="frame" onClick={() => this.handleClick(index)}>{index}</button>
+          <button className="frame" onClick={() => this.handleClick(spreadIndex)}>{pageIndex}</button>
         </li>
       );
     });
 
     return (
       <div id="filmstrip">
-        <ul>{strip}</ul>
+        <ul>
+          {strip}
+        </ul>
       </div>
     )
   }
