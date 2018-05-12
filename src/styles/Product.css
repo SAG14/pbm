@@ -1,23 +1,34 @@
 .product-view-design {
   border: solid 1px black;
   height: calc(100% - 200px);
-}
-
-/* keeps the container in the same ratio */
-.product-view-design-container-wrapper {
   width: 100%;
-  margin: auto;
 }
 
 .product-view-design-container {
+  width: 80%;
+  height: 100%;
+  margin: auto;
+}
+
+/* keeps the container in the same ratio */
+.product-view-design-container-resizer {
+  padding-top: calc( 5.75 / 8.75 / 2 * 100%);
+  position: relative;
+  margin-top: 40px;
+}
+
+.product-view-design-container-content {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
   padding: 40px;
+  margin: -40px;
   background: #3E3E3E;
-  width: 1242px; /* 840 * 2 - 9 - 9 = 1662px or 630 * 2 - 9 - 9 = 1242px */
 }
 
 .spread {
   display: table;
   width: 100%;
+  height: 100%;
 }
 
 .spread:after {
@@ -26,11 +37,18 @@
 
 .bleed {
   border: solid 1px red;
+  /* border-width: calc(1 / 414 * 100%) calc(1 / 630 * 100%); */
   float: left;
-  padding: 8px;
-  margin: -9px;
-  width: 612px; /* 840 - 9 - 9 = 822px or 630 - 9 - 9 = 612px */
-  height: 396px; /* 552 - 9 - 9 = 534px or 414 - 9 - 9 = 396px */
+  /* padding-top: calc((8 / 414) * 100%) calc((8 * 630) * 100%);
+  padding-bottom: calc((8 / 414) * 100%) calc((8 * 630) * 100%);
+  padding-left: calc((8 * 630) * 100%);
+  padding-right: calc((8 * 630) * 100%);
+  margin-top: calc((-9 / 414) * 100%);
+  margin-bottom: calc((-9 / 414) * 100%);
+  margin-left: calc((-9 / 630) * 100%);
+  margin-right: calc((-9 / 630) * 100%); */
+  width: calc(50%);
+  height: calc(100%);
 }
 
 .transparent {

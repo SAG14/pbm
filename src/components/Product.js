@@ -58,9 +58,11 @@ class Product extends Component {
     return (
       <div className="product-view-design">
         {this.renderProductDetail()}
-        <div className="product-view-design-container-wrapper">
-          <div className="product-view-design-container">
-            {this.renderSpread(this.props.current)}
+        <div className="product-view-design-container">
+          <div className="product-view-design-container-resizer">
+            <div className="product-view-design-container-content">
+              {this.renderSpread(this.props.current)}
+            </div>
           </div>
         </div>
       </div>

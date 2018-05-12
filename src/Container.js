@@ -10,7 +10,7 @@ const Container = () => (
     <div>
         <Header/>
         <main>
-            <Route exact path="/" component={Login}/>
+            <Route exact path="/" component={App}/>
             <Route path="/registration" component={Registration}/>
             <Route path="/home" component={App}/>
         </main>

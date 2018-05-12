@@ -23,35 +23,35 @@ class App extends Component {
 
   render() {
     // Redirects to login page if not authenticated
-    if (this.props.isAuthenticated) {
-      return (
-        <div>
-          <div className="App">
-            <ProductSelector />
-            <div>
-              <Sidebar />
-            </div>
-            <div className="main">
-              <Product />
-              <Filmstrip />
-            </div>
+    // if (this.props.isAuthenticated) {
+    return (
+      <div>
+        <div className="App">
+          <ProductSelector />
+          <div>
+            <Sidebar />
           </div>
-          {
-              (this.props.displayExportPDFPage) ? (
-                  <div>
-                    <SaveToPDF/>
-                  </div>
-              ) : (null)
-          }          
+          <div className="main">
+            <Product />
+            <Filmstrip />
+          </div>
         </div>
-      );
-    } else {
-      return (
-        <div>
-          <Redirect to="/" />
-        </div>
-      );
-    }
+        {
+          (this.props.displayExportPDFPage) ? (
+            <div>
+              <SaveToPDF />
+            </div>
+          ) : (null)
+        }
+      </div>
+    );
+    // } else {
+    //   return (
+    //     <div>
+    //       <Redirect to="/" />
+    //     </div>
+    //   );
+    // }
   }
 }
 
