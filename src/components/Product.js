@@ -71,28 +71,22 @@ class Product extends Component {
       <div className="product-view-design">
         {this.renderProductDetail()}
         <div className="product-view-design-container-wrapper">
-        <table>
+        <table style={{borderCollapse: 'collapse'}}>
+          <tbody>
         <tr>
-          <td>
-        <div>
-            <div>
-              <RaisedButton onClick={this.props.previousPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '65px'}} label="<"/>
-            </div>
-          </div>
+          <td style={{borderCollapse: 'collapse'}}>
+              <RaisedButton onClick={this.props.previousPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '60px'}} label="<"/>
           </td>
-          <td style={{width: '100%'}}>
+          <td>
           <div className="product-view-design-container">
             {this.renderSpread(this.props.current)}
           </div>
           </td>
-          <td>
-          <div>
-            <div>
-              <RaisedButton onClick={this.props.nextPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '65px'}} label=">"/>
-            </div>
-          </div>
+          <td style={{borderCollapse: 'collapse'}}>
+              <RaisedButton onClick={this.props.nextPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '60px'}} label=">"/>
           </td>
           </tr>
+          </tbody>
         </table>
         </div>
       </div>
@@ -194,7 +188,7 @@ class Page extends Component {
       "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, 1fr 12px) 1fr`,
       "gridTemplateAreas": this.props.value.area,
     };
-
+    
     let className = 'bleed';
     if (!this.props.isPreview) {
       if (!(this.props.index % 2)) {
@@ -247,7 +241,7 @@ const mapStateToProps = state => ({
   product: state.products.product,
   pages: state.pages.pages,
   current: state.pages.current,
-  preview: state.preview.isPreview,
+  isPreview: state.preview.isPreview,
 });
 
 export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame, nextPage, previousPage })(Product);

@@ -73,6 +73,12 @@ img {
   outline: none;
 }
 
+.imageFramePreview {
+  background: #FFFFFF;
+  border: 0 none;
+  outline: none;
+}
+
 .textFrame {
   line-height: 11pt;
   font-size: 8pt;

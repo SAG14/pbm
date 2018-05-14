@@ -57,8 +57,8 @@ export default function(state = initialState, action) {
     }
     case PREVIOUS_PAGE: {
       let newCurrent = state.current;
-      if (newCurrent != 0 && (newCurrent -2) >= 0)
-        newCurrent = newCurrent -2;
+      if (newCurrent != 0 && (newCurrent -1) >= 0)
+        newCurrent = newCurrent -1;
       return {
         ...state,
         current: newCurrent
@@ -66,9 +66,9 @@ export default function(state = initialState, action) {
     }
     case NEXT_PAGE: {
       let newCurrent = state.current;
-      let maxPages = state.pages.length;
-      if ((newCurrent+2) < maxPages)
-        newCurrent = newCurrent + 2;
+      let maxPages = Math.floor(state.pages.length/2) + 1;
+      if ((newCurrent+1) < maxPages)
+        newCurrent = newCurrent + 1;
       return {
         ...state,
         current: newCurrent,

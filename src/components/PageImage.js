@@ -186,9 +186,11 @@ class PageImage extends Component {
       backgroundPositionY: this.state.offsetY + "px",
       backgroundPositionX: this.state.offsetX + "px"
     }
-
+    let imageClass = 'imageFrame';
+    if (this.props.isPreview)
+      imageClass = 'imageFramePreview';
     return connectDropTarget(
-      <div className="imageFrame" style={style}>
+      <div className={imageClass} style={style}>
         <div className="imageContainer" style={imageStyle} onMouseDown={this.onMouseDown}>
         </div>
       </div>
@@ -201,7 +203,8 @@ PageImage.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    pages: state.pages.pages
+    pages: state.pages.pages,
+    isPreview: state.preview.isPreview,
   };
 }
 
