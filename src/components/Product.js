@@ -247,8 +247,8 @@ const mapStateToProps = state => ({
   product: state.products.product,
   pages: state.pages.pages,
   current: state.pages.current,
-  templates: state.templates.templates,
-  isPreview: state.preview.isPreview,
+  preview: state.preview.isPreview,
+});
 
-export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame })(Product);
+export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame, nextPage, previousPage })(Product);
 export { Page };

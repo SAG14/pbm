@@ -61,7 +61,7 @@ class App extends Component {
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool,
-  isPreview: PropTypes.bool
+  isPreview: PropTypes.bool,
   displayExportPDFPage: PropTypes.bool,
   displayOrderPage: PropTypes.bool,
   displayPreviewPage: PropTypes.bool,
