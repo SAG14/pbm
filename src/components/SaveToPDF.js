@@ -12,6 +12,7 @@ class SaveToPDF extends Component {
 
         this.state = {
             content: '',
+            props: this.props,
         };
     }
 
@@ -21,6 +22,12 @@ class SaveToPDF extends Component {
     componentDidMount() {
         this.exportableContent.save();
         this.props.toHomePage();
+        // console.log(props);
+        // setTimeout(function() {
+        //     this.props.toHomePage();
+        // }, 2000);
+        
+        //this.exportableContent.save({},this.props.toHomePage());
     }
 
     render() {
@@ -28,7 +35,7 @@ class SaveToPDF extends Component {
             <div>
             <PDFExport
                 ref={(component) => this.exportableContent = component}
-                // scale={0.2}
+                //scale={0.2}
                 // paperSize={["8.75in", "11.25in"]}
                 // forcePageBreak=".page-break"
                 // multiPage={true}
