@@ -5,12 +5,14 @@ import '../../styles/Header.css';
 import { logout } from '../../actions/userActions';
 import { togglePreview } from '../../actions/previewActions';
 import RaisedButton from 'material-ui/RaisedButton';
+import { toExportPDFPage } from '../../actions/appNavigationActions';
 
 class Header extends Component {
     constructor(props) {
         super(props);
 
         this.logout = this.logout.bind(this);
+        this.toExportPage = this.toExportPage.bind(this);
     }
 
      // Sign out function
@@ -21,7 +23,11 @@ class Header extends Component {
         } else {
             //TODO
         }
-    }   
+    }
+    
+    toExportPage() {
+        this.props.toExportPDFPage();
+    }
 
     render() {
         if (this.props.isAuthenticated) {
@@ -49,7 +55,7 @@ class Header extends Component {
                             <RaisedButton type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" label="Order"/>
                         </div>
                         <div className="navbarOptionElement">
-                            <RaisedButton type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" label="Download"/>
+                            <RaisedButton type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" label="Export" onClick={this.toExportPage}/>
                         </div>
                     </div>
                 </div>
@@ -66,6 +72,7 @@ class Header extends Component {
 
 Header.propTypes = {
     logout: PropTypes.func.isRequired,
+    toExportPDFPage: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
     token: PropTypes.string,
     currentUser: PropTypes.object,
@@ -77,7 +84,8 @@ const mapStateToProps = state => ({
     isAuthenticated: state.user.isAuthenticated,
     token: state.user.token,
     currentUser: state.user.currentUser,
-    isPreview: state.preview.isPreview
+    isPreview: state.preview.isPreview,
+    displayExportPDFPage: state.appNavigation.displayExportPDFPage,
 })
 
-export default connect(mapStateToProps, { logout, togglePreview })(Header);
+export default connect(mapStateToProps, { logout, togglePreview, toExportPDFPage })(Header);

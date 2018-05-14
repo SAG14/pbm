@@ -7,6 +7,7 @@ import templateReducer from './templateReducer';
 import pageReducer from './pageReducer';
 import userReducer from './userReducer';
 import previewReducer from './previewReducer';
+import appNavigationReducer from './appNavigiationReducer';
 
 export default combineReducers({
   uploads: uploadReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   routing: routerReducer,
   user: userReducer,
   preview: previewReducer,
+  appNavigation: appNavigationReducer,
 });

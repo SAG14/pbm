@@ -1,4 +1,23 @@
-import { REGISTER_USER, LOGIN_USER, LOGOUT_USER, UPDATE_REGISTER_VALUE } from './types';
+import {
+    REGISTER_USER, 
+    LOGIN_USER, 
+    LOGOUT_USER, 
+    UPDATE_REGISTER_VALUE,
+    REDIRECT_TO_REGISTRATION,
+    REDIRECT_TO_LOGIN, 
+} from './types';
+
+export const toRegistration = () => dispatch => {
+    dispatch({
+        type: REDIRECT_TO_REGISTRATION, 
+    })
+}
+
+export const toLogin = () => dispatch => {
+    dispatch({
+        type: REDIRECT_TO_LOGIN,
+    })
+}
 
 export const signIn = (credentialData) => dispatch => {
     fetch('http://localhost:3100/api/account/login', {
