@@ -11,7 +11,6 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 class ProductSelector extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.products);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = { productIndex: -1, visible: true }

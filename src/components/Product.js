@@ -16,20 +16,6 @@ const VIEW_CALL_BACK_ENUMS = {
 };
 
 class Product extends Component {
-  constructor(props) {
-    super(props);
-    // this.addImageToPage = this.addImageToPage.bind(this);
-  };
-
-  // component() {
-  //   // this.props.selectProduct();
-  //   console.log("hi");
-  //   for (let i = 0; i < this.props.pages.length; i += 2) {
-  //     this.props.applyTemplate(i, this.props.templates[i / 2 % 5]);
-  //     this.props.applyTemplate(i + 1, this.props.templates[i / 2 % 5]);
-  //   }
-  // }
-
   callbackHandler = (type, data) => {
     switch (type) {
       case VIEW_CALL_BACK_ENUMS.ADD_TEXT_TO_FRAME:
@@ -41,9 +27,17 @@ class Product extends Component {
     }
   }
 
-  // addImageToPage(id, source) {
-  //   this.props.addImageToFrame({ id: id, source: source, });
-  // };
+  renderProductDetail() {
+    return (
+      <div className="product-detail">
+        <div>{this.props.product.type}</div>
+        <div>{this.props.product.size}</div>
+        <div>{this.props.product.pageNumber} pages</div>
+        <div>{this.props.product.price}</div>
+        <div>{this.props.product.priceUnit}</div>
+      </div>
+    )
+  }
 
   renderSpread(i) {
     if (i == null)
@@ -59,11 +53,11 @@ class Product extends Component {
   }
 
   render() {
+    if (!Object.keys(this.props.product).length)
+      return null;
     return (
       <div className="product-view-design">
-        <div id="product-detail">
-          product information
-        </div>
+        {this.renderProductDetail()}
         <div className="product-view-design-container-wrapper">
           <div className="product-view-design-container">
             {this.renderSpread(this.props.current)}
@@ -84,6 +78,17 @@ class Spread extends Component {
   }
 
   renderPage(i) {
+    if (i < 0) {
+      return (
+        <div className="bleed transparent"></div>
+      )
+    }
+    else if (i >= this.props.pages.length) {
+      return (
+        <div className="bleed bleed-right transparent"></div>
+      )
+    }
+
     return (
       <Page
         index={i}
@@ -97,8 +102,8 @@ class Spread extends Component {
   render() {
     return (
       <div className="spread">
-        {this.renderPage(this.props.index)}
-        {this.renderPage(this.props.index + 1)}
+        {this.renderPage(this.props.index * 2 - 1)}
+        {this.renderPage(this.props.index * 2)}
       </div>
     )
   }
@@ -158,7 +163,7 @@ class Page extends Component {
     };
 
     let className = 'bleed';
-    if (this.props.index % 2) {
+    if (!(this.props.index % 2)) {
       className += ' bleed-right';
     }
 
@@ -179,7 +184,7 @@ class Text extends Component {
       VIEW_CALL_BACK_ENUMS.ADD_TEXT_TO_FRAME,
       {
         id: this.props.value.id,
-        value: e.target.value,
+        value: e.target.innerText,
       },
     );
   }
@@ -188,8 +193,11 @@ class Text extends Component {
     const style = JSON.parse(this.props.value.style);
 
     return (
-      <div className="textFrame" style={style}>
-        <textarea value={this.props.value.value} onInput={(e) => this.inputChangeHandler(e)}></textarea>
+      <div className="textFrame"
+        style={style}
+        onBlur={(e) => this.inputChangeHandler(e)}
+        contentEditable="true">
+        {this.props.value.value}
       </div>
     )
   }
@@ -199,7 +207,6 @@ const mapStateToProps = state => ({
   product: state.products.product,
   pages: state.pages.pages,
   current: state.pages.current,
-  templates: state.templates.templates,
 });
 
 export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame })(Product);
