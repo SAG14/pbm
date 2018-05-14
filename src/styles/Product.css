@@ -41,6 +41,17 @@
   margin-left: 9px;
 }
 
+.preview {
+  float: left;
+  width: calc(50% - 12px);
+  padding: 0px;
+  margin: -9px;
+}
+
+.preview-right {
+  margin-left: 0px;
+  border-left: thin black solid;
+}
 .page {
   background-color: #FFFFFF;
   display: grid;
@@ -58,6 +69,12 @@ img {
 
 .imageFrame {
   background: #11ADEC;
+  border: 0 none;
+  outline: none;
+}
+
+.imageFramePreview {
+  background: #FFFFFF;
   border: 0 none;
   outline: none;
 }

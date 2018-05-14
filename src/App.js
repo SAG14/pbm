@@ -14,6 +14,8 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { addImageToFrame } from './actions/pageActions';
 import SaveToPDF from './components/SaveToPDF';
 import { fetchProducts } from './actions/productActions';
+import Preview from './components/Preview';
+import PreviewSidebar from './components/PreviewSidebar';
 
 class App extends Component {
   constructor(props) {
@@ -29,9 +31,11 @@ class App extends Component {
           <div className="App">
             <ProductSelector />
             <div>
-              <Sidebar />
+            {this.props.isPreview && <PreviewSidebar/>}
+            {!this.props.isPreview && <Sidebar />}
             </div>
             <div className="main">
+            {this.props.isPreview && <Preview/>}
               <Product />
               <Filmstrip />
             </div>
@@ -57,6 +61,7 @@ class App extends Component {
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool,
+  isPreview: PropTypes.bool,
   displayExportPDFPage: PropTypes.bool,
   displayOrderPage: PropTypes.bool,
   displayPreviewPage: PropTypes.bool,
@@ -65,6 +70,7 @@ App.propTypes = {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.user.isAuthenticated,
+  isPreview: state.preview.isPreview,
   displayExportPDFPage: state.appNavigation.displayExportPDFPage,
   displayOrderPage: state.appNavigation.displayOrderPage,
   displayPreviewPage: state.appNavigation.displayPreviewPage,

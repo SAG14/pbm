@@ -9,6 +9,10 @@ export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const UPDATE_REGISTER_VALUE = "UPDATE_REGISTER_VALUE";
 export const ADD_IMAGE_TO_FRAME = 'ADD_IMAGE_TO_FRAME';
+export const ADD_TEXT_TO_PAGE = 'ADD_TEXT_TO_PAGE';
+export const TOGGLE_PREVIEW = 'TOGGLE_PREVIEW';
+export const NEXT_PAGE = 'NEXT_PAGE';
+export const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
 export const SEND_ORDER = "SEND_ORDER";
 export const ADD_TEXT_TO_FRAME = 'ADD_TEXT_TO_FRAME';
 // Navigation variables

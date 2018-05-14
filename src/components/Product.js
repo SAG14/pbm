@@ -5,8 +5,11 @@ import {
   applyTemplate,
   addImageToFrame,
   addTextToFrame,
+  nextPage,
+  previousPage,
 } from '../actions/pageActions';
 import PageImage, { CALL_BACK_ENUMS } from './PageImage';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import '../styles/Product.css';
 
@@ -48,20 +51,43 @@ class Product extends Component {
         index={i}
         addImageToPage={this.addImageToPage}
         callbackHandler={this.callbackHandler}
+        isPreview = {this.props.isPreview}
       />
     )
   }
 
+
   render() {
+    let buttonNavStyle = {
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      backgroundColor: '#3E3E3E',
+      zIndex: 3,
+    };
     if (!Object.keys(this.props.product).length)
       return null;
     return (
       <div className="product-view-design">
         {this.renderProductDetail()}
         <div className="product-view-design-container-wrapper">
+        <table style={{borderCollapse: 'collapse'}}>
+          <tbody>
+        <tr>
+          <td style={{borderCollapse: 'collapse'}}>
+              <RaisedButton onClick={this.props.previousPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '60px'}} label="<"/>
+          </td>
+          <td>
           <div className="product-view-design-container">
             {this.renderSpread(this.props.current)}
           </div>
+          </td>
+          <td style={{borderCollapse: 'collapse'}}>
+              <RaisedButton onClick={this.props.nextPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '60px'}} label=">"/>
+          </td>
+          </tr>
+          </tbody>
+        </table>
         </div>
       </div>
     )
@@ -95,6 +121,7 @@ class Spread extends Component {
         value={this.props.pages[i]}
         addImageToPage={this.props.addImageToPage}
         callbackHandler={this.callbackHandler}
+        isPreview = {this.props.isPreview}
       />
     )
   }
@@ -161,10 +188,17 @@ class Page extends Component {
       "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, 1fr 12px) 1fr`,
       "gridTemplateAreas": this.props.value.area,
     };
-
+    
     let className = 'bleed';
-    if (!(this.props.index % 2)) {
-      className += ' bleed-right';
+    if (!this.props.isPreview) {
+      if (!(this.props.index % 2)) {
+        className += ' bleed-right';
+      }
+    } else {
+      className = 'preview';
+      if (this.props.index % 2) {
+        className += ' preview-right';
+      }
     }
 
     return (
@@ -207,7 +241,8 @@ const mapStateToProps = state => ({
   product: state.products.product,
   pages: state.pages.pages,
   current: state.pages.current,
+  isPreview: state.preview.isPreview,
 });
 
-export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame })(Product);
+export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame, nextPage, previousPage })(Product);
 export { Page };
