@@ -80,14 +80,9 @@ class Spread extends Component {
   }
 
   renderPage(i) {
-    if (i < 0) {
+    if (i < 0 || i >= this.props.pages.length) {
       return (
-        <div className="bleed transparent"></div>
-      )
-    }
-    else if (i >= this.props.pages.length) {
-      return (
-        <div className="bleed bleed-right transparent"></div>
+        <div className="page transparent"></div>
       )
     }
 
@@ -159,19 +154,14 @@ class Page extends Component {
     });
 
     const layout = {
-      "gridTemplateRows": `repeat(${this.props.value.rows - 1}, 1fr 12px) 1fr`,
-      "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, 1fr 12px) 1fr`,
+      "gridTemplateRows": `repeat(${this.props.value.rows - 1}, calc(94.5 / 414 * 100%) calc(12 / 414 * 100%)) calc(94.5 / 414 * 100%)`,
+      "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, calc(116.4 / 630 * 100%) calc(12 / 630 * 100%)) calc(116.4 / 630 * 100%)`,
       "gridTemplateAreas": this.props.value.area,
     };
 
-    let className = 'bleed';
-    if (!(this.props.index % 2)) {
-      className += ' bleed-right';
-    }
-
     return (
-      <div className={className}>
-        <div className="page" style={layout}>
+      <div className="page">
+        <div className="gridlayout" style={layout}>
           {images}
           {texts}
         </div>

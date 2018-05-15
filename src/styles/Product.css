@@ -5,14 +5,14 @@
 }
 
 .product-view-design-container {
-  width: 80%;
-  height: 100%;
+  /* width: 1260px; */
+  width: 90%;
   margin: auto;
 }
 
 /* keeps the container in the same ratio */
 .product-view-design-container-resizer {
-  padding-top: calc( 5.75 / 8.75 / 2 * 100%);
+  padding-top: calc( 414 / 1260 * 100%);
   position: relative;
   margin-top: 40px;
 }
@@ -20,8 +20,6 @@
 .product-view-design-container-content {
   position: absolute;
   top: 0; bottom: 0; left: 0; right: 0;
-  padding: 40px;
-  margin: -40px;
   background: #3E3E3E;
 }
 
@@ -29,41 +27,36 @@
   display: table;
   width: 100%;
   height: 100%;
+  border: 0 none;
 }
 
 .spread:after {
   clear: both;
 }
 
-.bleed {
-  border: solid 1px red;
-  /* border-width: calc(1 / 414 * 100%) calc(1 / 630 * 100%); */
+.page {
+  background-color: #FFFFFF;
+  height: calc((414 - 18) / 414 * 100%);
+  width: calc((630 - 18) / 630 * 50%);
+  border: 0 none;
   float: left;
-  /* padding-top: calc((8 / 414) * 100%) calc((8 * 630) * 100%);
-  padding-bottom: calc((8 / 414) * 100%) calc((8 * 630) * 100%);
-  padding-left: calc((8 * 630) * 100%);
-  padding-right: calc((8 * 630) * 100%);
-  margin-top: calc((-9 / 414) * 100%);
-  margin-bottom: calc((-9 / 414) * 100%);
-  margin-left: calc((-9 / 630) * 100%);
-  margin-right: calc((-9 / 630) * 100%); */
-  width: calc(50%);
-  height: calc(100%);
+  margin: calc(9 / 630 * 50%);
+}
+
+.gridlayout {
+  background: transparent;
+  border-style: solid;
+  border-color: red;
+  border-width: 1px;
+  width: calc((612 - -18) / 612 * 100% - 2px);
+  height: calc((396 - -18) / 396 * 100% - 2px);
+  margin: calc(-9 / 612 * 100%);
+  display: grid;
 }
 
 .transparent {
   border-color: transparent;
-}
-
-.bleed-right {
-  margin-left: 9px;
-}
-
-.page {
-  background-color: #FFFFFF;
-  display: grid;
-  height: 100%;
-  width: 100%;
+  background: transparent;
 }
 
 img {
@@ -81,18 +74,21 @@ img {
 }
 
 .textFrame {
-  line-height: 11pt;
-  font-size: 8pt;
+  /* line-height: 11pt; */
+  /* font-size: 8pt; */
+  line-height: 0.77vw;
+  font-size: 0.56vw;
   font-family: 'Lato', sans-serif;
   font-weight: 300; /* light */
-  background: #DEDFE0;
+  white-space: pre-wrap;
+  hyphens: none;
+
+  /* display: flex;
+  align-items: center;
+  justify-content: flex-start; */
   
-  display: table-cell;
-  /* text-align: center; */
-  vertical-align: bottom;
 
-  bottom: 0;
-
+  background: #DEDFE0;
   outline: none;
   border: 0 none;
   overflow: hidden;
