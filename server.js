@@ -3,10 +3,10 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 // Sets the requirements to look at the config file
-const config = require('./config/config');
+const config = require('./server-config');
 
 // Pre-sets the deployment port
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3100;
 
 mongoose.connect(config.db_dev);
 mongoose.Promise = global.Promise;
@@ -34,7 +34,7 @@ app.listen(port, '0.0.0.0', (err) => {
         console.log(err);
     }
 
-    console.info('>>> Open http://0.0.0.0:%s/ in your browser.', port);
+    console.info('>>> Node Server is running on http://0.0.0.0:%s/ in your browser.', port);
 });
 
 module.exports = app;

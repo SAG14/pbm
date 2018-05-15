@@ -7,6 +7,8 @@ import {
     REDIRECT_TO_LOGIN, 
 } from './types';
 
+const config = require('../app-config');
+
 export const toRegistration = () => dispatch => {
     dispatch({
         type: REDIRECT_TO_REGISTRATION, 
@@ -20,7 +22,7 @@ export const toLogin = () => dispatch => {
 }
 
 export const signIn = (credentialData) => dispatch => {
-    fetch(window.location.hostname + '/api/account/login', {
+    fetch(config.path + '/api/account/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -37,7 +39,7 @@ export const signIn = (credentialData) => dispatch => {
 }
 
 export const logout = (token) => dispatch => {
-    fetch('http://localhost:3100/api/account/logout?token=' + token)
+    fetch(config.path + '/api/account/logout?token=' + token)
             .then(res => res.json())
             .then(data =>
                 dispatch ({
@@ -48,7 +50,7 @@ export const logout = (token) => dispatch => {
 }
 
 export const register = (userData) => dispatch =>{
-    fetch('http://localhost:3100/api/account/signup', {
+    fetch(config.path + '/api/account/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -63,10 +65,3 @@ export const register = (userData) => dispatch =>{
                 })
             );
 }
-
-// export const resetRegisterValue = (registerData) => dispatch => {
-//     dispatch({
-//         type: UPDATE_REGISTER_VALUE,
-//         payload: JSON.stringify(registerdData)
-//     });
-// }

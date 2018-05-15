@@ -1,7 +1,7 @@
 const User = require('../../models/User');
 const UserSession = require('../../models/UserSession');
 const EmailVerification = require('../../models/EmailVerification');
-const config = require('../../../config/config');
+const config = require('../../../server-config');
 
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
@@ -165,8 +165,6 @@ module.exports = (app) => {
                             success: true,
                             message: 'Verification email has been sent to ' + user.email + '.'
                         });
-                        // TODO: Redirect to login
-                        // return res.redirect('http://localhost:3000/');
                     });
                 });
             });
