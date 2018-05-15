@@ -4,6 +4,8 @@ import {
   JUMP_TO_PAGE,
   ADD_IMAGE_TO_FRAME,
   ADD_TEXT_TO_FRAME,
+  NEXT_PAGE,
+  PREVIOUS_PAGE,
 } from '../actions/types';
 
 const initialState = {
@@ -29,18 +31,20 @@ export default function(state = initialState, action) {
       }
     }
     case APPLY_TEMPLATE: {
+      let templatePageIndex = Math.floor((action.index + 1) % 2);
+      if (action.payload.type === "front" || action.payload.type === "back")
+        templatePageIndex = 0;
       return Object.assign({}, state, {
         pages : state.pages.map((page, index) => {
           if (index !== action.index) {
             return page;
           }
-          const i = index % 2;
           return Object.assign({}, page, {
-            rows: action.payload.pages[i].rows,
-            columns: action.payload.pages[i].columns,
-            area: action.payload.pages[i].area,
-            images: action.payload.pages[i].images,
-            texts: action.payload.pages[i].texts,
+            rows: action.payload.pages[templatePageIndex].rows,
+            columns: action.payload.pages[templatePageIndex].columns,
+            area: action.payload.pages[templatePageIndex].area,
+            images: action.payload.pages[templatePageIndex].images,
+            texts: action.payload.pages[templatePageIndex].texts,
           });
         }),
       });
@@ -49,6 +53,25 @@ export default function(state = initialState, action) {
       return {
         ...state,
         current : action.payload,
+      };
+    }
+    case PREVIOUS_PAGE: {
+      let newCurrent = state.current;
+      if (newCurrent != 0 && (newCurrent -1) >= 0)
+        newCurrent = newCurrent -1;
+      return {
+        ...state,
+        current: newCurrent
+      };
+    }
+    case NEXT_PAGE: {
+      let newCurrent = state.current;
+      let maxPages = Math.floor(state.pages.length/2) + 1;
+      if ((newCurrent+1) < maxPages)
+        newCurrent = newCurrent + 1;
+      return {
+        ...state,
+        current: newCurrent,
       };
     }
     case ADD_IMAGE_TO_FRAME: {

@@ -5,8 +5,11 @@ import {
   applyTemplate,
   addImageToFrame,
   addTextToFrame,
+  nextPage,
+  previousPage,
 } from '../actions/pageActions';
 import PageImage, { CALL_BACK_ENUMS } from './PageImage';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import '../styles/Product.css';
 
@@ -16,20 +19,6 @@ const VIEW_CALL_BACK_ENUMS = {
 };
 
 class Product extends Component {
-  constructor(props) {
-    super(props);
-    // this.addImageToPage = this.addImageToPage.bind(this);
-  };
-
-  // component() {
-  //   // this.props.selectProduct();
-  //   console.log("hi");
-  //   for (let i = 0; i < this.props.pages.length; i += 2) {
-  //     this.props.applyTemplate(i, this.props.templates[i / 2 % 5]);
-  //     this.props.applyTemplate(i + 1, this.props.templates[i / 2 % 5]);
-  //   }
-  // }
-
   callbackHandler = (type, data) => {
     switch (type) {
       case VIEW_CALL_BACK_ENUMS.ADD_TEXT_TO_FRAME:
@@ -41,9 +30,17 @@ class Product extends Component {
     }
   }
 
-  // addImageToPage(id, source) {
-  //   this.props.addImageToFrame({ id: id, source: source, });
-  // };
+  renderProductDetail() {
+    return (
+      <div className="product-detail">
+        <div>{this.props.product.type}</div>
+        <div>{this.props.product.size}</div>
+        <div>{this.props.product.pageNumber} pages</div>
+        <div>{this.props.product.price}</div>
+        <div>{this.props.product.priceUnit}</div>
+      </div>
+    )
+  }
 
   renderSpread(i) {
     if (i == null)
@@ -54,20 +51,43 @@ class Product extends Component {
         index={i}
         addImageToPage={this.addImageToPage}
         callbackHandler={this.callbackHandler}
+        isPreview = {this.props.isPreview}
       />
     )
   }
 
+
   render() {
+    let buttonNavStyle = {
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      backgroundColor: '#3E3E3E',
+      zIndex: 3,
+    };
+    if (!Object.keys(this.props.product).length)
+      return null;
     return (
       <div className="product-view-design">
-        <div id="product-detail">
-          product information
-        </div>
+        {this.renderProductDetail()}
         <div className="product-view-design-container-wrapper">
+        <table style={{borderCollapse: 'collapse'}}>
+          <tbody>
+        <tr>
+          <td style={{borderCollapse: 'collapse'}}>
+              <RaisedButton onClick={this.props.previousPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '60px'}} label="<"/>
+          </td>
+          <td>
           <div className="product-view-design-container">
             {this.renderSpread(this.props.current)}
           </div>
+          </td>
+          <td style={{borderCollapse: 'collapse'}}>
+              <RaisedButton onClick={this.props.nextPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '60px'}} label=">"/>
+          </td>
+          </tr>
+          </tbody>
+        </table>
         </div>
       </div>
     )
@@ -84,12 +104,24 @@ class Spread extends Component {
   }
 
   renderPage(i) {
+    if (i < 0) {
+      return (
+        <div className="bleed transparent"></div>
+      )
+    }
+    else if (i >= this.props.pages.length) {
+      return (
+        <div className="bleed bleed-right transparent"></div>
+      )
+    }
+
     return (
       <Page
         index={i}
         value={this.props.pages[i]}
         addImageToPage={this.props.addImageToPage}
         callbackHandler={this.callbackHandler}
+        isPreview = {this.props.isPreview}
       />
     )
   }
@@ -97,8 +129,8 @@ class Spread extends Component {
   render() {
     return (
       <div className="spread">
-        {this.renderPage(this.props.index)}
-        {this.renderPage(this.props.index + 1)}
+        {this.renderPage(this.props.index * 2 - 1)}
+        {this.renderPage(this.props.index * 2)}
       </div>
     )
   }
@@ -156,10 +188,17 @@ class Page extends Component {
       "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, 1fr 12px) 1fr`,
       "gridTemplateAreas": this.props.value.area,
     };
-
+    
     let className = 'bleed';
-    if (this.props.index % 2) {
-      className += ' bleed-right';
+    if (!this.props.isPreview) {
+      if (!(this.props.index % 2)) {
+        className += ' bleed-right';
+      }
+    } else {
+      className = 'preview';
+      if (this.props.index % 2) {
+        className += ' preview-right';
+      }
     }
 
     return (
@@ -179,7 +218,7 @@ class Text extends Component {
       VIEW_CALL_BACK_ENUMS.ADD_TEXT_TO_FRAME,
       {
         id: this.props.value.id,
-        value: e.target.value,
+        value: e.target.innerText,
       },
     );
   }
@@ -188,8 +227,11 @@ class Text extends Component {
     const style = JSON.parse(this.props.value.style);
 
     return (
-      <div className="textFrame" style={style}>
-        <textarea value={this.props.value.value} onInput={(e) => this.inputChangeHandler(e)}></textarea>
+      <div className="textFrame"
+        style={style}
+        onBlur={(e) => this.inputChangeHandler(e)}
+        contentEditable="true">
+        {this.props.value.value}
       </div>
     )
   }
@@ -199,8 +241,8 @@ const mapStateToProps = state => ({
   product: state.products.product,
   pages: state.pages.pages,
   current: state.pages.current,
-  templates: state.templates.templates,
+  isPreview: state.preview.isPreview,
 });
 
-export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame })(Product);
+export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame, nextPage, previousPage })(Product);
 export { Page };
