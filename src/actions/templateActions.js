@@ -20,14 +20,14 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "i0",
               source: null,
-              style: '{"gridArea":"i0", "margin":"36px 0 36px 36px"}',
+              style: '{"gridArea":"i0", "margin":"calc(36 / 372 *100%) 0 calc(36 / 372 *100%) calc(36 / 372 * 100%)"}',
             },
           ],
           texts: [
             {
               id: "t0",
               value: '',
-              style: '{"gridArea":"t0", "margin":"0 0 36px 0"}',
+              style: '{"gridArea":"t0", "margin":"0 0 calc(36 / 116 * 100%) 0", "textAlign":"left"}',
             },
           ],
         },
@@ -45,14 +45,14 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "i1",
               source: null,
-              style: '{"gridArea":"i1", "margin":"36px 36px 0 0"}',
+              style: '{"gridArea":"i1", "margin":"calc(36 / 500 * 100%) calc(36 / 500 * 100%) 0 0"}',
             },
           ],
           texts: [
             {
               id: "t1",
               value: '',
-              style: '{"gridArea":"t1", "margin":"0 36px 36px 0"}',
+              style: '{"gridArea":"t1", "margin":"0 calc(36 / 244 * 100%) calc(36 / 244 * 100%) 0", "textAlign":"right"}',
             },
           ],
         },
@@ -76,19 +76,19 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "i0",
               source: null,
-              style: '{"gridArea":"i0", "margin":"-9px 0 -9px -9px"}',
+              style: '{"gridArea":"i0", "margin":"0"}',
             },
           ],
           texts: [
             {
               id: "t0",
               value: '',
-              style: '{"gridArea":"t0", "margin":"0 0 36px 0"}',
+              style: '{"gridArea":"t0", "margin":"0 0 calc(36 / 116 * 100%) 0", "textAlign":"left"}',
             },
             {
               id: "t1",
               value: '',
-              style: '{"gridArea":"t1", "margin":"0 36px 36px 0"}',
+              style: '{"gridArea":"t1", "margin":"0 calc(36 / 116 * 100%) calc(36 / 116 * 100%) 0", "textAlign":"right"}',
             },
           ],
         },
@@ -106,7 +106,7 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "i1",
               source: null,
-              style: '{"gridArea":"i1", "margin":"36px"}',
+              style: '{"gridArea":"i1", "margin":"calc(36 / 627.9 * 100%)"}',
             },
           ],
           texts: [],
@@ -131,7 +131,7 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "i0",
               source: null,
-              style: '{"gridArea":"i0", "margin":"-9px"}',
+              style: '{"gridArea":"i0", "margin":"0"}',
             },
           ],
           texts: [],
@@ -150,19 +150,19 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "i1",
               source: null,
-              style: '{"gridArea":"i1", "margin":"36px 0"}',
+              style: '{"gridArea":"i1", "margin":"calc(36 / 371.95 * 100%) 0"}',
             },
           ],
           texts: [
             {
               id: "t0",
               value: '',
-              style: '{"gridArea":"t0", "margin":"36px 0 0 36px"}',
+              style: '{"gridArea":"t0", "margin":"calc(36 / 116 * 100%) 0 0 calc(36 / 116 * 100%)", "textAlign":"left"}',
             },
             {
               id: "t1",
               value: '',
-              style: '{"gridArea":"t1", "margin":"0 0 36px 0"}',
+              style: '{"gridArea":"t1", "margin":"0 0 calc(36 / 116 * 100%) 0", "textAlign":"right"}',
             },
           ],
         },
@@ -186,7 +186,7 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "i0",
               source: null,
-              style: '{"gridArea":"i0", "margin":"36px"}',
+              style: '{"gridArea":"i0", "margin":"calc(36 / 627.9 * 100%)"}',
             },
           ],
           texts: [],
@@ -205,7 +205,7 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "i1",
               source: null,
-              style: '{"gridArea":"i1", "margin":"36px"}',
+              style: '{"gridArea":"i1", "margin":"calc(36 / 627.9 * 100%)"}',
             },
           ],
           texts: [],
@@ -230,14 +230,14 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "i0",
               source: null,
-              style: '{"gridArea":"i0", "margin":"36px 18px"}',
+              style: '{"gridArea":"i0", "margin":"calc(36 / 371.95 * 100%) calc(18 / 371.95 * 100%)"}',
             },
           ],
           texts: [
             {
               id: "t0",
               value: '',
-              style: '{"gridArea":"t0", "margin":"0 36px 36px 0"}',
+              style: '{"gridArea":"t0", "margin":"0 calc(36 / 116 * 100%) calc(36 / 116 * 100%) 0", "textAlign":"left"}',
             },
           ],
         },
@@ -255,24 +255,24 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "i1",
               source: null,
-              style: '{"gridArea":"i1", "margin":"0 -41.769px"}',
+              style: '{"gridArea":"i1", "margin":"0 calc(-41.769 / 139.92 * 100%)"}',
             },
             {
               id: "i2",
               source: null,
-              style: '{"gridArea":"i2", "margin":"0 -41.769px"}',
+              style: '{"gridArea":"i2", "margin":"0 calc(-41.769 / 139.92 * 100%)"}',
             },
           ],
           texts: [
             {
               id: "t1",
               value: '',
-              style: '{"gridArea":"t1", "margin":"0 0 36px 0", "textAlign":"center"}',
+              style: '{"gridArea":"t1", "textAlign":"center", "margin":"calc(18 / 116 * 100%) 0 calc(36 / 116 * 100%) 0", "textAlign":"center"}',
             },
             {
               id: "t2",
               value: '',
-              style: '{"gridArea":"t2", "margin":"0 0 36px 0", "textAlign":"center"}',
+              style: '{"gridArea":"t2", "textAlign":"center", "margin":"calc(18 / 116 * 100%) 0 calc(36 / 116 * 100%) 0", "textAlign":"center"}',
             },
           ],
         },
@@ -296,14 +296,14 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "i0",
               source: null,
-              style: '{"gridArea":"i0", "margin":"-9px 0 -9px -9px"}',
+              style: '{"gridArea":"i0", "margin":"0"}',
             },
           ],
           texts: [
             {
               id: "t0",
               value: '',
-              style: '{"gridArea":"t0", "margin":"0 0 36px 0", "borderTop":"solid 2px #000000", "borderBottom":"solid 2px #000000"}',
+              style: '{"gridArea":"t0", "borderTop":"solid 0.11vw #000000", "borderBottom":"solid 0.11vw #000000", "margin":"0 0 calc(36 / 116 * 100%) 0", "textAlign":"left", "lineHeight":"1.008vw", "fontSize":"0.84vw", "fontWeight":"600"}',
             },
           ],
         },
@@ -328,12 +328,12 @@ export const fetchTemplates = () => dispatch => {
             {
               id: "t0",
               value: '',
-              style: '{"gridArea":"t0", "margin":"-13px 0 0 0"}',
+              style: '{"gridArea":"t0", "margin":"-13px 0 0 0", "margin":"calc(-13 / 371.95 * 100%) 0 0 0", "textAlign":"center", "fontSize":"0.84vw", "fontWeight":"500", "lineHeight":"1.008vw"}',
             },
             {
               id: "t1",
               value: '',
-              style: '{"gridArea":"t1", "margin":"0 0 36px 0"}',
+              style: '{"gridArea":"t1", "margin":"0 0 36px 0", "margin":"0 0 calc(36 / 371.95 * 100%) 0", "textAlign":"center", "lineHeight":"0.672vw"}',
             },
           ],
         },
