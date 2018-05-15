@@ -1,0 +1,25 @@
+#template-manager {
+  position: fixed;
+  bottom: 150px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+.template-thumbnail {
+  width: 100px;
+  height: auto;
+}
+
+.template-button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin: 15px;
+  border: solid 1px black;
+}
+

@@ -41,7 +41,7 @@ class ProductSelector extends Component {
     return (
       <div className="Modal-background">
         <div className="Modal-content">
-          <h1>Select Product</h1>
+          <h1>Choose A Product</h1>
           <RadioButtonGroup name="productSelection" onChange={this.handleChange}>
             {buttons}
           </RadioButtonGroup>
@@ -50,6 +50,7 @@ class ProductSelector extends Component {
             label="select"
             disabled={this.state.productIndex < 0}
             onClick={this.handleSubmit}
+            className="customButton"
           />
         </div>
       </div>
