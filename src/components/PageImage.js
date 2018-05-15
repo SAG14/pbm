@@ -123,8 +123,8 @@ class PageImage extends Component {
       let mouseOffset = e.pageY - this.state.startY;
       offsetY = this.state.offsetY + mouseOffset;  // calculate mouse position offset
 
-      console.log(e.pageY - this.state.startY, "mouse offset");
-      console.log(this.state.offsetY);
+      // console.log(e.pageY - this.state.startY, "mouse offset");
+      // console.log(this.state.offsetY);
       // console.log(offsetY, "offsetY");
 
       if (offsetY == this.state.offsetY) return;  // no movement, skip to reduce setState calls
@@ -135,6 +135,8 @@ class PageImage extends Component {
         }
       } else {
         if (offsetY < this.state.imageBoundaryY * -1) { // image reached bottom, set everything to boundary
+          console.log(offsetY, "offsetY");
+          console.log(this.state.imageBoundaryY * -1);
           offsetY = Math.floor(this.state.imageBoundaryY) * -1;
         }
       }
@@ -143,9 +145,9 @@ class PageImage extends Component {
     } 
     
     if (!this.state.moveVertical) { // moving horizontally
-      let offsetX = e.pageX - this.state.startX;
+      offsetX = e.pageX - this.state.startX;
 
-      console.log(offsetX, "offsetX");
+      // console.log(offsetX, "offsetX");
 
       if (offsetX == this.state.offsetX) return;  // no movement, skip to reduce setState calls
 
@@ -155,6 +157,8 @@ class PageImage extends Component {
         }
       } else {
         if (offsetX < this.state.imageBoundaryX * -1) { // image reached right, set everything to boundary
+          console.log(offsetX, "offsetX");
+          console.log(this.state.imageBoundaryX * -1);
           offsetX = Math.floor(this.state.imageBoundaryX) * -1;
         }
       }
