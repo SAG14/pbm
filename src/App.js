@@ -31,22 +31,22 @@ class App extends Component {
           <div className="App">
             <ProductSelector />
             <div>
-            {this.props.isPreview && <PreviewSidebar/>}
-            {!this.props.isPreview && <Sidebar />}
+              {this.props.isPreview && <PreviewSidebar />}
+              {!this.props.isPreview && <Sidebar />}
             </div>
             <div className="main">
-            {this.props.isPreview && <Preview/>}
+              {this.props.isPreview && <Preview />}
               <Product />
               <Filmstrip />
             </div>
           </div>
           {
-              (this.props.displayExportPDFPage) ? (
-                  <div>
-                    <SaveToPDF/>
-                  </div>
-              ) : (null)
-          }          
+            (this.props.displayExportPDFPage) ? (
+              <div>
+                <SaveToPDF />
+              </div>
+            ) : (null)
+          }
         </div>
       );
     } else {
