@@ -5,8 +5,11 @@ import {
   applyTemplate,
   addImageToFrame,
   addTextToFrame,
+  nextPage,
+  previousPage,
 } from '../actions/pageActions';
 import PageImage, { CALL_BACK_ENUMS } from './PageImage';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import '../styles/Product.css';
 
@@ -48,16 +51,25 @@ class Product extends Component {
         index={i}
         addImageToPage={this.addImageToPage}
         callbackHandler={this.callbackHandler}
+        isPreview = {this.props.isPreview}
       />
     )
   }
 
   render() {
+    let buttonNavStyle = {
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      backgroundColor: '#3E3E3E',
+      zIndex: 3,
+    };
     if (!Object.keys(this.props.product).length)
       return null;
     return (
       <div className="product-view-design">
         {this.renderProductDetail()}
+
         <div className="product-view-design-container">
           <div className="product-view-design-container-resizer">
             <div className="product-view-design-container-content">
@@ -92,6 +104,7 @@ class Spread extends Component {
         value={this.props.pages[i]}
         addImageToPage={this.props.addImageToPage}
         callbackHandler={this.callbackHandler}
+        isPreview = {this.props.isPreview}
       />
     )
   }
@@ -199,7 +212,8 @@ const mapStateToProps = state => ({
   product: state.products.product,
   pages: state.pages.pages,
   current: state.pages.current,
+  isPreview: state.preview.isPreview,
 });
 
-export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame })(Product);
+export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame, nextPage, previousPage })(Product);
 export { Page };

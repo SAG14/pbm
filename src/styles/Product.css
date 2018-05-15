@@ -59,6 +59,24 @@
   background: transparent;
 }
 
+/* .preview {
+  float: left;
+  width: calc(50% - 12px);
+  padding: 0px;
+  margin: -9px;
+}
+
+.preview-right {
+  margin-left: 0px;
+  border-left: thin black solid;
+}
+.page {
+  background-color: #FFFFFF;
+  display: grid;
+  height: 100%;
+  width: 100%;
+} */
+
 img {
   width: 100%;
   height: 100%;
@@ -69,6 +87,12 @@ img {
 
 .imageFrame {
   background: #11ADEC;
+  border: 0 none;
+  outline: none;
+}
+
+.imageFramePreview {
+  background: #FFFFFF;
   border: 0 none;
   outline: none;
 }

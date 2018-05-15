@@ -3,6 +3,8 @@ import {
     JUMP_TO_PAGE,
     ADD_IMAGE_TO_FRAME,
     ADD_TEXT_TO_FRAME,
+    NEXT_PAGE,
+    PREVIOUS_PAGE
 } from './types';
 import store from '../store';
 
@@ -19,6 +21,20 @@ export const jumpToPage = (index) => dispatch => {
     dispatch({
         type: JUMP_TO_PAGE,
         payload: index,
+    });
+}
+
+export const previousPage = () => dispatch => {
+    dispatch({
+        type: PREVIOUS_PAGE,
+        payload: null,
+    });
+}
+
+export const nextPage = () => dispatch => {
+    dispatch({
+        type: NEXT_PAGE,
+        payload: null,
     });
 }
 
