@@ -56,7 +56,6 @@ class Product extends Component {
     )
   }
 
-
   render() {
     let buttonNavStyle = {
       width: '100%',
@@ -70,24 +69,13 @@ class Product extends Component {
     return (
       <div className="product-view-design">
         {this.renderProductDetail()}
-        <div className="product-view-design-container-wrapper">
-        <table style={{borderCollapse: 'collapse'}}>
-          <tbody>
-        <tr>
-          <td style={{borderCollapse: 'collapse'}}>
-              <RaisedButton onClick={this.props.previousPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '60px'}} label="<"/>
-          </td>
-          <td>
-          <div className="product-view-design-container">
-            {this.renderSpread(this.props.current)}
+
+        <div className="product-view-design-container">
+          <div className="product-view-design-container-resizer">
+            <div className="product-view-design-container-content">
+              {this.renderSpread(this.props.current)}
+            </div>
           </div>
-          </td>
-          <td style={{borderCollapse: 'collapse'}}>
-              <RaisedButton onClick={this.props.nextPage} type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" buttonStyle={{height: '70px'}} labelStyle={{fontSize: '60px'}} label=">"/>
-          </td>
-          </tr>
-          </tbody>
-        </table>
         </div>
       </div>
     )
@@ -104,14 +92,9 @@ class Spread extends Component {
   }
 
   renderPage(i) {
-    if (i < 0) {
+    if (i < 0 || i >= this.props.pages.length) {
       return (
-        <div className="bleed transparent"></div>
-      )
-    }
-    else if (i >= this.props.pages.length) {
-      return (
-        <div className="bleed bleed-right transparent"></div>
+        <div className="page transparent"></div>
       )
     }
 
@@ -184,26 +167,14 @@ class Page extends Component {
     });
 
     const layout = {
-      "gridTemplateRows": `repeat(${this.props.value.rows - 1}, 1fr 12px) 1fr`,
-      "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, 1fr 12px) 1fr`,
+      "gridTemplateRows": `repeat(${this.props.value.rows - 1}, calc(94.5 / 414 * 100%) calc(12 / 414 * 100%)) calc(94.5 / 414 * 100%)`,
+      "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, calc(116.4 / 630 * 100%) calc(12 / 630 * 100%)) calc(116.4 / 630 * 100%)`,
       "gridTemplateAreas": this.props.value.area,
     };
-    
-    let className = 'bleed';
-    if (!this.props.isPreview) {
-      if (!(this.props.index % 2)) {
-        className += ' bleed-right';
-      }
-    } else {
-      className = 'preview';
-      if (this.props.index % 2) {
-        className += ' preview-right';
-      }
-    }
 
     return (
-      <div className={className}>
-        <div className="page" style={layout}>
+      <div className="page">
+        <div className="gridlayout" style={layout}>
           {images}
           {texts}
         </div>
