@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchTemplates } from '../actions/templateActions';
 import { applyTemplate } from '../actions/pageActions';
+import '../styles/TemplateManager.css';
 
 import store from '../store';
 
@@ -37,20 +38,24 @@ class TemplateManager extends Component {
   }
 
   render() {
+    if (!this.props.current || this.props.current == 0 || this.props.current == this.props.max) return null;
+
     const templates = this.props.templates.map((template, index) => {
       if (template.type !== "body") {
         return;
       }
       return (
-        <li key={index}>
-          <button onClick={() => this.handleClick(index)}>{index + 1}</button>
-        </li>
+          <button onClick={() => this.handleClick(index)} className="template-button">
+            <img className="template-thumbnail" src={`/template-${index+1}.png`} />
+          </button>
       )
     });
 
     return (
-      <div className="manager-container">
-        <ul>{templates}</ul>
+      <div id="template-manager">
+        <div id="template-manager-content">
+          {templates}
+        </div>
       </div>
     );
   }

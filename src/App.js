@@ -16,6 +16,7 @@ import SaveToPDF from './components/SaveToPDF';
 import { fetchProducts } from './actions/productActions';
 import Preview from './components/Preview';
 import PreviewSidebar from './components/PreviewSidebar';
+import TemplateManager from './components/TemplateManager';
 
 class App extends Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class App extends Component {
             <div className="main">
               {this.props.isPreview && <Preview />}
               <Product />
+              <TemplateManager />
               <Filmstrip />
             </div>
           </div>
