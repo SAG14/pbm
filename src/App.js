@@ -25,7 +25,7 @@ class App extends Component {
 
   render() {
     // Redirects to login page if not authenticated
-    if (1) { //this.props.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       return (
         <div>
           <div className="App">
