@@ -20,7 +20,7 @@ export const toLogin = () => dispatch => {
 }
 
 export const signIn = (credentialData) => dispatch => {
-    fetch('http://localhost:3100/api/account/login', {
+    fetch(window.location.hostname + '/api/account/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
