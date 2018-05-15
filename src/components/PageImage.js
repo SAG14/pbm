@@ -61,6 +61,7 @@ class PageImage extends Component {
       elementWidth: 0,
       elementHeight: 0,
       moveVertical: false,
+      prevMouseOffset: 0,
     }
     
     this.onMouseDown = this.onMouseDown.bind(this);
@@ -120,12 +121,7 @@ class PageImage extends Component {
     let offsetY = this.state.offsetY;
 
     if (this.state.moveVertical) {  // moving vertically
-      let mouseOffset = e.pageY - this.state.startY;
-      offsetY = this.state.offsetY + mouseOffset;  // calculate mouse position offset
-
-      // console.log(e.pageY - this.state.startY, "mouse offset");
-      // console.log(this.state.offsetY);
-      // console.log(offsetY, "offsetY");
+      offsetY = this.state.offsetY + ((this.state.prevMouseOffset - (e.pageY - this.state.startY)) * -1);
 
       if (offsetY == this.state.offsetY) return;  // no movement, skip to reduce setState calls
 
@@ -135,19 +131,16 @@ class PageImage extends Component {
         }
       } else {
         if (offsetY < this.state.imageBoundaryY * -1) { // image reached bottom, set everything to boundary
-          console.log(offsetY, "offsetY");
-          console.log(this.state.imageBoundaryY * -1);
           offsetY = Math.floor(this.state.imageBoundaryY) * -1;
         }
       }
 
-      this.setState({ offsetY: offsetY });
+      let prevMouseOffset = e.pageY - this.state.startY;
+      this.setState({ offsetY: offsetY, prevMouseOffset: prevMouseOffset });
     } 
     
     if (!this.state.moveVertical) { // moving horizontally
-      offsetX = e.pageX - this.state.startX;
-
-      // console.log(offsetX, "offsetX");
+      offsetX = this.state.offsetX + ((this.state.prevMouseOffset - (e.pageX - this.state.startX)) * -1);
 
       if (offsetX == this.state.offsetX) return;  // no movement, skip to reduce setState calls
 
@@ -157,13 +150,12 @@ class PageImage extends Component {
         }
       } else {
         if (offsetX < this.state.imageBoundaryX * -1) { // image reached right, set everything to boundary
-          console.log(offsetX, "offsetX");
-          console.log(this.state.imageBoundaryX * -1);
           offsetX = Math.floor(this.state.imageBoundaryX) * -1;
         }
       }
 
-      this.setState({ offsetX: offsetX});
+      let prevMouseOffset = e.pageX - this.state.startX;
+      this.setState({ offsetX: offsetX, prevMouseOffset: prevMouseOffset });
     }
 
     e.preventDefault();
@@ -172,6 +164,7 @@ class PageImage extends Component {
   onMouseUp(e) {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
+    this.setState({prevMouseOffset: 0});
     e.preventDefault();
   }
 
