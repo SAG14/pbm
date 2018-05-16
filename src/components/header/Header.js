@@ -34,10 +34,10 @@ class Header extends Component {
             return (
                 <div className="appHeader">
                     <div className="navbarTitle">
-                        <h1>Photobook Maker</h1>
+                        <h1>Mini-Mag Maker</h1>
                     </div>
                     <div className="navbarElement">
-                        <RaisedButton type="button" backgroundColor="#A4C639" labelColor="#FFFFFF" onClick={this.logout} label="Logout"/>
+                        <RaisedButton type="button" labelColor="#999" onClick={this.logout} label="Logout"/>
                     </div>
                     <div className="navbarElement">
                         <p className="navbarText"> Hello, {this.props.currentUser.firstName}</p>
@@ -46,16 +46,15 @@ class Header extends Component {
                         <div className="navbarOptionElement">
                             <RaisedButton 
                                 type="button" 
-                                backgroundColor="#0288D1" 
-                                labelColor="#FFFFFF" 
+                                labelColor="#999" 
                                 label="Preview"
                                 onClick={this.props.togglePreview}/>
                         </div>
                         <div className="navbarOptionElement">
-                            <RaisedButton type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" label="Order"/>
+                            <RaisedButton type="button" labelColor="#999" label="Order"/>
                         </div>
                         <div className="navbarOptionElement">
-                            <RaisedButton type="button" backgroundColor="#0288D1" labelColor="#FFFFFF" label="Export" onClick={this.toExportPage}/>
+                            <RaisedButton type="button" labelColor="#999" label="Export" onClick={this.toExportPage}/>
                         </div>
                     </div>
                 </div>
@@ -63,7 +62,7 @@ class Header extends Component {
         } else {
             return (
                 <div className="appHeader">
-                    <h1>Photobook Maker</h1>
+                    <h1>Mini-Mag Maker</h1>
                 </div>
             );
         }

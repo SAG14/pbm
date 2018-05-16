@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addImage } from '../actions/uploadActions';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import '../styles/Manager.css';
 import '../styles/UploadImage.css';
@@ -33,14 +34,36 @@ class UploadImage extends Component {
   }
 
   render() {
+    const styles = {
+      button: {
+        margin: 12,
+      },
+      exampleImageInput: {
+        cursor: 'pointer',
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        width: '100%',
+        opacity: 0,
+      },
+      uploadImage: {
+        width: '125px',
+      }
+    };
+
     return (
-      <div id="upload-image" className="manager-bottom">
-        <input 
-          type="file"
-          accept="image/jpeg"
-          alt="Upload"
-          onChange={this.fileChangedHandler} 
-          multiple/>
+      <div id="upload-image" style={styles.uploadImage}>
+        <RaisedButton type="submit" primary={true} label="Add Photos" labelPosition="before">
+          <input 
+            style={styles.exampleImageInput}
+            type="file"
+            accept="image/jpeg"
+            alt="Upload"
+            onChange={this.fileChangedHandler} 
+            multiple/>
+        </RaisedButton>
       </div>
     )
   }

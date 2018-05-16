@@ -28,7 +28,7 @@ class App extends Component {
     // Redirects to login page if not authenticated
     if (this.props.isAuthenticated) {
       return (
-        <div>
+        <div className="Container">
           <div className="App">
             <ProductSelector />
             <div>
