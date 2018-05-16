@@ -15,6 +15,7 @@ export const NEXT_PAGE = 'NEXT_PAGE';
 export const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
 export const SEND_ORDER = "SEND_ORDER";
 export const ADD_TEXT_TO_FRAME = 'ADD_TEXT_TO_FRAME';
+export const SET_HAS_APPLIED_COVERS = 'SET_HAS_APPLIED_COVERS';
 // Navigation variables
 export const REDIRECT_TO_LOGIN = "REDIRECT_TO_LOGIN";
 export const REDIRECT_TO_REGISTRATION = "REDIRECT_TO_REGISTRATION";

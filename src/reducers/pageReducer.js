@@ -6,11 +6,13 @@ import {
   ADD_TEXT_TO_FRAME,
   NEXT_PAGE,
   PREVIOUS_PAGE,
+  SET_HAS_APPLIED_COVERS,
 } from '../actions/types';
 
 const initialState = {
   current : null,
   pages : [],
+  hasAppliedCovers: false,
 };
 
 export default function(state = initialState, action) {
@@ -92,12 +94,6 @@ export default function(state = initialState, action) {
           });
         }),
       });
-      // let newPages = Object.assign({}, state);
-      // newPages.pages[state.current].images[action.payload.id].source = action.payload.source;
-      // return {
-      //   ...state,
-      //   newPages
-      // };
     }
     case ADD_TEXT_TO_FRAME: {
       return Object.assign({}, state, {
@@ -117,6 +113,12 @@ export default function(state = initialState, action) {
           });
         }),
       });
+    }
+    case SET_HAS_APPLIED_COVERS: {
+      return {
+        ...state,
+        hasAppliedCovers: true,
+      }
     }
     default:
       return state;
