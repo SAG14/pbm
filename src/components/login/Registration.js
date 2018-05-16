@@ -67,9 +67,9 @@ class Registration extends Component {
           }
         }
         return (
-            <div className="outerContainer">
-                <div className="loginContainer">
+            <div className="outerRegisterContainer">
                     <a className="loginBack" onClick={this.backToLogin}>&lt; Back</a>
+                <div className="registerContainer">
                     <h1>Sign Up</h1>
                     <form onSubmit={this.onSubmit}>
                         <TextField
