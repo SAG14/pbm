@@ -5,6 +5,8 @@ const config = require('../../../server-config');
 
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
+var os = require('os');
+var hostname = os.hostname();
 
 module.exports = (app) => {
     app.post('/api/account/signup', (req, res, next) => {
@@ -144,7 +146,7 @@ module.exports = (app) => {
                         }
                     });
 
-                    const url = `http://localhost:3100/confirmation/${emailToken.token}`;
+                    const url = `${hostname}/confirmation/${emailToken.token}`;
 
                     var mailOptions = { 
                         from: config.emailUsername, 

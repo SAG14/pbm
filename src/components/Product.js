@@ -9,7 +9,6 @@ import {
   previousPage,
 } from '../actions/pageActions';
 import PageImage, { CALL_BACK_ENUMS } from './PageImage';
-import RaisedButton from 'material-ui/RaisedButton';
 
 import '../styles/Product.css';
 
@@ -26,6 +25,8 @@ class Product extends Component {
         break;
       case VIEW_CALL_BACK_ENUMS.ADD_IMAGE_TO_FRAME:
         this.props.addImageToFrame(data.id, data.value, data.index);
+        break;
+      default:
         break;
     }
   }

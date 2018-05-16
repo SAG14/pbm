@@ -7,7 +7,6 @@ import { Redirect } from 'react-router';
 import Sidebar from './components/Sidebar';
 import ProductSelector from './components/ProductSelector';
 import Filmstrip from './components/Filmstrip';
-import UploadImage from './components/UploadImage';
 import Product from './components/Product';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
