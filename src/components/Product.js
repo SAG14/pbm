@@ -205,7 +205,6 @@ class Text extends Component {
   render() {
     const style = JSON.parse(this.props.value.style);
     let textClass = 'textFrame';
-    console.log(this.props);
     if (this.props.isPreview)
       textClass = 'previewTextFrame';
     return (
