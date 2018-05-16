@@ -36,9 +36,9 @@ class App extends Component {
             </div>
             <div className="main">
               {this.props.isPreview && <Preview />}
-              <Product />
-              <TemplateManager />
-              <Filmstrip />
+              {!this.props.isPreview && <Product />}
+              {!this.props.isPreview && <TemplateManager />}
+              {!this.props.isPreview && <Filmstrip />}
             </div>
           </div>
           {

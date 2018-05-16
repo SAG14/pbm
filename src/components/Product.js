@@ -70,7 +70,6 @@ class Product extends Component {
     return (
       <div className="product-view-design">
         {this.renderProductDetail()}
-
         <div className="product-view-design-container">
           <div className="product-view-design-container-resizer">
             <div className="product-view-design-container-content">
@@ -150,6 +149,7 @@ class Page extends Component {
         key={this.props.value.texts[i].id}
         value={this.props.value.texts[i]}
         callbackHandler={this.callbackHandler}
+        isPreview = {this.props.isPreview}
       />
     )
   }
@@ -173,12 +173,19 @@ class Page extends Component {
       "gridTemplateAreas": this.props.value.area,
     };
 
+    let pageClass = 'page';
+    if (this.props.isPreview){
+      pageClass = 'previewPage';
+    }
+
     return (
-      <div className="page">
-        <div className="gridlayout" style={layout}>
+      <div className={pageClass}>
+        {this.props.isPreview && <div className='bleed-hider'></div>}
+        <div className='gridlayout' style={layout}>
           {images}
           {texts}
         </div>
+        {this.props.isPreview && <div className='page-break'></div>}
       </div>
     )
   }
@@ -197,12 +204,16 @@ class Text extends Component {
 
   render() {
     const style = JSON.parse(this.props.value.style);
-
+    let textClass = 'textFrame';
+    console.log(this.props);
+    if (this.props.isPreview)
+      textClass = 'previewTextFrame';
     return (
-      <div className="textFrame"
+      <div className={textClass}
         style={style}
         onBlur={(e) => this.inputChangeHandler(e)}
-        contentEditable="true">
+        contentEditable="true"
+        suppressContentEditableWarning="true">
         {this.props.value.value}
       </div>
     )
@@ -217,4 +228,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame, nextPage, previousPage })(Product);
-export { Page };
+export { Page, Spread };

@@ -2,31 +2,41 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Product from './Product';
+import { Page, Spread } from './Product';
 import RaisedButton from 'material-ui/RaisedButton';
 import { previousPage, nextPage } from '../actions/pageActions';
+
+import '../styles/Preview.css';
+
 class Preview extends Component {
 
-    render(){
-        let style = {
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
-            backgroundColor: '#3E3E3E',
-            zIndex: 3,
-        };
+
+    render() {
+        const previewPages = this.props.pages.map((page, index) => {
+            return (
+                <Page
+                    key={index}
+                    value={this.props.pages[index]}
+                    isPreview={this.props.isPreview}
+                />
+            );
+        });
+
         return (
-            <div style={style}>
-                <Product />
+            <div className="preview">
+                {/* <div className='preview-container'> */}
+                {previewPages}
+                {/* </div> */}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    preview: state.preview.isPreview,
+    isPreview: state.preview.isPreview,
     current: state.pages.current,
     pages: state.pages.pages,
 
 });
 
-export default connect(mapStateToProps, {previousPage, nextPage})(Preview);
+export default connect(mapStateToProps, { previousPage, nextPage })(Preview);
