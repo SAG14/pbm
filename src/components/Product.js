@@ -171,10 +171,16 @@ class Page extends Component {
       "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, calc(116.4 / 630 * 100%) calc(12 / 630 * 100%)) calc(116.4 / 630 * 100%)`,
       "gridTemplateAreas": this.props.value.area,
     };
-
+    let gridLayoutClass = 'gridlayout';
+    let pageClass = 'page';
+    if (this.props.isPreview){
+      gridLayoutClass = 'previewGridLayout';
+      pageClass = 'previewPage';
+    }
+    
     return (
-      <div className="page">
-        <div className="gridlayout" style={layout}>
+      <div className={pageClass}>
+        <div className={gridLayoutClass} style={layout}>
           {images}
           {texts}
         </div>
@@ -216,4 +222,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { selectProduct, applyTemplate, addImageToFrame, addTextToFrame, nextPage, previousPage })(Product);
-export { Page };
+export { Page, Spread };
