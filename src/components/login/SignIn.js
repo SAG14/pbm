@@ -70,6 +70,11 @@ class SignIn extends Component {
                                     value={this.state.signInPassword}
                                     onChange={this.onChange}
                                 /><br/>
+                                {
+                                    (this.props.signInError) ? (
+                                        <div className="errorText">{this.props.signInError}</div>
+                                    ) : (null)
+                                }
                                 <div className="button">
                                     <RaisedButton type="submit" primary={true} label="Sign In"/>
                                 </div>
@@ -78,11 +83,6 @@ class SignIn extends Component {
                         <div className="Register">
                             Don't have an account? <Link to="/registration" onClick={this.props.toRegistration}>Sign Up</Link>
                         </div>
-                        {
-                            (this.props.signInError) ? (
-                                <div className="errorText">{this.props.signInError}</div>
-                            ) : (null)
-                        }
                     </div>
                 </div>
             );

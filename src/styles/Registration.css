@@ -3,15 +3,29 @@
     padding-top: 5px;
     margin-right: 10px;
     margin-top: 20px;
-    float: right;
+}
+
+.loginBack {
+  cursor: pointer;
+  text-decoration: underline;
+  float: left;
+  margin-top: -25px;
+  margin-left: -25px;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .errorText {
     color: #F44336;
     padding-top: 5px;
     padding-bottom: 15px;
+    position: fixed;
 }
 
 .buttonsContainer {
     padding-bottom: 10px;
 }
+
+.outerContainer {
+  height: 425px;
+}
+
