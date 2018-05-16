@@ -5,7 +5,7 @@ import { findDOMNode } from 'react-dom';
 import { DropTarget } from 'react-dnd';
 // import fireworks from '../images/fireworks.jpg';
 // import humananddog from '../images/humananddog.jpg';
-// import { addImageToFrame } from '../actions/pageActions';
+import { updateImagePosition } from '../actions/pageActions';
 import '../styles/PageImage.css';
 
 
@@ -70,6 +70,8 @@ class PageImage extends Component {
   }
 
   onMouseDown(e) {
+    if(!this.props.value.source) return;
+
     let i = new Image();
     i.src = this.props.value.source;
 
@@ -164,8 +166,16 @@ class PageImage extends Component {
   onMouseUp(e) {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
+    this.props.updateImagePosition(this.props.value.id, this.state.offsetX, this.state.offsetY, this.props.index);
     this.setState({prevMouseOffset: 0});
     e.preventDefault();
+  }
+
+  componentWillReceiveProps() {
+    if (this.props.value.offset) {
+      // console.log(this.props.value.offset,"offset");
+      this.setState({ offsetX: this.props.value.offset.offsetX, offsetY: this.props.value.offset.offsetY });
+    }
   }
 
   render() {
@@ -174,9 +184,10 @@ class PageImage extends Component {
     
     let imageStyle = {
       backgroundImage: "url(" + this.props.value.source + ")",
+      backgroundPositionX: this.state.offsetX + "px",
       backgroundPositionY: this.state.offsetY + "px",
-      backgroundPositionX: this.state.offsetX + "px"
     }
+
     let imageClass = 'imageFrame';
     if (this.props.isPreview)
       imageClass = 'imageFramePreview';
@@ -190,16 +201,19 @@ class PageImage extends Component {
 }
 
 PageImage.propTypes = {
+  updateImagePosition: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
     pages: state.pages.pages,
     isPreview: state.preview.isPreview,
+    updateImagePosition: state.pages.updateImagePosition,
+    current: state.pages.current
   };
 }
 
-PageImage = connect(mapStateToProps, {})(PageImage);
+PageImage = connect(mapStateToProps, {updateImagePosition})(PageImage);
 PageImage = DropTarget(Types.IMAGE, imageTarget, collect)(PageImage);
 
 export default PageImage;

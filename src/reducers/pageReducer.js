@@ -6,6 +6,7 @@ import {
   ADD_TEXT_TO_FRAME,
   NEXT_PAGE,
   PREVIOUS_PAGE,
+  UPDATE_IMAGE_POSITION
 } from '../actions/types';
 
 const initialState = {
@@ -75,6 +76,7 @@ export default function(state = initialState, action) {
       };
     }
     case ADD_IMAGE_TO_FRAME: {
+      console.log("add image");
       return Object.assign({}, state, {
         pages : state.pages.map((page, index) => {
           if (index !== action.index) {
@@ -98,6 +100,28 @@ export default function(state = initialState, action) {
       //   ...state,
       //   newPages
       // };
+    }
+    case UPDATE_IMAGE_POSITION: {
+      console.log(action.id, action.index, action.payload);
+
+      return Object.assign({}, state, {        
+        pages : state.pages.map((page, index) => {
+          if (index !== action.index) {
+            return page;
+          }
+          return Object.assign({}, page, {
+            images : page.images.map((image) => {
+              if (image.id !== action.id) {
+                return image;
+              }
+
+              return Object.assign({}, image, {
+                offset: action.payload
+              });
+            }),
+          });
+        }),
+      })
     }
     case ADD_TEXT_TO_FRAME: {
       return Object.assign({}, state, {

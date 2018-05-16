@@ -136,6 +136,7 @@ class Page extends Component {
   renderImage(i) {
     return (
       <PageImage
+        index={this.props.index}
         key={this.props.value.images[i].id}
         value={this.props.value.images[i]}
         callbackHandler={this.callbackHandler}
