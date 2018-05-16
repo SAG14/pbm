@@ -1,23 +1,23 @@
 .manager-container {
-  border-right: inset 1px black;
   height: 100%;
   width: 20%;
   position: fixed;
   z-index: -1;
-  /* top: 0;
-  left: 0; */
+  box-shadow: 0px 5px 28px -8px rgba(0,0,0,0.50);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .manager-top {
-  height: calc(100% - 200px);
+  height: calc(100% - 125px);
   overflow-x: scroll;
   overflow-x: hidden;
-
+  margin-bottom: 10px;
 }
 
 .manager-bottom {
-  border-top: 1px black solid;
-  border-right: 1px black solid;
-  height: 200px;
-  width: 100%;
+  position: relative;
+  bottom: 0;
+  margin-left: auto;
 }

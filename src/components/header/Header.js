@@ -34,7 +34,7 @@ class Header extends Component {
             return (
                 <div className="appHeader">
                     <div className="navbarTitle">
-                        <h1>Photobook Maker</h1>
+                        <h1>Mini-Mag Maker</h1>
                     </div>
                     <div className="navbarElement">
                         <RaisedButton type="button" backgroundColor="#A4C639" labelColor="#FFFFFF" onClick={this.logout} label="Logout"/>
@@ -63,7 +63,7 @@ class Header extends Component {
         } else {
             return (
                 <div className="appHeader">
-                    <h1>Photobook Maker</h1>
+                    <h1>Mini-Mag Maker</h1>
                 </div>
             );
         }

@@ -52,6 +52,7 @@ class SignIn extends Component {
             return (
                 <div className="outerContainer">
                     <div className="loginContainer">
+                        <img src="/minimagmaker-logo.png" id="logo-login" />
                         <h1>Sign In</h1>
                         <form onSubmit={this.onSubmit}>
                             <div>
@@ -74,12 +75,9 @@ class SignIn extends Component {
                                 </div>
                             </div>
                         </form>
-                        <div>
-                            <Link to="/registration" onClick={this.props.toRegistration}>Register</Link>
+                        <div className="Register">
+                            Don't have an account? <Link to="/registration" onClick={this.props.toRegistration}>Sign Up</Link>
                         </div>
-                        <br/>
-                        <br/>
-                        <br/>
                         {
                             (this.props.signInError) ? (
                                 <div className="errorText">{this.props.signInError}</div>

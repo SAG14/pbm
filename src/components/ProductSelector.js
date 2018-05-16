@@ -42,9 +42,11 @@ class ProductSelector extends Component {
       <div className="Modal-background">
         <div className="Modal-content">
           <h1>Choose A Product</h1>
-          <RadioButtonGroup name="productSelection" onChange={this.handleChange}>
-            {buttons}
-          </RadioButtonGroup>
+          <div className="product-selector-radio">
+            <RadioButtonGroup name="productSelection" onChange={this.handleChange}>
+              {buttons}
+            </RadioButtonGroup>
+          </div>
           <RaisedButton
             primary={true}
             label="select"

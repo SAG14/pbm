@@ -5,3 +5,9 @@ RaisedButton {
 .customButton {
   margin-top: 20px;
 }
+
+.product-selector-radio {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+}

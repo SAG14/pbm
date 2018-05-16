@@ -33,11 +33,11 @@ class Product extends Component {
   renderProductDetail() {
     return (
       <div className="product-detail">
-        <div>{this.props.product.type}</div>
+        {/* <div>{this.props.product.type}</div>
         <div>{this.props.product.size}</div>
         <div>{this.props.product.pageNumber} pages</div>
         <div>{this.props.product.price}</div>
-        <div>{this.props.product.priceUnit}</div>
+        <div>{this.props.product.priceUnit}</div> */}
       </div>
     )
   }
