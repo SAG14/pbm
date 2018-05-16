@@ -41,7 +41,7 @@ class ProductSelector extends Component {
     return (
       <div className="Modal-background">
         <div className="Modal-content">
-          <h1>Choose A Product</h1>
+          <h1>Pick A Book</h1>
           <div className="product-selector-radio">
             <RadioButtonGroup name="productSelection" onChange={this.handleChange}>
               {buttons}
