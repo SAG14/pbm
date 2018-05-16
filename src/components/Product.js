@@ -69,7 +69,6 @@ class Product extends Component {
     return (
       <div className="product-view-design">
         {this.renderProductDetail()}
-
         <div className="product-view-design-container">
           <div className="product-view-design-container-resizer">
             <div className="product-view-design-container-content">
@@ -212,7 +211,8 @@ class Text extends Component {
       <div className={textClass}
         style={style}
         onBlur={(e) => this.inputChangeHandler(e)}
-        contentEditable="true">
+        contentEditable="true"
+        suppressContentEditableWarning="true">
         {this.props.value.value}
       </div>
     )

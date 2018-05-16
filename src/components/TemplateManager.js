@@ -59,7 +59,7 @@ class TemplateManager extends Component {
         return;
       }
       return (
-        <button onClick={() => this.handleClick(index)} className="template-button">
+        <button key={index} onClick={() => this.handleClick(index)} className="template-button">
           <img className="template-thumbnail" src={`/template-${index + 1}.png`} />
         </button>
       )
