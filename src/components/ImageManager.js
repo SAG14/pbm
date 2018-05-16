@@ -22,7 +22,6 @@ class ImageManager extends Component {
     return (
       <div id="image-manager"  className="manager-container">
         <div className="manager-top">
-          <h1 className="title">ImageManager</h1>
           {
             processImages
           }   
