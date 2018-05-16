@@ -20,7 +20,7 @@ class Filmstrip extends Component {
         pageIndex = "BACK";
       }
       else if (index % 2 === 1) {
-        return;
+        return null;
       }
       
       const spreadIndex = Math.floor((index + 1) / 2);
