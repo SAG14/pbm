@@ -61,8 +61,8 @@ class Registration extends Component {
     
     render() {
         return (
-            <div className="outerContainer">
-                <div className="loginContainer">
+            <div className="outerRegisterContainer">
+                <div className="registerContainer">
                     <h1>Sign Up</h1>
                     <form onSubmit={this.onSubmit}>
                         <TextField
@@ -108,7 +108,7 @@ class Registration extends Component {
                             onChange={this.onChange}
                         /><br/>
                         <div className="buttonsContainer">
-                            <div className="button">
+                            <div className="registerButton">
                                 <RaisedButton type="submit" primary={true} label="Sign up" />
                             </div>
                             <div className="secondButton">

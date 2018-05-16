@@ -1,16 +1,14 @@
-
 .loginContainer {
     width: 256px;
     height: 256px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
-
 }
 
 .outerContainer {
     width: 300px;
-    height: 350px;
+    height: 375px;
     margin: auto;
     margin-top: 15vh;
     border-radius: 15px;
@@ -50,6 +48,8 @@
     color: #F44336;
     padding-top: 5px;
     padding-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
 }
 
 form {
