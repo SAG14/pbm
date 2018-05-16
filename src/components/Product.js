@@ -180,7 +180,6 @@ class Page extends Component {
 
     return (
       <div className={pageClass}>
-        {this.props.isPreview && <div className='bleed-hider'></div>}
         <div className='gridlayout' style={layout}>
           {images}
           {texts}
@@ -205,7 +204,6 @@ class Text extends Component {
   render() {
     const style = JSON.parse(this.props.value.style);
     let textClass = 'textFrame';
-    console.log(this.props);
     if (this.props.isPreview)
       textClass = 'previewTextFrame';
     return (
