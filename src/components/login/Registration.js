@@ -10,6 +10,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import '../../styles/Registration.css';
 
+
 class Registration extends Component {
     constructor(props) {
         super(props);
@@ -60,9 +61,15 @@ class Registration extends Component {
     }
     
     render() {
+        let styles = {
+          button: {
+            marginTop: '30px'
+          }
+        }
         return (
-            <div className="outerContainer">
-                <div className="loginContainer">
+            <div className="outerRegisterContainer">
+                    <a className="loginBack" onClick={this.backToLogin}>&lt; Back</a>
+                <div className="registerContainer">
                     <h1>Sign Up</h1>
                     <form onSubmit={this.onSubmit}>
                         <TextField
@@ -107,12 +114,14 @@ class Registration extends Component {
                             value={this.state.signUpStudentNo}
                             onChange={this.onChange}
                         /><br/>
+                        {
+                            (this.props.signUpError) ? (
+                                <div className={this.props.isRegistered ? '' : 'errorText'}> {this.props.signUpError} </div>
+                            ) : (null)
+                        }
                         <div className="buttonsContainer">
-                            <div className="button">
+                            <div className="button" style={styles.button}>
                                 <RaisedButton type="submit" primary={true} label="Sign up" />
-                            </div>
-                            <div className="secondButton">
-                                <RaisedButton type="button" backgroundColor="#a4c639" labelColor="#FFFFFF" label="Back" onClick={this.backToLogin}/>
                             </div>
                         </div>
                     </form>
@@ -124,11 +133,6 @@ class Registration extends Component {
                             <div className="errorText">{this.props.signUpError}</div>
                         ) : (null)
                     } */}
-                    {
-                        (this.props.signUpError) ? (
-                            <div className={this.props.isRegistered ? '' : 'errorText'}> {this.props.signUpError} </div>
-                        ) : (null)
-                    }
                 </div>
             </div>
         );
