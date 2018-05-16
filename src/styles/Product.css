@@ -45,11 +45,15 @@
 }
 .previewPage {
   background-color: #FFFFFF;
-  height: calc((414 - 18) / 414 * 100%);
-  width: calc((630 - 18) / 630 * 50%);
+  /* height: calc((414 - 18) / 414 * 100%);
+  width: calc((630 - 18) / 630 * 100%); */
+  height: 414px;
+  width: 630px;
   border: 0 none;
   float: none;
+  /* margin: calc(9 / 630 * 100%); */
   margin: auto;
+  position: relative;
 }
 .gridlayout {
   background: transparent;
@@ -64,11 +68,9 @@
 
 .previewGridLayout {
   background: transparent;
-  /*
   border-style: solid;
-  border-color: green;
-  border-width: 30px;
-  */
+  border-color: red;
+  border-width: 0px;
   width: calc((612 - -18) / 612 * 100% - 2px);
   height: calc((396 - -18) / 396 * 100% - 2px);
   margin: calc(-9 / 612 * 100%);
@@ -79,15 +81,21 @@
 }
 .bleed-hider {
   background: transparent;
-  border: thin yellow solid;
-  height: calc( 414 / 1260 * 100%);
+  border: 8.52px #3E3E3E solid;
+  width: 633px;
+  height: 400px;
+  position: absolute;
+  margin-left: -9.7px;
+  z-index: 3;
 }
-.preview-container {
-  margin: auto;
-  height: 100%;
-  width: calc(100% - 300px);
-  border: thick blue dashed;
+
+.page-break{
+  height: 30px;
+  width: 630px;
+  position: absolute;
+  margin-bottom: 10px;
 }
+
 .transparent {
   border-color: transparent;
   background: transparent;
@@ -150,6 +158,28 @@ img {
   outline: none;
   border: 0 none;
   overflow: hidden;
+}
+
+.previewTextFrame {
+  /* line-height: 11pt; */
+  /* font-size: 8pt; */
+  line-height: 0.77vw;
+  font-size: 0.56vw;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300; /* light */
+  white-space: pre-wrap;
+  hyphens: none;
+
+  /* display: flex;
+  align-items: center;
+  justify-content: flex-start; */
+  
+
+  background: transparent;
+  outline: none;
+  border: 0 none;
+  overflow: hidden;
+
 }
 
 .product-detail div {

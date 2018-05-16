@@ -149,6 +149,7 @@ class Page extends Component {
         key={this.props.value.texts[i].id}
         value={this.props.value.texts[i]}
         callbackHandler={this.callbackHandler}
+        isPreview = {this.props.isPreview}
       />
     )
   }
@@ -171,19 +172,20 @@ class Page extends Component {
       "gridTemplateColumns": `repeat(${this.props.value.columns - 1}, calc(116.4 / 630 * 100%) calc(12 / 630 * 100%)) calc(116.4 / 630 * 100%)`,
       "gridTemplateAreas": this.props.value.area,
     };
-    let gridLayoutClass = 'gridlayout';
+
     let pageClass = 'page';
     if (this.props.isPreview){
-      gridLayoutClass = 'previewGridLayout';
       pageClass = 'previewPage';
     }
-    
+
     return (
       <div className={pageClass}>
-        <div className={gridLayoutClass} style={layout}>
+        {this.props.isPreview && <div className='bleed-hider'></div>}
+        <div className='gridlayout' style={layout}>
           {images}
           {texts}
         </div>
+        {this.props.isPreview && <div className='page-break'></div>}
       </div>
     )
   }
@@ -202,9 +204,12 @@ class Text extends Component {
 
   render() {
     const style = JSON.parse(this.props.value.style);
-
+    let textClass = 'textFrame';
+    console.log(this.props);
+    if (this.props.isPreview)
+      textClass = 'previewTextFrame';
     return (
-      <div className="textFrame"
+      <div className={textClass}
         style={style}
         onBlur={(e) => this.inputChangeHandler(e)}
         contentEditable="true">
