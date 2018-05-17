@@ -173,7 +173,6 @@ class PageImage extends Component {
 
   componentWillReceiveProps() {
     if (this.props.value.offset) {
-      // console.log(this.props.value.offset,"offset");
       this.setState({ offsetX: this.props.value.offset.offsetX, offsetY: this.props.value.offset.offsetY });
     }
   }

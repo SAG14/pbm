@@ -76,7 +76,6 @@ export default function(state = initialState, action) {
       };
     }
     case ADD_IMAGE_TO_FRAME: {
-      console.log("add image");
       return Object.assign({}, state, {
         pages : state.pages.map((page, index) => {
           if (index !== action.index) {
@@ -102,8 +101,6 @@ export default function(state = initialState, action) {
       // };
     }
     case UPDATE_IMAGE_POSITION: {
-      console.log(action.id, action.index, action.payload);
-
       return Object.assign({}, state, {        
         pages : state.pages.map((page, index) => {
           if (index !== action.index) {
