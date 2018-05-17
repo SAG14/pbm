@@ -21,6 +21,7 @@ export const fetchTemplates = () => dispatch => {
               id: "i0",
               source: null,
               style: '{"gridArea":"i0", "margin":"calc(36 / 372 *100%) 0 calc(36 / 372 *100%) calc(36 / 372 * 100%)"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
           ],
           texts: [
@@ -46,6 +47,7 @@ export const fetchTemplates = () => dispatch => {
               id: "i1",
               source: null,
               style: '{"gridArea":"i1", "margin":"calc(36 / 500 * 100%) calc(36 / 500 * 100%) 0 0"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
           ],
           texts: [
@@ -77,6 +79,7 @@ export const fetchTemplates = () => dispatch => {
               id: "i0",
               source: null,
               style: '{"gridArea":"i0", "margin":"0"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
           ],
           texts: [
@@ -107,6 +110,7 @@ export const fetchTemplates = () => dispatch => {
               id: "i1",
               source: null,
               style: '{"gridArea":"i1", "margin":"calc(36 / 627.9 * 100%)"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
           ],
           texts: [],
@@ -132,6 +136,7 @@ export const fetchTemplates = () => dispatch => {
               id: "i0",
               source: null,
               style: '{"gridArea":"i0", "margin":"0"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
           ],
           texts: [],
@@ -151,6 +156,7 @@ export const fetchTemplates = () => dispatch => {
               id: "i1",
               source: null,
               style: '{"gridArea":"i1", "margin":"calc(36 / 371.95 * 100%) 0"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
           ],
           texts: [
@@ -187,6 +193,7 @@ export const fetchTemplates = () => dispatch => {
               id: "i0",
               source: null,
               style: '{"gridArea":"i0", "margin":"calc(36 / 627.9 * 100%)"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
           ],
           texts: [],
@@ -206,6 +213,7 @@ export const fetchTemplates = () => dispatch => {
               id: "i1",
               source: null,
               style: '{"gridArea":"i1", "margin":"calc(36 / 627.9 * 100%)"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
           ],
           texts: [],
@@ -231,6 +239,7 @@ export const fetchTemplates = () => dispatch => {
               id: "i0",
               source: null,
               style: '{"gridArea":"i0", "margin":"calc(36 / 371.95 * 100%) calc(18 / 371.95 * 100%)"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
           ],
           texts: [
@@ -256,11 +265,13 @@ export const fetchTemplates = () => dispatch => {
               id: "i1",
               source: null,
               style: '{"gridArea":"i1", "margin":"0 calc(-41.769 / 139.92 * 100%)"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
             {
               id: "i2",
               source: null,
               style: '{"gridArea":"i2", "margin":"0 calc(-41.769 / 139.92 * 100%)"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
           ],
           texts: [
@@ -297,6 +308,7 @@ export const fetchTemplates = () => dispatch => {
               id: "i0",
               source: null,
               style: '{"gridArea":"i0", "margin":"0"}',
+              offset: {offsetX: 0, offsetY: 0}
             },
           ],
           texts: [

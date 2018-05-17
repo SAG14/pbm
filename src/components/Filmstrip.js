@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { jumpToPage } from '../actions/pageActions';
+import { updateImagePosition } from '../actions/pageActions';
 
 import '../styles/Filmstrip.css';
 
 class Filmstrip extends Component {
-
   handleClick(i) {
     this.props.jumpToPage(i);
   }
@@ -49,6 +49,7 @@ class Filmstrip extends Component {
 const mapStateToProps = state => ({
   pages: state.pages.pages,
   current: state.pages.current,
+  updateImagePosition: state.pages.updateImagePosition,
 });
 
-export default connect(mapStateToProps, { jumpToPage })(Filmstrip);
+export default connect(mapStateToProps, { jumpToPage, updateImagePosition })(Filmstrip);

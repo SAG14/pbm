@@ -6,6 +6,7 @@ import {
   ADD_TEXT_TO_FRAME,
   NEXT_PAGE,
   PREVIOUS_PAGE,
+  UPDATE_IMAGE_POSITION,
   SET_HAS_APPLIED_COVERS,
 } from '../actions/types';
 
@@ -89,11 +90,32 @@ export default function(state = initialState, action) {
               }
               return Object.assign({}, image, {
                 source : action.payload,
+                offset: {offsetX: 0, offsetY: 0}
               });
             }),
           });
         }),
       });
+    }
+    case UPDATE_IMAGE_POSITION: {
+      return Object.assign({}, state, {        
+        pages : state.pages.map((page, index) => {
+          if (index !== action.index) {
+            return page;
+          }
+          return Object.assign({}, page, {
+            images : page.images.map((image) => {
+              if (image.id !== action.id) {
+                return image;
+              }
+
+              return Object.assign({}, image, {
+                offset: action.payload
+              });
+            }),
+          });
+        }),
+      })
     }
     case ADD_TEXT_TO_FRAME: {
       return Object.assign({}, state, {
