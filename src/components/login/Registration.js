@@ -6,9 +6,12 @@ import {
     register,
     toLogin,
 } from '../../actions/userActions';
+import { openTOSModal } from '../../actions/termsOfServiceActions';
+import TermsOfService from '../../components/login/TermsOfService';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import '../../styles/Registration.css';
+import { Link } from 'react-router-dom';
 
 
 class Registration extends Component {
@@ -114,6 +117,12 @@ class Registration extends Component {
                             value={this.state.signUpStudentNo}
                             onChange={this.onChange}
                         /><br/>
+                        <div>
+                            By clicking on the Sign Up button you are agreeing to the <Link to='#' onClick={this.props.openTOSModal}>Terms of Service</Link>.
+                        </div>
+                        {
+                            (this.props.termsOfServiceIsOpen) ? (<TermsOfService/>) : (null)
+                        }
                         {
                             (this.props.signUpError) ? (
                                 <div className={this.props.isRegistered ? '' : 'errorText'}> {this.props.signUpError} </div>
@@ -128,11 +137,6 @@ class Registration extends Component {
                     <br/>
                     <br/>
                     <br/>
-                    {/* {
-                        (this.props.signUpError && !this.props.isRegistered) ? (
-                            <div className="errorText">{this.props.signUpError}</div>
-                        ) : (null)
-                    } */}
                 </div>
             </div>
         );
@@ -142,13 +146,16 @@ class Registration extends Component {
 Registration.propTypes = {
     register: PropTypes.func.isRequired,
     toLogin: PropTypes.func.isRequired,
+    openTOSModal: PropTypes.func.isRequired,
     isRegistered: PropTypes.bool,
     signUpError: PropTypes.string,
+    termsOfServiceIsOpen: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
     isRegistered: state.user.isRegistered,
     signUpError: state.user.signUpError,
+    termsOfServiceIsOpen: state.termsOfService.termsOfServiceIsOpen,
 });
 
-export default connect(mapStateToProps, { register, toLogin })(Registration);
+export default connect(mapStateToProps, { register, toLogin, openTOSModal })(Registration);

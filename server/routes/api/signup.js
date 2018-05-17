@@ -5,8 +5,14 @@ const config = require('../../../server-config');
 
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
-var os = require('os');
-var hostname = os.hostname();
+
+let path;
+
+if (config.isDev) {
+    path = config.frontend_path_dev;
+} else {
+    path = config.frontend_path;
+}
 
 module.exports = (app) => {
     app.post('/api/account/signup', (req, res, next) => {
@@ -146,14 +152,14 @@ module.exports = (app) => {
                         }
                     });
 
-                    const url = `${hostname}/confirmation/${emailToken.token}`;
+                    const url = `http://${req.headers.host}/confirmation/${emailToken.token}`;
 
                     var mailOptions = { 
                         from: config.emailUsername, 
                         to: user.email,
-                        subject: 'Account Verification Token',
+                        subject: 'Confirm Registration',
                         //text: 'Hello,\n\n Thank you for signing up an account for the PhotoBook Maker. Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + emailToken.token + '.\n'
-                        html: `Please click this link to confirm your email: ${url}`
+                        html: `Thank you for registering to use the <b>Mini Mag Maker.</b> <br><br> Please click the link below to confirm your registration. <br><br> If you are not directed back to the application within 5 seconds, please return to the login portal at xxx to begin your project. <br><br> <a href="${url}">${url}</a> <br><br> Have fun! <br><br> - BCITSA Publications`
                     };
 
                     transporter.sendMail(mailOptions, function (err) {
@@ -177,69 +183,59 @@ module.exports = (app) => {
     app.get('/confirmation/:token', (req, res, next) => {
 
         if (!req.params.token) {
-            return res.status(400).send({
-                success: false,
-                message: 'Error: Token cannot is empty.'
-            });
+            return res.status(400).send(
+                `<p>Token cannot be empty.</p>`
+            );
         }
 
         EmailVerification.findOne({
             token: req.params.token
         }, function(err, token) {
             if (err) {
-                return res.send({
-                    success: false,
-                    message: 'Error: Server error'
-                });
+                return res.send(
+                    `<p>Error: Server error. ${err.message}</p>`
+                );
             }
 
             if (!token) {
-                return res.status(400).send({
-                    success: false,
-                    message: 'Unable to find valid token, your token may have expired.'
-                });
+                return res.status(400).send(
+                    `<p>Unable to find a valid token, your token may have expired.</p>`
+                );
             }
 
             User.findOne({
                 _id: token._userId
             }, function(err, user) {
                 if (err) {
-                    return res.status(401).send({
-                        success: false,
-                        message: 'Error: Server error'
-                    });
+                    return res.status(401).send(
+                        `<p>Error: Server error. ${err.message}</p>`
+                    );
                 }
 
                 if (!user) {
-                    return res.status(400).send({
-                        success: false,
-                        message: 'We were unable to find a user for this token.'
-                    });
+                    return res.status(400).send(
+                        `<p>We were unable to find a user for this token.</p>`
+                    );
                 }
 
                 if (user.isVerified) {
-                    return res.status(400).send({
-                        success: false,
-                        message: 'This user has already been verified.'
-                    });
+                    return res.status(400).send(
+                        `<p>This account has already been verified. Please login in <a href="${path}">here</a></p>`
+                    );
                 }
 
                 // Verify and save the user
                 user.isVerified = true;
                 user.save(function (err) {
                     if (err) {
-                        return res.status(500).send({
-                            success: false,
-                            message: err.message
-                        })
+                        return res.status(500).send(
+                            `<p>Error: ${err.message}</p>`
+                        );
                     }
 
-                    return res.status(200).send({
-                        success: true,
-                        message: "The account has been verified. Please log in."
-                    });
-                    // TODO: Redirect to login
-                    //return res.redirect('http://localhost:3000/');
+                    return res.status(200).send(
+                        `<p>Your account has been successfully verified. Please login in <a href="${path}">here</a></p>`
+                    );
                 });
             });
         });

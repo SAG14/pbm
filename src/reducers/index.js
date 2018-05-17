@@ -8,6 +8,7 @@ import pageReducer from './pageReducer';
 import userReducer from './userReducer';
 import previewReducer from './previewReducer';
 import appNavigationReducer from './appNavigiationReducer';
+import termsOfServiceReducer from './termsOfServiceReducer';
 
 const appReducer = combineReducers({
   uploads: uploadReducer,
@@ -18,6 +19,7 @@ const appReducer = combineReducers({
   user: userReducer,
   preview: previewReducer,
   appNavigation: appNavigationReducer,
+  termsOfService: termsOfServiceReducer,
 });
 
 const rootReducer = (state, action) => {
