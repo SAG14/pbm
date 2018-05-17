@@ -41,13 +41,13 @@ class App extends Component {
               {!this.props.isPreview && <Filmstrip />}
             </div>
           </div>
-          {
+          {/* {
             (this.props.displayExportPDFPage) ? (
               <div>
                 <SaveToPDF />
               </div>
             ) : (null)
-          }
+          } */}
         </div>
       );
     } else {

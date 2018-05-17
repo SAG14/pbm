@@ -180,7 +180,6 @@ class Page extends Component {
 
     return (
       <div className={pageClass}>
-        {this.props.isPreview && <div className='bleed-hider'></div>}
         <div className='gridlayout' style={layout}>
           {images}
           {texts}

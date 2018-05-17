@@ -53,9 +53,9 @@ class Header extends Component {
                                 label={modeText}
                                 onClick={this.props.togglePreview}/>
                         </div>
-                        {this.props.isPreview && <div className="navbarOptionElement">
+                        {/* {this.props.isPreview && <div className="navbarOptionElement">
                             <RaisedButton type="button" labelColor="#999" label="Export" onClick={this.toExportPage}/>
-                        </div>}
+                        </div>} */}
                     </div>
                 </div>
             );

@@ -9,8 +9,23 @@
     margin: auto;
     width: 630px;
     height: 100%;
+}
+
+.export-PDF-button {
+    position: fixed;
+    bottom: 10px;
+    right: 30px;
+}
+
+.preview-container-page {
+    width: 630px;
+    height: 414px;
+    position: relative;
+}
+
+.preview-container-page-mask {
     position: absolute;
-    background-color: #3E3E3E;
-    z-index: 3;
-    
+    width: 612px;
+    height: 396px;
+    border: solid 9px #3E3E3E;
 }
