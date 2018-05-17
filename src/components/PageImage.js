@@ -172,17 +172,8 @@ class PageImage extends Component {
   onMouseUp(e) {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
-    // this.props.updateImagePosition(this.props.value.id, this.state.offsetX, this.state.offsetY, this.props.index);
     this.setState({prevMouseOffset: 0});
     e.preventDefault();
-  }
-
-  componentWillReceiveProps() {
-    // if (!this.props.value.source) {
-    //   console.log("reset offset");
-    //   this.setState({ offsetX: 0, offsetY: 0 });
-    // }
-    // this.setState({ offsetX: this.props.value.offset.offsetX, offsetY: this.props.value.offset.offsetY });
   }
 
   render() {
