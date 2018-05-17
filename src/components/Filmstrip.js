@@ -7,18 +7,8 @@ import '../styles/Filmstrip.css';
 
 class Filmstrip extends Component {
   handleClick(i) {
-    // this.persistImagePosition();
     this.props.jumpToPage(i);
   }
-
-  // persistImagePosition() {
-  //   Object.entries(this.props.pages).forEach(([pageKey, page]) => {
-  //     Object.entries(page["images"]).forEach(([imageKey, image]) => {
-  //       this.props.updateImagePosition(image.id, image.offset.offsetX, image.offset.offsetY, pageKey);
-  //     });
-  //   });
-
-  // }
 
   render() {
     const strip = this.props.pages.map((page, index) => {
