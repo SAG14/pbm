@@ -9,14 +9,23 @@ import userReducer from './userReducer';
 import previewReducer from './previewReducer';
 import appNavigationReducer from './appNavigiationReducer';
 
-export default combineReducers({
+const appReducer = combineReducers({
   uploads: uploadReducer,
   products: productReducer,
   templates: templateReducer,
   pages: pageReducer,
-  uploads: uploadReducer,
   routing: routerReducer,
   user: userReducer,
   preview: previewReducer,
   appNavigation: appNavigationReducer,
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === 'LOGOUT_USER') {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+}
+
+export default rootReducer;

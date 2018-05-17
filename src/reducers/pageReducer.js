@@ -6,12 +6,14 @@ import {
   ADD_TEXT_TO_FRAME,
   NEXT_PAGE,
   PREVIOUS_PAGE,
-  UPDATE_IMAGE_POSITION
+  UPDATE_IMAGE_POSITION,
+  SET_HAS_APPLIED_COVERS,
 } from '../actions/types';
 
 const initialState = {
   current : null,
   pages : [],
+  hasAppliedCovers: false,
 };
 
 export default function(state = initialState, action) {
@@ -88,17 +90,12 @@ export default function(state = initialState, action) {
               }
               return Object.assign({}, image, {
                 source : action.payload,
+                offset: {offsetX: 0, offsetY: 0}
               });
             }),
           });
         }),
       });
-      // let newPages = Object.assign({}, state);
-      // newPages.pages[state.current].images[action.payload.id].source = action.payload.source;
-      // return {
-      //   ...state,
-      //   newPages
-      // };
     }
     case UPDATE_IMAGE_POSITION: {
       return Object.assign({}, state, {        
@@ -138,6 +135,12 @@ export default function(state = initialState, action) {
           });
         }),
       });
+    }
+    case SET_HAS_APPLIED_COVERS: {
+      return {
+        ...state,
+        hasAppliedCovers: true,
+      }
     }
     default:
       return state;

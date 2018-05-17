@@ -97,6 +97,9 @@ class PageImage extends Component {
 
     if (elementAspect > imageAspect) {
       moveVertical = true;
+      this.setState({ offsetX: 0 });
+    } else {
+      this.setState({ offsetY: 0 });
     }
 
     this.setState({
@@ -121,6 +124,7 @@ class PageImage extends Component {
   onMouseMove(e) {
     let offsetX = this.state.offsetX;
     let offsetY = this.state.offsetY;
+    let prevMouseOffset;
 
     if (this.state.moveVertical) {  // moving vertically
       offsetY = this.state.offsetY + ((this.state.prevMouseOffset - (e.pageY - this.state.startY)) * -1);
@@ -137,7 +141,7 @@ class PageImage extends Component {
         }
       }
 
-      let prevMouseOffset = e.pageY - this.state.startY;
+      prevMouseOffset = e.pageY - this.state.startY;
       this.setState({ offsetY: offsetY, prevMouseOffset: prevMouseOffset });
     } 
     
@@ -156,9 +160,11 @@ class PageImage extends Component {
         }
       }
 
-      let prevMouseOffset = e.pageX - this.state.startX;
+      prevMouseOffset = e.pageX - this.state.startX;
       this.setState({ offsetX: offsetX, prevMouseOffset: prevMouseOffset });
     }
+
+    this.props.updateImagePosition(this.props.value.id, offsetX, offsetY, this.props.index);
 
     e.preventDefault();
   }
@@ -166,15 +172,17 @@ class PageImage extends Component {
   onMouseUp(e) {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
-    this.props.updateImagePosition(this.props.value.id, this.state.offsetX, this.state.offsetY, this.props.index);
+    // this.props.updateImagePosition(this.props.value.id, this.state.offsetX, this.state.offsetY, this.props.index);
     this.setState({prevMouseOffset: 0});
     e.preventDefault();
   }
 
   componentWillReceiveProps() {
-    if (this.props.value.offset) {
-      this.setState({ offsetX: this.props.value.offset.offsetX, offsetY: this.props.value.offset.offsetY });
-    }
+    // if (!this.props.value.source) {
+    //   console.log("reset offset");
+    //   this.setState({ offsetX: 0, offsetY: 0 });
+    // }
+    // this.setState({ offsetX: this.props.value.offset.offsetX, offsetY: this.props.value.offset.offsetY });
   }
 
   render() {
@@ -183,8 +191,8 @@ class PageImage extends Component {
     
     let imageStyle = {
       backgroundImage: "url(" + this.props.value.source + ")",
-      backgroundPositionX: this.state.offsetX + "px",
-      backgroundPositionY: this.state.offsetY + "px",
+      backgroundPositionX: this.props.value.offset.offsetX + "px",
+      backgroundPositionY: this.props.value.offset.offsetY + "px",
     }
 
     let imageClass = 'imageFrame';

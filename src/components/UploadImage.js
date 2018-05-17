@@ -24,7 +24,7 @@ class UploadImage extends Component {
           imageURL: reader.result
         };
         --pending;
-        if (pending == 0) {
+        if (pending === 0) {
           this.props.addImage(filesAsURL);
         }
       }
@@ -45,7 +45,7 @@ class UploadImage extends Component {
         bottom: 0,
         right: 0,
         left: 0,
-        width: '100%',
+        width: '60%',
         opacity: 0,
       },
       uploadImage: {
@@ -55,7 +55,7 @@ class UploadImage extends Component {
 
     return (
       <div id="upload-image" style={styles.uploadImage}>
-        <RaisedButton type="submit" primary={true} label="Add Photos" labelPosition="before">
+        <RaisedButton type="submit" primary={true} label="Add Photos" labelPosition="before" containerElement='label' > 
           <input 
             style={styles.exampleImageInput}
             type="file"

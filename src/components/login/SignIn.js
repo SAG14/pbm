@@ -10,7 +10,6 @@ import {
 import TextField from 'material-ui/TextField';
 import '../../styles/Login.css';
 import { RaisedButton } from 'material-ui';
-import Background from '../../images/Photos.jpeg';
 
 class SignIn extends Component {
     constructor(props) {

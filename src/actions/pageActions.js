@@ -5,7 +5,8 @@ import {
     ADD_TEXT_TO_FRAME,
     NEXT_PAGE,
     PREVIOUS_PAGE,
-    UPDATE_IMAGE_POSITION
+    UPDATE_IMAGE_POSITION,
+    SET_HAS_APPLIED_COVERS,
 } from './types';
 import store from '../store';
 
@@ -15,6 +16,12 @@ export const applyTemplate = (pageIndex, templateIndex) => dispatch => {
         type: APPLY_TEMPLATE,
         payload: templates[templateIndex],
         index: pageIndex,
+    });
+}
+
+export const setHasAppliedCovers = () => dispatch => {
+    dispatch({
+        type: SET_HAS_APPLIED_COVERS,
     });
 }
 

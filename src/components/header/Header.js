@@ -31,6 +31,9 @@ class Header extends Component {
 
     render() {
         if (this.props.isAuthenticated) {
+            let modeText = 'Preview';
+            if (this.props.isPreview)
+                modeText = 'Design';
             return (
                 <div className="appHeader">
                     <div className="navbarTitle">
@@ -47,15 +50,12 @@ class Header extends Component {
                             <RaisedButton 
                                 type="button" 
                                 labelColor="#999" 
-                                label="Preview"
+                                label={modeText}
                                 onClick={this.props.togglePreview}/>
                         </div>
-                        <div className="navbarOptionElement">
-                            <RaisedButton type="button" labelColor="#999" label="Order"/>
-                        </div>
-                        <div className="navbarOptionElement">
+                        {/* {this.props.isPreview && <div className="navbarOptionElement">
                             <RaisedButton type="button" labelColor="#999" label="Export" onClick={this.toExportPage}/>
-                        </div>
+                        </div>} */}
                     </div>
                 </div>
             );

@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { jumpToPage } from '../actions/pageActions';
+import { updateImagePosition } from '../actions/pageActions';
 
 import '../styles/Filmstrip.css';
 
 class Filmstrip extends Component {
-
   handleClick(i) {
+    // this.persistImagePosition();
     this.props.jumpToPage(i);
   }
+
+  // persistImagePosition() {
+  //   Object.entries(this.props.pages).forEach(([pageKey, page]) => {
+  //     Object.entries(page["images"]).forEach(([imageKey, image]) => {
+  //       this.props.updateImagePosition(image.id, image.offset.offsetX, image.offset.offsetY, pageKey);
+  //     });
+  //   });
+
+  // }
 
   render() {
     const strip = this.props.pages.map((page, index) => {
@@ -20,7 +30,7 @@ class Filmstrip extends Component {
         pageIndex = "BACK";
       }
       else if (index % 2 === 1) {
-        return;
+        return null;
       }
       
       const spreadIndex = Math.floor((index + 1) / 2);
@@ -49,6 +59,7 @@ class Filmstrip extends Component {
 const mapStateToProps = state => ({
   pages: state.pages.pages,
   current: state.pages.current,
+  updateImagePosition: state.pages.updateImagePosition,
 });
 
-export default connect(mapStateToProps, { jumpToPage })(Filmstrip);
+export default connect(mapStateToProps, { jumpToPage, updateImagePosition })(Filmstrip);
