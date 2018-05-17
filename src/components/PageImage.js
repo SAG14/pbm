@@ -5,7 +5,7 @@ import { findDOMNode } from 'react-dom';
 import { DropTarget } from 'react-dnd';
 // import fireworks from '../images/fireworks.jpg';
 // import humananddog from '../images/humananddog.jpg';
-// import { addImageToFrame } from '../actions/pageActions';
+import { updateImagePosition } from '../actions/pageActions';
 import '../styles/PageImage.css';
 
 
@@ -70,6 +70,8 @@ class PageImage extends Component {
   }
 
   onMouseDown(e) {
+    if(!this.props.value.source) return;
+
     let i = new Image();
     i.src = this.props.value.source;
 
@@ -95,6 +97,9 @@ class PageImage extends Component {
 
     if (elementAspect > imageAspect) {
       moveVertical = true;
+      this.setState({ offsetX: 0 });
+    } else {
+      this.setState({ offsetY: 0 });
     }
 
     this.setState({
@@ -119,6 +124,7 @@ class PageImage extends Component {
   onMouseMove(e) {
     let offsetX = this.state.offsetX;
     let offsetY = this.state.offsetY;
+    let prevMouseOffset;
 
     if (this.state.moveVertical) {  // moving vertically
       offsetY = this.state.offsetY + ((this.state.prevMouseOffset - (e.pageY - this.state.startY)) * -1);
@@ -135,7 +141,7 @@ class PageImage extends Component {
         }
       }
 
-      let prevMouseOffset = e.pageY - this.state.startY;
+      prevMouseOffset = e.pageY - this.state.startY;
       this.setState({ offsetY: offsetY, prevMouseOffset: prevMouseOffset });
     } 
     
@@ -154,9 +160,11 @@ class PageImage extends Component {
         }
       }
 
-      let prevMouseOffset = e.pageX - this.state.startX;
+      prevMouseOffset = e.pageX - this.state.startX;
       this.setState({ offsetX: offsetX, prevMouseOffset: prevMouseOffset });
     }
+
+    this.props.updateImagePosition(this.props.value.id, offsetX, offsetY, this.props.index);
 
     e.preventDefault();
   }
@@ -174,9 +182,10 @@ class PageImage extends Component {
     
     let imageStyle = {
       backgroundImage: "url(" + this.props.value.source + ")",
-      backgroundPositionY: this.state.offsetY + "px",
-      backgroundPositionX: this.state.offsetX + "px"
+      backgroundPositionX: this.props.value.offset.offsetX + "px",
+      backgroundPositionY: this.props.value.offset.offsetY + "px",
     }
+
     let imageClass = 'imageFrame';
     if (this.props.isPreview)
       imageClass = 'imageFramePreview';
@@ -190,16 +199,19 @@ class PageImage extends Component {
 }
 
 PageImage.propTypes = {
+  updateImagePosition: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
     pages: state.pages.pages,
     isPreview: state.preview.isPreview,
+    updateImagePosition: state.pages.updateImagePosition,
+    current: state.pages.current
   };
 }
 
-PageImage = connect(mapStateToProps, {})(PageImage);
+PageImage = connect(mapStateToProps, {updateImagePosition})(PageImage);
 PageImage = DropTarget(Types.IMAGE, imageTarget, collect)(PageImage);
 
 export default PageImage;

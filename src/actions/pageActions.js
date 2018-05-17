@@ -5,6 +5,7 @@ import {
     ADD_TEXT_TO_FRAME,
     NEXT_PAGE,
     PREVIOUS_PAGE,
+    UPDATE_IMAGE_POSITION,
     SET_HAS_APPLIED_COVERS,
 } from './types';
 import store from '../store';
@@ -61,4 +62,13 @@ export const addTextToFrame = (id, value, index) => dispatch => {
         payload: value,
         index: index,
     });
+}
+
+export const updateImagePosition = (id, offsetX, offsetY, index) => dispatch => {
+  dispatch({
+    type: UPDATE_IMAGE_POSITION,
+    id: id,
+    payload: {offsetX: offsetX, offsetY: offsetY},
+    index: index
+  });
 }
