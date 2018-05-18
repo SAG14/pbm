@@ -123,16 +123,16 @@ class Registration extends Component {
                         {
                             (this.props.termsOfServiceIsOpen) ? (<TermsOfService/>) : (null)
                         }
-                        {
-                            (this.props.signUpError) ? (
-                                <div className={this.props.isRegistered ? '' : 'errorText'}> {this.props.signUpError} </div>
-                            ) : (null)
-                        }
                         <div className="buttonsContainer">
                             <div className="button" style={styles.button}>
                                 <RaisedButton type="submit" primary={true} label="Sign up" />
                             </div>
                         </div>
+                        {
+                            (this.props.signUpError) ? (
+                                <div className={this.props.isRegistered ? '' : 'errorText'}> {this.props.signUpError} </div>
+                            ) : (null)
+                        }
                     </form>
                     <br/>
                     <br/>
