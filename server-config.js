@@ -6,7 +6,7 @@ module.exports = {
     isDev: true,
     
     db: 'mongodb://username:password@url:port/db',
-    db_dev: 'mongodb://admin:pbmtest@ds261479.mlab.com:61479/pbm-demo',
+    db_dev: 'mongodb://admin:pbmtest@ds031581.mlab.com:31581/pbm-demo',
     
     // Location of frontend website
     frontend_path:'',
