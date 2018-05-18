@@ -24,8 +24,9 @@
 }
 
 .preview-container-page-mask {
+    margin: -2px;
     position: absolute;
     width: 612px;
     height: 396px;
-    border: solid 9px #3E3E3E;
+    border: solid 11px #3E3E3E;
 }
