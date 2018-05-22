@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addImage } from '../actions/uploadActions';
 import UploadImage from './UploadImage';
-import store from '../store';
-
 import '../styles/Manager.css';
 import '../styles/ImageManager.css';
 import PreviewImage from './PreviewImage'

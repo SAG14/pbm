@@ -1,4 +1,4 @@
-// Project Configuration file
+// Server Configuration file
 
 module.exports = {
 
@@ -9,7 +9,7 @@ module.exports = {
     db_dev: 'mongodb://admin:pbmtest@ds031581.mlab.com:31581/pbm-demo',
     
     // Location of frontend website
-    frontend_path:'',
+    frontend_path:'http://hs-minimag.azurewebsites.net/',
     frontend_path_dev:'http://localhost:3000',
 
     // Email variables

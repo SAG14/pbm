@@ -13,6 +13,7 @@ class Filmstrip extends Component {
   render() {
     const strip = this.props.pages.map((page, index) => {
       let pageIndex = index + " / " + (index + 1);
+      
       if (index === 0) {
         pageIndex = 'FRONT';
       }
@@ -26,6 +27,7 @@ class Filmstrip extends Component {
       const spreadIndex = Math.floor((index + 1) / 2);
 
       let style = "frame";
+      
       if (spreadIndex === this.props.current)
         style += " active";
 

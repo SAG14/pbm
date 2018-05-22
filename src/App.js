@@ -11,7 +11,6 @@ import Product from './components/Product';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { addImageToFrame } from './actions/pageActions';
-import SaveToPDF from './components/SaveToPDF';
 import { fetchProducts } from './actions/productActions';
 import Preview from './components/Preview';
 import PreviewSidebar from './components/PreviewSidebar';
@@ -41,13 +40,6 @@ class App extends Component {
               {!this.props.isPreview && <Filmstrip />}
             </div>
           </div>
-          {/* {
-            (this.props.displayExportPDFPage) ? (
-              <div>
-                <SaveToPDF />
-              </div>
-            ) : (null)
-          } */}
         </div>
       );
     } else {

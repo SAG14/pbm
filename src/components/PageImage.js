@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { findDOMNode } from 'react-dom';
 import { DropTarget } from 'react-dnd';
-// import fireworks from '../images/fireworks.jpg';
-// import humananddog from '../images/humananddog.jpg';
 import { updateImagePosition } from '../actions/pageActions';
 import '../styles/PageImage.css';
-
 
 const Types = {
   IMAGE: 'IMAGE'
@@ -23,10 +19,6 @@ const imageTarget = {
       return;
     }
     let imageURL = monitor.getItem().imageURL;
-    let idPattern = /\d+/g;
-    let parsedId = parseInt((props.value.id).match(idPattern));
-    // props.addImageToPage(parsedId, imageURL);
-    // props.addImageToPage(props.value.id, imageURL);
     props.callbackHandler(
       VIEW_CALL_BACK_ENUMS.ADD_IMAGE_TO_FRAME,
       {
@@ -129,7 +121,7 @@ class PageImage extends Component {
     if (this.state.moveVertical) {  // moving vertically
       offsetY = this.state.offsetY + ((this.state.prevMouseOffset - (e.pageY - this.state.startY)) * -1);
 
-      if (offsetY == this.state.offsetY) return;  // no movement, skip to reduce setState calls
+      if (offsetY === this.state.offsetY) return;  // no movement, skip to reduce setState calls
 
       if (offsetY >= this.state.offsetY) {  // moving down
         if (offsetY > 0) {  // image at top, set everything to 0
@@ -148,7 +140,7 @@ class PageImage extends Component {
     if (!this.state.moveVertical) { // moving horizontally
       offsetX = this.state.offsetX + ((this.state.prevMouseOffset - (e.pageX - this.state.startX)) * -1);
 
-      if (offsetX == this.state.offsetX) return;  // no movement, skip to reduce setState calls
+      if (offsetX === this.state.offsetX) return;  // no movement, skip to reduce setState calls
 
       if (offsetX >= this.state.offsetX) {  // moving right
         if (offsetX > 0) {  // image at left, set everything to 0
@@ -177,7 +169,7 @@ class PageImage extends Component {
   }
 
   render() {
-    const { connectDropTarget, isOver, canDrop } = this.props;
+    const { connectDropTarget } = this.props;
     const style = JSON.parse(this.props.value.style);
     
     let imageStyle = {

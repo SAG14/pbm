@@ -23,6 +23,7 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
+  // Clears the store when user logs out
   if (action.type === 'LOGOUT_USER') {
     state = undefined;
   }

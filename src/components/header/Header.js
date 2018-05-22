@@ -5,14 +5,12 @@ import '../../styles/Header.css';
 import { logout } from '../../actions/userActions';
 import { togglePreview } from '../../actions/previewActions';
 import RaisedButton from 'material-ui/RaisedButton';
-import { toExportPDFPage } from '../../actions/appNavigationActions';
 
 class Header extends Component {
     constructor(props) {
         super(props);
 
         this.logout = this.logout.bind(this);
-        this.toExportPage = this.toExportPage.bind(this);
     }
 
      // Sign out function
@@ -21,12 +19,8 @@ class Header extends Component {
             const token = this.props.token;
             this.props.logout(token);
         } else {
-            //TODO
+            console.log("Token is missing inside the store.");
         }
-    }
-    
-    toExportPage() {
-        this.props.toExportPDFPage();
     }
 
     render() {
@@ -40,7 +34,10 @@ class Header extends Component {
                         <h1>Mini-Mag Maker</h1>
                     </div>
                     <div className="navbarElement">
-                        <RaisedButton type="button" labelColor="#999" onClick={this.logout} label="Logout"/>
+                        <RaisedButton type="button" 
+                            labelColor="#999"
+                            label="Logout" 
+                            onClick={this.logout}/>
                     </div>
                     <div className="navbarElement">
                         <p className="navbarText"> Hello, {this.props.currentUser.firstName}</p>
@@ -53,9 +50,6 @@ class Header extends Component {
                                 label={modeText}
                                 onClick={this.props.togglePreview}/>
                         </div>
-                        {/* {this.props.isPreview && <div className="navbarOptionElement">
-                            <RaisedButton type="button" labelColor="#999" label="Export" onClick={this.toExportPage}/>
-                        </div>} */}
                     </div>
                 </div>
             );
@@ -71,12 +65,11 @@ class Header extends Component {
 
 Header.propTypes = {
     logout: PropTypes.func.isRequired,
-    toExportPDFPage: PropTypes.func.isRequired,
+    togglePreview: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
     token: PropTypes.string,
     currentUser: PropTypes.object,
     isPreview: PropTypes.bool,
-    togglePreview: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -84,7 +77,6 @@ const mapStateToProps = state => ({
     token: state.user.token,
     currentUser: state.user.currentUser,
     isPreview: state.preview.isPreview,
-    displayExportPDFPage: state.appNavigation.displayExportPDFPage,
 })
 
-export default connect(mapStateToProps, { logout, togglePreview, toExportPDFPage })(Header);
+export default connect(mapStateToProps, { logout, togglePreview })(Header);

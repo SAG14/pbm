@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addImage } from '../actions/uploadActions';
-import UploadImage from './UploadImage';
-import store from '../store';
-
 import '../styles/Manager.css';
 import '../styles/ImageManager.css';
 import { DragSource } from 'react-dnd';
-import { compose } from 'redux'
 import { addImageToFrame } from '../actions/pageActions';
 
 const Types = {
@@ -25,9 +20,7 @@ const imageSource = {
         if (!monitor.didDrop()) {
           return;
         }
-        const item = monitor.getItem();
-      }
-
+    }
 };
 
 function collect(connect, monitor) {
@@ -53,7 +46,7 @@ class PreviewImage extends Component {
 
     return connectDragSource(
                 <div>
-                <img src= {imageURL} style={isDragging ? imageDragStyle :imageStyle}/>
+                <img src= {imageURL} style={isDragging ? imageDragStyle :imageStyle} alt=''/>
                 </div>
             );
   }

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Product from './Product';
-import { Page, Spread } from './Product';
+import { Page } from './Product';
 import RaisedButton from 'material-ui/RaisedButton';
 import { previousPage, nextPage } from '../actions/pageActions';
 import { PDFExport } from '@progress/kendo-react-pdf';
-
 import '../styles/Preview.css';
 
 class Preview extends Component {
@@ -32,13 +29,12 @@ class Preview extends Component {
                 isExport: false,
             });
         }, 1000);
-
     }
 
     render() {
         const previewPages = this.props.pages.map((page, index) => {
             return (
-                <div className="preview-container-page">
+                <div className="preview-container-page" key={index}>
                     {!this.state.isExport && <div className="preview-container-page-mask"></div>}
                     <Page
                         key={index}
