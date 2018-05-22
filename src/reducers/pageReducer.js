@@ -60,7 +60,7 @@ export default function(state = initialState, action) {
     }
     case PREVIOUS_PAGE: {
       let newCurrent = state.current;
-      if (newCurrent != 0 && (newCurrent -1) >= 0)
+      if (newCurrent !== 0 && (newCurrent -1) >= 0)
         newCurrent = newCurrent -1;
       return {
         ...state,

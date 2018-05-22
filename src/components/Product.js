@@ -34,6 +34,7 @@ class Product extends Component {
   renderProductDetail() {
     return (
       <div className="product-detail">
+      {/* For future implementations of the product details */}
         {/* <div>{this.props.product.type}</div>
         <div>{this.props.product.size}</div>
         <div>{this.props.product.pageNumber} pages</div>
@@ -58,13 +59,6 @@ class Product extends Component {
   }
 
   render() {
-    let buttonNavStyle = {
-      width: '100%',
-      height: '100%',
-      position: 'absolute',
-      backgroundColor: '#3E3E3E',
-      zIndex: 3,
-    };
     if (!Object.keys(this.props.product).length)
       return null;
     return (
@@ -127,6 +121,7 @@ class Page extends Component {
         break;
       case VIEW_CALL_BACK_ENUMS.ADD_IMAGE_TO_FRAME:
         this.props.callbackHandler(type, { ...data, index: this.props.index, });
+        break;
       default:
         // bubble up all other actions to parents
         this.props.callbackHandler(type, data);

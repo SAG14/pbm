@@ -1,5 +1,7 @@
+// Application Configuration file
+
 // Set the environment to DEV/PROD
-let isDev = false;
+let isDev = true;
 
 let currPath;
 

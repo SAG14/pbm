@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addImage } from '../actions/uploadActions';
 import RaisedButton from 'material-ui/RaisedButton';
-
 import '../styles/Manager.css';
 import '../styles/UploadImage.css';
 

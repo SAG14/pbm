@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import Modal from '@material-ui/core/Modal';
 import RaisedButton from 'material-ui/RaisedButton';
 import { closeTOSModal } from '../../actions/termsOfServiceActions';
 import { connect } from 'react-redux';

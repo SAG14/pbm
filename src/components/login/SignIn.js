@@ -51,7 +51,7 @@ class SignIn extends Component {
             return (
                 <div className="outerContainer">
                     <div className="loginContainer">
-                        <img src="/minimagmaker-logo.png" id="logo-login" />
+                        <img src="/minimagmaker-logo.png" id="logo-login" alt=''/>
                         <h1>Sign In</h1>
                         <form onSubmit={this.onSubmit}>
                             <div>

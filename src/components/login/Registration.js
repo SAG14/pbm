@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { 
@@ -117,9 +116,10 @@ class Registration extends Component {
                             value={this.state.signUpStudentNo}
                             onChange={this.onChange}
                         /><br/>
-                        <div>
+                        <div className="termsOfService">
                             By clicking on the Sign Up button you are agreeing to the <Link to='#' onClick={this.props.openTOSModal}>Terms of Service</Link>.
                         </div>
+                        {/* Terms of Service Modal */}
                         {
                             (this.props.termsOfServiceIsOpen) ? (<TermsOfService/>) : (null)
                         }
@@ -128,6 +128,7 @@ class Registration extends Component {
                                 <RaisedButton type="submit" primary={true} label="Sign up" />
                             </div>
                         </div>
+                        {/* Displaying error text */}
                         {
                             (this.props.signUpError) ? (
                                 <div className={this.props.isRegistered ? '' : 'errorText'}> {this.props.signUpError} </div>

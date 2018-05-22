@@ -1,9 +1,9 @@
-// Project Configuration file
+// Server Configuration file
 
 module.exports = {
 
     // Change variable for DEV/PROD
-    isDev: false,
+    isDev: true,
     
     db: 'mongodb://username:password@url:port/db',
     db_dev: 'mongodb://admin:pbmtest@ds031581.mlab.com:31581/pbm-demo',

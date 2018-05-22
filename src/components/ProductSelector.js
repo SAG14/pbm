@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import store from '../store';
 import { fetchProducts, selectProduct } from '../actions/productActions';
-
 import '../styles/ProductSelector.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
@@ -17,7 +15,7 @@ class ProductSelector extends Component {
   }
 
   handleChange(e, v) {
-    const index = this.props.products.findIndex((e) => e.pageNumber == v);
+    const index = this.props.products.findIndex((e) => e.pageNumber === v);
     this.setState({productIndex: index});
   }
 

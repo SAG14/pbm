@@ -14,6 +14,7 @@ if (config.isDev) {
     path = config.frontend_path;
 }
 
+// Signup API
 module.exports = (app) => {
     app.post('/api/account/signup', (req, res, next) => {
         const { body } = req;
@@ -97,6 +98,7 @@ module.exports = (app) => {
             });
         }
 
+        // Checks for unique Email within the database
         User.find({
             email: email
         }, (err, previousUsers) => {
@@ -120,7 +122,6 @@ module.exports = (app) => {
             newUser.lastName = lastName;
             newUser.studentNo = studentNo;
             
-            // Saves the user object
             newUser.save((err, user) => {
                 if (err) {
                     return res.send({
@@ -152,13 +153,14 @@ module.exports = (app) => {
                         }
                     });
 
+                    // Email verification link
                     const url = `http://${req.headers.host}/confirmation/${emailToken.token}`;
 
+                    // Email object
                     var mailOptions = { 
                         from: config.emailUsername, 
                         to: user.email,
                         subject: 'Confirm Registration',
-                        //text: 'Hello,\n\n Thank you for signing up an account for the PhotoBook Maker. Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + emailToken.token + '.\n'
                         html: `Thank you for registering to use the <b>Mini Mag Maker.</b> <br><br> Please click the link below to confirm your registration. <br><br> If you are not directed back to the application within 5 seconds, please return to the login portal at xxx to begin your project. <br><br> <a href="${url}">${url}</a> <br><br> Have fun! <br><br> - BCITSA Publications`
                     };
 
@@ -179,7 +181,7 @@ module.exports = (app) => {
         });
     });
 
-    // Confirms the token
+    // Token Confirmation API
     app.get('/confirmation/:token', (req, res, next) => {
 
         if (!req.params.token) {
@@ -188,6 +190,7 @@ module.exports = (app) => {
             );
         }
 
+        // Checks for the token
         EmailVerification.findOne({
             token: req.params.token
         }, function(err, token) {
@@ -241,6 +244,7 @@ module.exports = (app) => {
         });
     });
 
+    // List of all users API
     app.get('/api/users', (req, res, next) => {
         User.find()
             .exec()
@@ -248,7 +252,7 @@ module.exports = (app) => {
             .catch((err) => next(err));
     });
 
-    // The login api 
+    // Login API
     app.post('/api/account/login', (req, res, next) => {
         const { body } = req;
         const {
@@ -332,6 +336,7 @@ module.exports = (app) => {
         });
     });
 
+    // Logout API
     app.get('/api/account/logout', (req, res, next) => {
         // Get the token
         const { query } = req;
@@ -359,6 +364,7 @@ module.exports = (app) => {
         });
     });
 
+    // Verifying the token
     app.get('/api/account/verify', (req, res, next) => {
         const { query } = req;
         const { token } = query;

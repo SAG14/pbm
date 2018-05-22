@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchTemplates } from '../actions/templateActions';
 import { applyTemplate, setHasAppliedCovers } from '../actions/pageActions';
 import '../styles/TemplateManager.css';
-
-import store from '../store';
 
 class TemplateManager extends Component {
   componentWillMount() {
@@ -49,7 +46,7 @@ class TemplateManager extends Component {
 
   render() {
     let isActive = {};
-    if (!this.props.current || this.props.current == 0 || this.props.current == this.props.max)
+    if (!this.props.current || this.props.current === 0 || this.props.current === this.props.max)
       isActive = {
         "visibility": "hidden",
       };
@@ -60,7 +57,7 @@ class TemplateManager extends Component {
       }
       return (
         <button key={index} onClick={() => this.handleClick(index)} className="template-button">
-          <img className="template-thumbnail" src={`/template-${index + 1}.png`} />
+          <img className="template-thumbnail" src={`/template-${index + 1}.png`} alt='' />
         </button>
       )
     });
