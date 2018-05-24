@@ -21,14 +21,18 @@ class Preview extends Component {
     exportPDF() {        
         this.setState({
             isExport: true,
-        },
+        });
+
+        setTimeout(() => {
             this.exportableContent.save()
-        );
+        }, 1000);
+
+        // Set more time before putting mask on to remove borders on first page of export
         setTimeout(() => {
             this.setState({
                 isExport: false,
             });
-        }, 1000);
+        }, 10000);
     }
 
     render() {
